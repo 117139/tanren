@@ -20,10 +20,10 @@
 	margin-top: 10rpx;
 }
 .trbox{
-	width: 45rpx;
-	height: 20rpx;
-	border-radius: 20rpx;
-	font-size: 18rpx;
+	padding: 0 5px;
+	height: 30rpx;
+	border-radius: 30rpx;
+	font-size: 26rpx;
 	display: flex;
 	justify-content: center;
 	align-items: center;

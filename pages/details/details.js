@@ -5,9 +5,17 @@ Page({
    * 页面的初始数据
    */
   data: {
+		num:0,
 		zan:0,
+		show: true,
+		fbtext:'',
+		
 		dataxq:{
 			img:[1,1,1]
+		},
+		tmpdata:{
+			fblen:0,
+			imgb:[]
 		}
   },
 
@@ -84,5 +92,88 @@ Page({
 	},
 	dianzan(e){
 		console.log(e.currentTarget.dataset.id)
+		this.setData({
+			zan:!this.data.zan
+		})
+	},
+	onClose() {
+    this.setData({ show: false });
+  },
+	showpp(){
+    this.setData({ show: true });
+  },
+	bint(e){
+		console.log(e.detail.value)
+		console.log(e.detail.value.length)
+		this.data.tmpdata.fblen=e.detail.value.length
+		this.setData({
+			fbtext:e.detail.value,
+			tmpdata:this.data.tmpdata
+		})
+		// this.setData({
+		// 	
+		// 	fblen:e.detail.value.length
+		// })
+	},
+	imgdel(e){
+		var that =this
+		console.log(e.currentTarget.dataset.idx)
+		wx.showModal({
+			title: '提示',
+			content: '确定要删除这张图片吗',
+			success (res) {
+				if (res.confirm) {
+					console.log('用户点击确定')
+					that.data.tmpdata.imgb.splice(e.currentTarget.dataset.idx)
+					that.setData({
+						tmpdata:that.data.tmpdata
+					})
+				} else if (res.cancel) {
+					console.log('用户点击取消')
+				}
+			}
+		})
+		
+	},
+	scpic(){
+		var that=this
+		wx.chooseImage({
+			count: 1,
+			sizeType: ['original', 'compressed'],
+			sourceType: ['album', 'camera'],
+			success (res) {
+				// tempFilePath可以作为img标签的src属性显示图片
+				console.log(res)
+				const tempFilePaths = res.tempFilePaths
+				that.data.tmpdata.imgb.push(res.tempFilePaths[0])
+				that.setData({
+					tmpdata:that.data.tmpdata
+				})
+			}
+		})
+	},
+	fabusub(){
+		var that =this
+		if(that.data.fbtext==""){
+			wx.showToast({
+				icon:"none",
+				title:"请输入您的评论"
+			})
+			return
+		}
+		wx.showModal({
+			title: '提示',
+			content: '是否要发布该评论',
+			success (res) {
+				if (res.confirm) {
+					console.log('用户点击确定')
+					console.log(that.data.fbtext)
+					console.log(that.data.tmpdata.imgb)
+					
+				} else if (res.cancel) {
+					console.log('用户点击取消')
+				}
+			}
+		})
 	}
 })

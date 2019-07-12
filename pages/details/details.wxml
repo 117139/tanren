@@ -1,4 +1,6 @@
 <!--pages/details/details.wxml-->
+
+<import src="/pages/component/fabu1/fabu1.wxml" />
 <view class="container pb50">
 	<view class="w100 dis_flex aic ju_b mb20">
 		<view class="dis_flex aic">
@@ -62,16 +64,20 @@
 			<text class="iconfont icondianhua mr10 fz30 cfff"></text> <text class="fz30 cfff">联系卖主</text>
 		</view>
 		<view class="dis_flex aic mr20" data-id="22" bindtap="dianzan">
-			<text class="iconfont icondianzan2 myicon mr10 c9"></text>
-			<text class='trbox fz24'>56</text>
+			<text  class="iconfont icondianzan2 myicon mr10 fz50 {{zan==0?'c9':'ce22829'}}"></text>
+			<text class='trbox'>56</text>
 		</view>
-		<view class="dis_flex aic mr20">
-			<text class="iconfont iconpinglun myicon mr10 c9" ></text>
-			<text class='trbox fz24'>56</text>
+		<view class="dis_flex aic mr20" bindtap="showpp">
+			<text class="iconfont iconpinglun myicon mr10 fz50 c9" ></text>
+			<text class='trbox'>56</text>
 		</view>
 		<view class="share1">
 			<text class="iconfont iconfenxiang fz36 c9"></text>
 			<button class="shareBtn" open-type='share' data-supid="1" data-type="{{idx1}}"></button>
 		</view>
 	</view>
+	<van-popup show="{{ show }}" position="bottom" bind:close="onClose">
+		<template is="fabu1" data="{{tmpdata}}" />
+	</van-popup>
+	
 </view> 
