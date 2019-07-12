@@ -1,0 +1,59 @@
+{
+  "pages": [
+    "pages/details/details",
+    "pages/index/index",
+    "pages/zhaopin/zhaopin",
+    "pages/share/share",
+    "pages/my/my",
+    "pages/faxian/faxian",
+    "pages/centertk/centertk",
+    "pages/shequ/shequ",
+    "pages/chuzu/chuzu",
+    "pages/ershou/ershou",
+    "pages/meishi/meishi",
+    "pages/jiaoche/jiaoche",
+    "pages/jiudian/jiudian",
+    "pages/logs/logs",
+    "pages/login/login"
+  ],
+  "window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#fff",
+		"navigationBarTitleText": "唐人街",
+		"navigationBarTextStyle": "black"
+	},
+	"sitemapLocation": "sitemap.json",
+	"tabBar": {
+		"color": "#333333",
+		"selectedColor": "#00a0e9",
+		"list": [
+			{
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/static/images/home.png",
+        "selectedIconPath": "/static/images/home1.png"
+      },{
+        "pagePath": "pages/shequ/shequ",
+        "text": "社区",
+        "iconPath": "/static/images/shequ.png",
+        "selectedIconPath": "/static/images/shequ1.png"
+      },{
+        "pagePath": "pages/centertk/centertk",
+        "text": "",
+        "iconPath": "/static/images/center.png",
+        "selectedIconPath": "/static/images/center.png"
+      },{
+        "pagePath": "pages/faxian/faxian",
+        "text": "发现",
+        "iconPath": "/static/images/faxian.png",
+        "selectedIconPath": "/static/images/faxian1.png"
+      },
+			{
+				"pagePath": "pages/my/my",
+				"text": "我的",
+				"iconPath": "/static/images/my.png",
+				"selectedIconPath": "/static/images/my1.png"
+			}
+		]
+	}
+}

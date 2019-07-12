@@ -1,0 +1,33 @@
+/* pages/details/details.wxss */
+.bbbtnz{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100rpx;
+	padding: 0 36rpx;
+	background-color: #fff;
+	border-top: 1px solid #ddd;
+}
+.lxbtn{
+	width: 320rpx;
+	height: 60rpx;
+	background-color: #E22829;
+	border-radius: 8rpx;
+	margin-right: 50rpx;
+}
+.msgicon1{
+	margin-top: 10rpx;
+}
+.trbox{
+	width: 45rpx;
+	height: 20rpx;
+	border-radius: 20rpx;
+	font-size: 18rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #eee;
+	color:#a4a4a4;
+	margin-top: -15rpx;
+}

@@ -1,0 +1,242 @@
+<!--pages/shequ/shequ.wxml-->
+<import src="/utils/pageState/index.wxml" />
+<template is="pageState" data="{{...pageState}}" />
+<view class="container">
+	<form class="topform" bindsubmit="formSubmit">
+		<view class="ssbox mb30">
+			<input class="ssint" type="text"  name="sr"/>
+			
+			<view class='ss_btn'>
+				<button  form-type="submit"></button>
+				<image src="../../static/images/sousuo.png"></image>
+			</view>
+		</view>
+	</form >
+  <swiper class="swiper mb45" 
+		indicator-dots="{{indicatorDots}}" 
+		autoplay="{{autoplay}}" 
+		interval="{{interval}}"
+		duration="{{duration}}" 
+		indicator-active-color='#fff' 
+		circular='true'>
+		<block wx:for="{{bannerimg}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+			<swiper-item>
+				<image src="{{item}}" class="slide-image" />
+			</swiper-item>
+		</block>
+	</swiper>
+  <view class="example">
+		<view class="zdicon">
+			置顶
+		</view>
+  	<view class="marquee_box">
+  		<view class="marquee_text dis_flex" style="{{orientation}}:{{marqueeDistance}}px;font-size: {{size}}px;">
+  			<view class="flex_1 oh1">{{text}}</view>
+				<view class="ml5">06月06日</view>
+  		</view>
+  	</view>
+  </view>
+  <view class='dis_flex ju_a w100 mb40'>
+    <view class="{{type==0?'typecur':''}}" data-type="0" bindtap='bindcur'>最新</view>
+    <view class="{{type==1?'typecur':''}}" data-type="1" bindtap='bindcur'>热门</view>
+    <view class="{{type==2?'typecur':''}}" data-type="2" bindtap='bindcur'>精华</view>
+  </view>
+  <view wx:if="{{type==0}}" class="w100 mb45">
+		<view class='tjone'>
+			<view class="w100 dis_flex ju_b aic mb20">
+				<view class="dis_flex aic">
+					<image class="headimg" src="/static/images/index_27.jpg"></image>
+					<text class="ml5 fz24">佛系怪兽君</text>
+				</view>
+				<view class="c6 fz24">06月06日</view>
+			</view>
+			<view class="oh2 fz28 mb20">同事组织星期天下午小聚一下，我本来就不太爱凑热闹，于是想以媳妇不同意搪塞过去，然鹅没有得逞然鹅没有得逞然鹅没有得逞....</view>
+			<view class="scrollbox mb30">
+				<scroll-view class="tjrimgbox" scroll-x style="width: 100%">
+					<image class="tjrimg" mode="aspectFill" bindtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
+					<image class="tjrimg" mode="aspectFill" bindtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
+					<image class="tjrimg" mode="aspectFill" bindtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
+					<image class="tjrimg" mode="aspectFill" bindtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
+					<image class="tjrimg" mode="aspectFill" bindtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
+
+				</scroll-view>
+			</view>
+			<view class="dis_flex ju_b w100 aic">
+				<view class="dis_flex aic">
+					<image class="msgicon1" src="../../static/images/pl.png"></image>
+					<text class='fz24'>我在纽约</text>
+				</view>
+				<view class="dis_flex aic">
+					<view class="dis_flex aic mr20">
+						<image class="msgicon1" src="../../static/images/zan.png"></image>
+						<text class='fz24'>56</text>
+					</view>
+					<view class="dis_flex aic">
+						<image class="msgicon1" src="../../static/images/scicon.png"></image>
+						<text class='fz24'>56</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class='tjone'>
+			<view class="w100 dis_flex ju_b aic mb20">
+				<view class="dis_flex aic">
+					<image class="headimg" src="/static/images/index_27.jpg"></image>
+					<text class="ml5 fz24">小伙子</text>
+				</view>
+				<view class="c6 fz24">06月06日</view>
+			</view>
+			<view class="oh2 fz28 mb20">同事组织星期天下午小聚一下，我本来就不太爱凑热闹，于是想以媳妇不同意搪塞过去，然鹅没有得逞然鹅没有得逞然鹅没有得逞....</view>
+			<!-- <video src="">1111111</video> -->
+			<image  class='tjrvideo mb20' mode="aspectFill" bindtap="previewImage" data-src="/static/images/banner_03.jpg" src="../../static/images/banner_03.jpg"></image>
+			<view class="dis_flex ju_b w100 aic">
+				<view class="dis_flex aic">
+					<image class="msgicon1" src="../../static/images/pl.png"></image>
+					<text class='fz24'>我在纽约</text>
+				</view>
+				<view class="dis_flex aic">
+					<view class="dis_flex aic mr20">
+						<image class="msgicon1" src="../../static/images/zan.png"></image>
+						<text class='fz24'>56</text>
+					</view>
+					<view class="dis_flex aic">
+						<image class="msgicon1" src="../../static/images/scicon.png"></image>
+						<text class='fz24'>56</text>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+  <view wx:if="{{type==1}}" class="w100 mb45">
+		<view class='tjone'>
+			<view class="w100 dis_flex ju_b aic mb20">
+				<view class="dis_flex aic">
+					<image class="headimg" src="/static/images/index_27.jpg"></image>
+					<text class="ml5">佛系怪兽君1</text>
+				</view>
+				<view class="c6 fz24">06月06日</view>
+			</view>
+			<view class="oh2 fz28 mb20">同事组织星期天下午小聚一下，我本来就不太爱凑热闹，于是想以媳妇不同意搪塞过去，然鹅没有得逞然鹅没有得逞然鹅没有得逞....</view>
+			<view class="scrollbox mb30">
+				<scroll-view class="tjrimgbox" scroll-x style="width: 100%">
+					<image class="tjrimg" src="../../static/images/index_27.jpg"></image>
+					<image class="tjrimg" src="../../static/images/index_27.jpg"></image>
+					<image class="tjrimg" src="../../static/images/index_27.jpg"></image>
+					<image class="tjrimg" src="../../static/images/index_27.jpg"></image>
+					<image class="tjrimg" src="../../static/images/index_27.jpg"></image>
+
+				</scroll-view>
+			</view>
+			<view class="dis_flex ju_b w100 aic">
+				<view class="dis_flex aic">
+					<image class="msgicon1" src="../../static/images/pl.png"></image>
+					<text class='fz24'>我在纽约</text>
+				</view>
+				<view class="dis_flex aic">
+					<view class="dis_flex aic mr20">
+						<image class="msgicon1" src="../../static/images/zan.png"></image>
+						<text class='fz24'>56</text>
+					</view>
+					<view class="dis_flex aic">
+						<image class="msgicon1" src="../../static/images/scicon.png"></image>
+						<text class='fz24'>56</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class='tjone'>
+			<view class="w100 dis_flex ju_b aic mb20">
+				<view class="dis_flex aic">
+					<image class="headimg" src="/static/images/index_27.jpg"></image>
+					<text class="ml5">小伙子</text>
+				</view>
+				<view class="c6 fz24">06月06日</view>
+			</view>
+			<view class="oh2 fz28 mb20">同事组织星期天下午小聚一下，我本来就不太爱凑热闹，于是想以媳妇不同意搪塞过去，然鹅没有得逞然鹅没有得逞然鹅没有得逞....</view>
+			<!-- <video src="">1111111</video> -->
+			<image  class='tjrvideo mb20' src="../../static/images/banner_03.jpg"></image>
+			<view class="dis_flex ju_b w100 aic">
+				<view class="dis_flex aic">
+					<image class="msgicon1" src="../../static/images/pl.png"></image>
+					<text class='fz24'>我在纽约</text>
+				</view>
+				<view class="dis_flex aic">
+					<view class="dis_flex aic mr20">
+						<image class="msgicon1" src="../../static/images/zan.png"></image>
+						<text class='fz24'>56</text>
+					</view>
+					<view class="dis_flex aic">
+						<image class="msgicon1" src="../../static/images/scicon.png"></image>
+						<text class='fz24'>56</text>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+  <view wx:if="{{type==2}}" class="w100 mb45">
+		<view class='tjone'>
+			<view class="w100 dis_flex ju_b aic mb20">
+				<view class="dis_flex aic">
+					<image class="headimg" src="/static/images/index_27.jpg"></image>
+					<text class="ml5">佛系怪兽君2</text>
+				</view>
+				<view class="c6 fz24">06月06日</view>
+			</view>
+			<view class="oh2 fz28 mb20">同事组织星期天下午小聚一下，我本来就不太爱凑热闹，于是想以媳妇不同意搪塞过去，然鹅没有得逞然鹅没有得逞然鹅没有得逞....</view>
+			<view class="scrollbox mb30">
+				<scroll-view class="tjrimgbox" scroll-x style="width: 100%">
+					<image class="tjrimg" src="../../static/images/index_27.jpg"></image>
+					<image class="tjrimg" src="../../static/images/index_27.jpg"></image>
+					<image class="tjrimg" src="../../static/images/index_27.jpg"></image>
+					<image class="tjrimg" src="../../static/images/index_27.jpg"></image>
+					<image class="tjrimg" src="../../static/images/index_27.jpg"></image>
+
+				</scroll-view>
+			</view>
+			<view class="dis_flex ju_b w100 aic">
+				<view class="dis_flex aic">
+					<image class="msgicon1" src="../../static/images/pl.png"></image>
+					<text class='fz24'>我在纽约</text>
+				</view>
+				<view class="dis_flex aic">
+					<view class="dis_flex aic mr20">
+						<image class="msgicon1" src="../../static/images/zan.png"></image>
+						<text class='fz24'>56</text>
+					</view>
+					<view class="dis_flex aic">
+						<image class="msgicon1" src="../../static/images/scicon.png"></image>
+						<text class='fz24'>56</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class='tjone'>
+			<view class="w100 dis_flex ju_b aic mb20">
+				<view class="dis_flex aic">
+					<image class="headimg" src="/static/images/index_27.jpg"></image>
+					<text class="ml5">小伙子</text>
+				</view>
+				<view class="c6 fz24">06月06日</view>
+			</view>
+			<view class="oh2 fz28 mb20">同事组织星期天下午小聚一下，我本来就不太爱凑热闹，于是想以媳妇不同意搪塞过去，然鹅没有得逞然鹅没有得逞然鹅没有得逞....</view>
+			<!-- <video src="">1111111</video> -->
+			<image  class='tjrvideo mb20' src="../../static/images/banner_03.jpg"></image>
+			<view class="dis_flex ju_b w100 aic">
+				<view class="dis_flex aic">
+					<image class="msgicon1" src="../../static/images/pl.png"></image>
+					<text class='fz24'>我在纽约</text>
+				</view>
+				<view class="dis_flex aic">
+					<view class="dis_flex aic mr20">
+						<image class="msgicon1" src="../../static/images/zan.png"></image>
+						<text class='fz24'>56</text>
+					</view>
+					<view class="dis_flex aic">
+						<image class="msgicon1" src="../../static/images/scicon.png"></image>
+						<text class='fz24'>56</text>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
