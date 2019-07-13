@@ -1,4 +1,4 @@
-// pages/details/details.js
+// pages/details_ms/details_ms.js
 Page({
 
   /**
@@ -11,7 +11,9 @@ Page({
 		fbtext:'',
 		
 		dataxq:{
-			img:[1,1,1]
+			list:[
+				1,{img:[1,2,3]},{img:[1]},1
+			]
 		},
 		tmpdata:{
 			fblen:0,
@@ -175,5 +177,18 @@ Page({
 				}
 			}
 		})
-	}
+	},
+	/**   
+     * 预览图片  
+     */
+  previewImage: function (e) {
+    var current = e.target.dataset.src;
+		var arr1=[]
+		arr1.push(current)
+		console.log(arr1);
+    wx.previewImage({
+      current: current, // 当前显示图片的http链接  
+      urls: arr1 // 需要预览的图片http链接列表  
+    })
+  }
 })

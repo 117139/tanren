@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/details/details",
     "pages/index/index",
+    "pages/details_ms/details_ms",
+    "pages/meishi/meishi",
+    "pages/details/details",
     "pages/zhaopin/zhaopin",
     "pages/share/share",
     "pages/my/my",
@@ -10,7 +12,6 @@
     "pages/shequ/shequ",
     "pages/chuzu/chuzu",
     "pages/ershou/ershou",
-    "pages/meishi/meishi",
     "pages/jiaoche/jiaoche",
     "pages/jiudian/jiudian",
     "pages/logs/logs",

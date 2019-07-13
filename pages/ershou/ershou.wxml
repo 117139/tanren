@@ -26,7 +26,7 @@
 			<view class="{{type==idx?'typecur':''}}" data-type="{{idx}}" bindtap='bindcur'>{{item.name}}</view>
 		</block>
 	</view>
-	<block wx:for="{{datalist}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+	<block wx:for="{{datalist}}" wx:for-index="idx" wx:for-item="item"      wx:key="idx">
 		<view wx:if="{{type==idx}}" class="w100 mb45">
 			<view class='tjone' wx:for="{{item.list}}"
 				wx:for-index="idx1"

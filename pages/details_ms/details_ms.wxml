@@ -1,0 +1,133 @@
+<!--pages/details_ms/details_ms.wxml-->
+
+<import src="/pages/component/fabu2/fabu2.wxml" />
+<view class="container pb50">
+	<view class='mb60 dis_flex w100'>
+		<image class='wh200 mr20' src="/static/images/index_27.jpg"></image>
+		<view class="flex_1">
+			<view class="oh1 fz32 mb20 lh40 fwb">瑞兴咖啡厅 </view>
+			<view class="oh1 fz28 mb20 lh40 c9">营业时间： 07:00-22:30</view>
+			<view class="dis_flex w100 aic mb20 ju_b">
+				<view class="dis_flex xingji">
+					<image class="wjx" src="/static/images/index_40.jpg"></image>
+					<image class="wjx" src="/static/images/index_40.jpg"></image>
+					<image class="wjx" src="/static/images/index_40.jpg"></image>
+					<image class="wjx" src="/static/images/index_40.jpg"></image>
+					<image class="wjx" src="/static/images/index_40.jpg"></image>
+					<text class="ml5">4.9</text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="fz36 fwb w100 mb20">店铺介绍</view>
+	<view class="fz32 lh50 mb40 w100">店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍</view>
+	
+	<view class="fz36 fwb w100 mb20">电话</view>
+	<view class="fz32  mb40 w100">212-966-2315</view>
+	
+	<view class="fz36 fwb w100 mb20">地址</view>
+	<view class="fz32  mb40 w100">212 Grand St, new York NY 10013</view>
+	
+	<view class="fz36 fwb w100 mb20">营业时间</view>
+	<view class="fz32  mb40 w100">周一到周日 07:00-22:00</view>
+	<view class="fz36 fwb w100 mb20">店铺实景</view>
+	<view class="scrollbox mb30">
+		<scroll-view class="tjrimgbox" scroll-x style="width: 100%">
+			<image mode="aspectFill" class="tjrimg" bindtap="previewImage" 
+	data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562849455583&di=0847a965036ad704fa554b1a062fd199&imgtype=0&src=http%3A%2F%2Fimg2.ctoutiao.com%2Fuploads%2F2017%2F06%2F22%2Fe691e01010f70eb33f153b7c75eaf6e5.jpg" 
+	src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562849455583&di=0847a965036ad704fa554b1a062fd199&imgtype=0&src=http%3A%2F%2Fimg2.ctoutiao.com%2Fuploads%2F2017%2F06%2F22%2Fe691e01010f70eb33f153b7c75eaf6e5.jpg"></image>
+			<image mode="aspectFill" class="tjrimg" bindtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
+			<image mode="aspectFill" class="tjrimg" bindtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
+			<image mode="aspectFill" class="tjrimg" bindtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
+			<image mode="aspectFill" class="tjrimg" bindtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
+	
+		</scroll-view>
+	</view>
+	
+	
+	<view class="fz36 fwb w100 mb20">
+		用户评价
+	</view>
+	<view class="zongpj mb50 dis_flex aic ju_a">
+		<view class="ce22829 fz42 fwb"> 4.9</view>
+		<view class="tac">
+			<view class="c525155 fz26">综合评分</view>
+			<view class="dis_flex xingji">
+				<image class="wjx" src="/static/images/index_40.jpg"></image>
+				<image class="wjx" src="/static/images/index_40.jpg"></image>
+				<image class="wjx" src="/static/images/index_40.jpg"></image>
+				<image class="wjx" src="/static/images/index_40.jpg"></image>
+				<image class="wjx" src="/static/images/index_40.jpg"></image>
+			</view>
+		</view>
+		<view class="shuxian"></view>
+		<view>
+			<view class="fz26 c3">4.9</view>
+			<view class="fz26 c9">味道</view>
+		</view>
+		<view>
+			<view class="fz26 c3">4.9</view>
+			<view class="fz26 c9">卫生</view>
+		</view>
+		<view>
+			<view class="fz26 c3">4.9</view>
+			<view class="fz26 c9">服务</view>
+		</view>
+	</view>
+	<block wx:for="{{dataxq.list}}"
+			wx:for-index="idx"
+			wx:for-item="item"
+			wx:key="idx">
+		<view class="dis_flex mb40">
+			<image class="headimg mr20" src="/static/images/index_32.jpg"></image>
+			<view class="flex_1">
+				<view class="dis_flex ju_b">
+					<view>
+						<view class="c0 fz32 fwb mb10">银小杏</view>
+						<view class="cadadad fz30 mb20">05月28日</view>
+					</view>
+					<view>
+						<view class="ce22829 fz30">5.0</view>
+						<view class="ce22829 fz30">超满意</view>
+					</view>
+				</view>
+				<view class="c3 fz32 lh40 mb20">东西不错东西不错东西不错东西不错东西不错东西不错东西不错东西不错东西不错东西不错东西不错东西不错</view>
+				<view class="w100 dis_flex flex_ww">
+					<image wx:if="{{item.img.length==1}}"
+						wx:for="{{item.img}}"
+						wx:for-index="idx1"
+						wx:for-item="item1"
+						wx:key="idx1"
+						class="tjrvideo " mode="widthFix"
+						data-src="/static/images/index_29.jpg"
+						src="/static/images/index_29.jpg"
+						bindtap="previewImage"alt=""/>
+					<image wx:if="{{item.img.length>1}}"
+						wx:for="{{item.img}}"
+						wx:for-index="idx1"
+						wx:for-item="item1"
+						wx:key="idx1"
+						class="img9" mode="widthFix"
+						data-src="/static/images/index_29.jpg"
+						src="/static/images/index_29.jpg"
+						bindtap="previewImage"alt=""/>
+					<!-- <image class="flex_1"  src="../../static/images/index_29.jpg" alt=""/> -->
+				</view>
+			</view>
+		</view>
+		<view wx:if="{{idx2!=dataxq.img.length-1}}" class="heng2 mb40"></view>
+	</block>
+	<view class=" dis_flex aic ju_b">
+		<view class="fixedEdit dis_flex aic  ju_c" bindtap="showpp">
+			<text class="iconfont iconpinglun myicon mr10 fz50 ce22829" ></text>
+		</view>
+		<view class="fixedshare share1 dis_flex aic  ju_c">
+			<text class="iconfont iconfenxiang fz36 cfff"></text>
+			<button class="shareBtn" open-type='share' data-supid="1" data-type="{{idx1}}"></button>
+		</view>
+	</view>
+	<van-popup show="{{ show }}" position="bottom" bind:close="onClose">
+		<template is="fabu2" data="{{tmpdata}}" />
+	</van-popup>
+	
+</view> 

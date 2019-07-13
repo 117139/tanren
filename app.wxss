@@ -103,6 +103,9 @@
 .fz24{
   font-size: 24rpx;
 }
+.fz26{
+	font-size: 26rpx;
+}
 .fz28{
 	font-size: 28rpx;
 }
@@ -149,6 +152,9 @@
 	color: #adadad;
 }
 /*margin*/
+.mt30{
+	margin-top: 30px;
+}
 .mb10{
   margin-bottom: 10rpx;
 }
@@ -166,6 +172,12 @@
 }
 .mb45{
   margin-bottom: 45rpx;
+}
+.mb50{
+  margin-bottom: 50rpx;
+}
+.mb60{
+  margin-bottom: 60rpx;
 }
 .ml5{
 	margin-left: 5px;
@@ -463,4 +475,47 @@
 	color: #fff;
 	font-size: 34rpx;
 	margin-bottom: 50rpx;
+}
+.wh200{
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 10rpx;
+}
+.biaoqian{
+	padding: 5rpx 10rpx;
+	background-color: #f2f2f2;
+	border-radius: 8rpx;
+	font-size: 26rpx;
+}
+.zongpj{
+	width: 100%;
+	padding: 25rpx;
+	box-sizing: border-box;
+	border-radius: 10rpx;
+	background-color: #f2f2f2;
+}
+.shuxian{
+	width: 1px;
+	height: 100%;
+	background-color: #cdcdcd;
+}
+.fixedEdit{
+	position: fixed;
+	bottom: 30rpx;
+	right: 200rpx;
+	width: 100rpx;
+	height: 100rpx;
+	border-radius: 50%;
+	background-color: #fff;
+	box-shadow: 4rpx 4rpx 8rpx  rgba(0,0,0,0.5);
+}
+.fixedshare{
+	position: fixed;
+	bottom: 30rpx;
+	right: 50rpx;
+	width: 100rpx;
+	height: 100rpx;
+	border-radius: 50%;
+	background-color: #E22829;
+	box-shadow: 4rpx 4rpx 8rpx  rgba(0,0,0,0.5);
 }
