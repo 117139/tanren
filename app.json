@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/centertk/centertk",
     "pages/index/index", 
+    "pages/centertk/centertk",
+    "pages/fabu/fabu",
     "pages/details_ms/details_ms",
     "pages/meishi/meishi",
     "pages/details/details",

@@ -1,2 +1,9 @@
 <!--pages/centertk/centertk.wxml-->
-<view class='tkbox'></view>
+<view class="container">
+	<view class='tkbox dis_flex aic ju_b fz30 w100'>
+		<navigator url="/pages/fabu/fabu">社区动态</navigator>
+		<navigator url="/pages/fabu/fabu">招聘求职</navigator>
+		<navigator url="/pages/fabu/fabu">房屋出租</navigator>
+		<navigator url="/pages/fabu/fabu">二手买卖</navigator>
+	</view>
+</view>

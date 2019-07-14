@@ -1,0 +1,34 @@
+<!--pages/fabu/fabu.wxml-->
+<view class="container">
+		<view class="textareabox">
+			<textarea bindinput="bint" class="ttaa" name="" maxlength="550" id="" cols="30" rows="10"></textarea>
+			<view class="ttnum">{{tmpdata.fblen}}/550</view>
+		</view>
+		<view class="dis_flex w100 aic ju_b mb40">
+			<view style="color:#525252"><text>0</text>选择主题</view>
+			<view style="color:#a0a0a0">未选择<text>></text></view>
+		</view>
+		<view class="dis_flex w100 aic ju_b mb40">
+			<view style="color:#525252"><text>0</text>是否置顶</view>
+			<view style="color:#a0a0a0">未选择<text>></text></view>
+		</view>
+		<view class="imgbox mb40">
+			<view class="addimg1" wx:for="{{tmpdata.imgb}}" 
+					 wx:for-index="idx"
+					 wx:for-item="item"
+					 wx:key="idx"
+					 data-idx="{{idx}}"
+					 bindtap="imgdel">
+				<image  src="{{item}}" data-src="{{item}}"
+					 mode="aspectFill"></image>
+			</view>
+			
+			<view wx:if="{{tmpdata.imgb.length<9}}" class="addimg" bindtap="scpic">
+				
+				<text class="iconfont iconjiahao fz100 c9"></text>
+			</view>
+		</view>
+		<view class="fabubtn" bindtap="fabusub">
+			发表评论
+		</view>
+	</view>
