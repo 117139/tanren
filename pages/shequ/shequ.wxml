@@ -46,9 +46,9 @@
 			<view class="w100 dis_flex ju_b aic mb20">
 				<view class="dis_flex aic">
 					<image class="headimg" src="/static/images/index_27.jpg"></image>
-					<text class="ml5 fz24">佛系怪兽君</text>
+					<text class="ml5 fz30">佛系怪兽君</text>
 				</view>
-				<view class="c6 fz24">06月06日</view>
+				<view class="c6 fz30">06月06日</view>
 			</view>
 			<view class="oh2 fz28 mb20">同事组织星期天下午小聚一下，我本来就不太爱凑热闹，于是想以媳妇不同意搪塞过去，然鹅没有得逞然鹅没有得逞然鹅没有得逞....</view>
 			<view class="scrollbox mb30">
@@ -82,9 +82,9 @@
 			<view class="w100 dis_flex ju_b aic mb20">
 				<view class="dis_flex aic">
 					<image class="headimg" src="/static/images/index_27.jpg"></image>
-					<text class="ml5 fz24">小伙子</text>
+					<text class="ml5 fz30">小伙子</text>
 				</view>
-				<view class="c6 fz24">06月06日</view>
+				<view class="c6 fz30">06月06日</view>
 			</view>
 			<view class="oh2 fz28 mb20">同事组织星期天下午小聚一下，我本来就不太爱凑热闹，于是想以媳妇不同意搪塞过去，然鹅没有得逞然鹅没有得逞然鹅没有得逞....</view>
 			<!-- <video src="">1111111</video> -->

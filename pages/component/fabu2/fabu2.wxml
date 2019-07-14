@@ -14,38 +14,38 @@
 		<view class="dis_flex w100 aic mb30">
 			<view class="mr30 fz32 c0">菜品味道</view>
 			<view class="w300r mr30 dis_flex ju_b">
-				<text class="iconfont iconwujiaoxing fz30 c9"></text>
-				<text class="iconfont iconwujiaoxing fz30 c9"></text>
-				<text class="iconfont iconwujiaoxing fz30 c9"></text>
-				<text class="iconfont iconwujiaoxing fz30 c9"></text>
-				<text class="iconfont iconwujiaoxing fz30 c9"></text>
+				<text class="iconfont iconwujiaoxing fz30  {{tmpdata.weidao>=1? 'ce22829':'c9'}}" data-type="0" data-pf="1" bindtap="pingfen"></text>
+				<text class="iconfont iconwujiaoxing fz30 {{tmpdata.weidao>=2? 'ce22829':'c9'}}" data-type="0" data-pf="2" bindtap="pingfen"></text>
+				<text class="iconfont iconwujiaoxing fz30 {{tmpdata.weidao>=3? 'ce22829':'c9'}}" data-type="0" data-pf="3" bindtap="pingfen"></text>
+				<text class="iconfont iconwujiaoxing fz30 {{tmpdata.weidao>=4? 'ce22829':'c9'}}" data-type="0" data-pf="4" bindtap="pingfen"></text>
+				<text class="iconfont iconwujiaoxing fz30 {{tmpdata.weidao>=5? 'ce22829':'c9'}}" data-type="0" data-pf="5" bindtap="pingfen"></text>
 			</view>
-			<view class="flex_1 c9 fz26">5.0</view>
+			<view class="flex_1 ce22829 fz26">{{tmpdata.weidao}}.0</view>
 		</view>
 		<view class="dis_flex w100 aic mb30">
 			<view class="mr30 fz32 c0">店铺卫生</view>
 			<view class="w300r mr30 dis_flex ju_b">
-				<text class="iconfont iconwujiaoxing fz30 c9"></text>
-				<text class="iconfont iconwujiaoxing fz30 c9"></text>
-				<text class="iconfont iconwujiaoxing fz30 c9"></text>
-				<text class="iconfont iconwujiaoxing fz30 c9"></text>
-				<text class="iconfont iconwujiaoxing fz30 c9"></text>
+				<text class="iconfont iconwujiaoxing fz30 {{tmpdata.weishen>=1? 'ce22829':'c9'}}" data-type="1" data-pf="1" bindtap="pingfen"></text>
+				<text class="iconfont iconwujiaoxing fz30  {{tmpdata.weishen>=2? 'ce22829':'c9'}}" data-type="1" data-pf="2" bindtap="pingfen"></text>
+				<text class="iconfont iconwujiaoxing fz30  {{tmpdata.weishen>=3? 'ce22829':'c9'}}" data-type="1" data-pf="3" bindtap="pingfen"></text>
+				<text class="iconfont iconwujiaoxing fz30  {{tmpdata.weishen>=4? 'ce22829':'c9'}}" data-type="1" data-pf="4" bindtap="pingfen"></text>
+				<text class="iconfont iconwujiaoxing fz30  {{tmpdata.weishen>=5? 'ce22829':'c9'}}" data-type="1" data-pf="5" bindtap="pingfen"></text>
 			</view>
-			<view class="flex_1 c9 fz26">5.0</view>
+			<view class="flex_1 ce22829 fz26">{{tmpdata.weishen}}.0</view>
 		</view>
 		<view class="dis_flex w100 aic mb30">
 			<view class="mr30 fz32 c0">店铺服务</view>
 			<view class="w300r mr30 dis_flex ju_b">
-				<text class="iconfont iconwujiaoxing fz30 c9"></text>
-				<text class="iconfont iconwujiaoxing fz30 c9"></text>
-				<text class="iconfont iconwujiaoxing fz30 c9"></text>
-				<text class="iconfont iconwujiaoxing fz30 c9"></text>
-				<text class="iconfont iconwujiaoxing fz30 c9"></text>
+				<text class="iconfont iconwujiaoxing fz30 {{tmpdata.fuwu>=1? 'ce22829':'c9'}}" data-type="2" data-pf="1" bindtap="pingfen"></text>
+				<text class="iconfont iconwujiaoxing fz30 {{tmpdata.fuwu>=2? 'ce22829':'c9'}}" data-type="2" data-pf="2" bindtap="pingfen"></text>
+				<text class="iconfont iconwujiaoxing fz30 {{tmpdata.fuwu>=3? 'ce22829':'c9'}}" data-type="2" data-pf="3" bindtap="pingfen"></text>
+				<text class="iconfont iconwujiaoxing fz30 {{tmpdata.fuwu>=4? 'ce22829':'c9'}}" data-type="2" data-pf="4" bindtap="pingfen"></text>
+				<text class="iconfont iconwujiaoxing fz30 {{tmpdata.fuwu>=5? 'ce22829':'c9'}}" data-type="2" data-pf="5" bindtap="pingfen"></text>
 			</view>
-			<view class="flex_1c9 fz26">5.0</view>
+			<view class="flex_1 ce22829 fz26">{{tmpdata.fuwu}}.0</view>
 		</view>
 		<view class="textareabox">
-			<textarea bindinput="bint" class="ttaa" name="" maxlength="150" id="" cols="30" rows="10"></textarea>
+			<textarea bindinput="bint" class="ttaa" name="" maxlength="150" id="" placeholder="说说您的消费感受" cols="30" rows="10"></textarea>
 			<view class="ttnum">{{tmpdata.fblen}}/150</view>
 		</view>
 		<view class="imgbox mb40">

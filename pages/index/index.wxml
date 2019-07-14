@@ -42,10 +42,10 @@
 		</navigator>
 	</view>
 	<view class="w100 dis_flex ju_b mb45">
-		<navigator class="ib2one" url="">
+		<navigator class="ib2one" url="/pages/jiaoche/jiaoche">
 			<image src='/static/images/index_20.jpg'></image>
 		</navigator>
-		<navigator class="ib2one" url="">
+		<navigator class="ib2one" url="/pages/jiudian/jiudian">
 			<image src='/static/images/index_22.jpg'></image>
 		</navigator>
 	</view>

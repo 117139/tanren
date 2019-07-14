@@ -5,7 +5,34 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    type: 0,
+    datalist: [
+      {
+        "name": "唐人街",
+        list: [
+          1, { "img": [1] }, { "img": [1, 1, 1] }, { "img": [1, 1, 1, 1, 1] }, 5
+        ]
+      }, {
+        "name": "布鲁克林",
+        list: [
+          1, 2, 3, 4, 5
+        ]
+      }, {
+        "name": "法拉盛",
+        list: [
+          1, 2, 3, 4, 5
+        ]
+      }
+    ],
+    bannerimg: [
+      '/static/images/banner_03.jpg',
+      '/static/images/banner_03.jpg',
+      '/static/images/banner_03.jpg',
+    ],
+    indicatorDots: true,
+    autoplay: true,
+    interval: 3000,
+    duration: 1000
   },
 
   /**
@@ -62,5 +89,38 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  bindcur(e){
+    console.log(e.currentTarget.dataset.type)
+    this.setData({
+      type: e.currentTarget.dataset.type
+    })
+  },
+	formSubmit: function(e) {
+		let that =this
+		console.log('form发生了submit事件，携带数据为：', e.detail.value)
+		// that.setData({
+		// 	keyword:e.detail.value.sr
+		// })
+		// that.getshoplist(1)
+	},
+	/**   
+     * 预览图片  
+     */
+  previewImage: function (e) {
+    var current = e.target.dataset.src;
+		var arr1=[]
+		arr1.push(current)
+		console.log(arr1);
+    wx.previewImage({
+      current: current, // 当前显示图片的http链接  
+      urls: arr1 // 需要预览的图片http链接列表  
+    })
+  },
+	call(e){
+		console.log(e.currentTarget.dataset.tel)
+		wx.makePhoneCall({
+			phoneNumber: e.currentTarget.dataset.tel //仅为示例，并非真实的电话号码
+		})
+	}
 })

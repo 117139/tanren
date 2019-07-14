@@ -2,7 +2,7 @@
 <import src="/utils/pageState/index.wxml" />
 <template is="pageState" data="{{...pageState}}" />
 <view class="container">
-	<form class="topform" bindsubmit="formSubmit">
+	<!-- <form class="topform" bindsubmit="formSubmit">
 		<view class="ssbox mb30">
 			<input class="ssint" type="text" name="sr" />
 	
@@ -11,7 +11,7 @@
 				<image src="../../static/images/sousuo.png"></image>
 			</view>
 		</view>
-	</form>
+	</form> -->
 	<swiper class="swiper mb45" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}"
 	 duration="{{duration}}" indicator-active-color='#fff' circular='true'>
 		<block wx:for="{{bannerimg}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">

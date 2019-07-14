@@ -1,6 +1,7 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/centertk/centertk",
+    "pages/index/index", 
     "pages/details_ms/details_ms",
     "pages/meishi/meishi",
     "pages/details/details",
@@ -8,7 +9,6 @@
     "pages/share/share",
     "pages/my/my",
     "pages/faxian/faxian",
-    "pages/centertk/centertk",
     "pages/shequ/shequ",
     "pages/chuzu/chuzu",
     "pages/ershou/ershou",

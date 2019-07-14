@@ -17,7 +17,10 @@ Page({
 		},
 		tmpdata:{
 			fblen:0,
-			imgb:[]
+			imgb:[],
+			weishen:0,
+			weidao:2,
+			fuwu:5
 		}
   },
 
@@ -156,6 +159,13 @@ Page({
 	},
 	fabusub(){
 		var that =this
+		if(that.data.tmpdata.weidao==0||that.data.tmpdata.weishen==0||that.data.tmpdata.fuwu==0){
+			wx.showToast({
+				icon:"none",
+				title:"请结合您的体检进行打分"
+			})
+			return
+		}
 		if(that.data.fbtext==""){
 			wx.showToast({
 				icon:"none",
@@ -190,5 +200,22 @@ Page({
       current: current, // 当前显示图片的http链接  
       urls: arr1 // 需要预览的图片http链接列表  
     })
-  }
+  },
+	pingfen(e){
+		var that=this
+		var type = e.currentTarget.dataset.type
+		var pf = e.currentTarget.dataset.pf
+		if(type==0){
+			that.data.tmpdata.weidao=pf
+		}else if(type==1){
+			that.data.tmpdata.weishen=pf
+		}else if(type==2){
+			that.data.tmpdata.fuwu=pf
+		}else{
+			
+		}
+		that.setData({
+			tmpdata:that.data.tmpdata
+		})
+	}
 })
