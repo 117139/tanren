@@ -1,0 +1,15 @@
+<!--pages/settel/settel.wxml-->
+<view class="container">
+	<form class="topform" bindsubmit="formSubmit">
+		<view class="dis_flex aic pb100">
+			<view class="mr20">手机号</view>
+			<view class="intbox  flex_1">
+				<input class="ssint" type="text" placeholder="请输入手机号" name="sr"/>
+				
+				
+			</view>
+		</view>
+		<button  class="mt60 thbtn" form-type="submit">提交</button>
+		
+	</form >
+</view>

@@ -6,7 +6,25 @@ Page({
    */
   data: {
     type: 0,
-    bannerimg: [
+		datalist: [
+		  {
+		    "name": "唐人街",
+		    list: [
+		      1, { "img": [1] }, { "img": [1, 1, 1] }, { "img": [1, 1, 1, 1, 1] }, 5
+		    ]
+		  }, {
+		    "name": "布鲁克林",
+		    list: [
+		      1, 2, 3, 4, 5
+		    ]
+		  }, {
+		    "name": "法拉盛",
+		    list: [
+		      1, 2, 3, 4, 5
+		    ]
+		  }
+		],
+		bannerimg: [
       '/static/images/banner_03.jpg',
       '/static/images/banner_03.jpg',
       '/static/images/banner_03.jpg',

@@ -1,0 +1,22 @@
+<!-- fabu1.wxml -->
+<template name="zhiding">
+	<view class="container">
+		<view class="fabutit ">是否置顶</view>
+		<view class="dis_flex aic ju_b w100 h100 bb1d0" wx:for="{{tmpdata.zhiding}}" 
+			 wx:for-index="idx"
+			 wx:for-item="item"
+			 wx:key="idx"
+			 data-idx="{{idx}}"
+			 bindtap="zhidingSelet">
+			<view class="dis_flex aic ">
+				<text class="iconfont icondiamond fz36 cf15a29 mr10"></text>
+				<text class="fz30 c0">15积分/1天</text>
+			</view>
+			<text class="iconfont iconiconfontxuanzhong fz36 {{tmpdata.zhidingcur==idx? 'cf15a29':'ca0a0a0'}}"></text>
+		</view>
+		
+		<view class="fabubtn mt60" bindtap="onClose">
+			确定
+		</view>
+	</view>
+</template>

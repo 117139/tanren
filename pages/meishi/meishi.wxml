@@ -23,7 +23,7 @@
 	<view class="w100 mb45">
 		<view class="tac mb40">// 美食推荐 //</view>
 		<view class="w100 dis_flex ju_b">
-			<view class="msone">
+			<navigator url="/pages/details_ms/details_ms" class="msone" class="msone">
 				<image class="mb10" src="/static/images/index_27.jpg"></image>
 				<view class="fz28">麦当劳</view>
 				<view class="dis_flex xingji">
@@ -34,8 +34,8 @@
 					<image class="wjx" src="/static/images/index_40.jpg"></image>
 					<text class="ml5">4.9</text>
 				</view>
-			</view>
-			<view class="msone">
+			</navigator>
+			<navigator url="/pages/details_ms/details_ms" class="msone" class="msone">
 				<image class="mb10" src="/static/images/index_29.jpg"></image>
 				<view class=" fz28">喜茶</view>
 				<view class="dis_flex xingji">
@@ -46,8 +46,8 @@
 					<image class="wjx" src="/static/images/index_40.jpg"></image>
 					<text class="ml5">4.9</text>
 				</view>
-			</view>
-			<view class="msone">
+			</navigator>
+			<navigator url="/pages/details_ms/details_ms" class="msone" class="msone">
 				<image class="mb10" src="/static/images/index_32.jpg"></image>
 				<view class="fz28">星巴克</view>
 				<view class="dis_flex xingji">
@@ -58,8 +58,8 @@
 					<image class="wjx" src="/static/images/index_40.jpg"></image>
 					<text class="ml5">4.9</text>
 				</view>
-			</view>
-			<view class="msone">
+			</navigator>
+			<navigator url="/pages/details_ms/details_ms" class="msone" class="msone">
 				<image class="mb10" src="/static/images/index_34.jpg"></image>
 				<view class=" fz28">瑞幸</view>
 				<view class="dis_flex xingji">
@@ -70,7 +70,7 @@
 					<image class="wjx" src="/static/images/index_40.jpg"></image>
 					<text class="ml5">4.9</text>
 				</view>
-			</view>
+			</navigator>
 		</view>
 	</view>
 	<view class='dis_flex ju_a w100 mb40'>

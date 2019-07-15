@@ -9,13 +9,15 @@ Page({
 		zan:0,
 		show: false,
 		fbtext:'',
-		
+		array: ['主题1', '主题2', '主题3', '主题4'],
 		dataxq:{
 			img:[1,1,1]
 		},
 		tmpdata:{
 			fblen:0,
-			imgb:[]
+			imgb:[],
+			zhidingcur:0,
+			zhiding:[1,2,3,4]
 		}
   },
 
@@ -174,6 +176,20 @@ Page({
 					console.log('用户点击取消')
 				}
 			}
+		})
+	},
+	bindPickerChange: function(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      index: e.detail.value
+    })
+  },
+	zhidingSelet(e){
+		console.log(e.currentTarget.dataset.idx)
+		var that =this
+		that.data.tmpdata.zhidingcur=e.currentTarget.dataset.idx
+		that.setData({
+			tmpdata:that.data.tmpdata
 		})
 	}
 })

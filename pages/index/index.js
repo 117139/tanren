@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+var pageState = require('../../utils/pageState/index.js')
 Page({
   data: {
     bannerimg: [
@@ -15,6 +15,7 @@ Page({
     duration: 1000
   },
   onLoad: function () {
+		this.getshoplist(0)
   },
   /**
   * 页面上拉触底事件的处理函数
@@ -27,6 +28,8 @@ Page({
 		// console.log(pageState)
 		const pageState1 = pageState.default(this)
 	  pageState1.loading()    // 切换为loading状态
+		pageState1.finish()
+		return
 		let that = this
 		if(type){
 			let remove=[]

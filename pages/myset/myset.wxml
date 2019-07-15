@@ -1,0 +1,34 @@
+<!--pages/myset/myset.wxml-->
+<view class="container">
+	<view class="w100">
+		<navigator url="/pages/myaddress/myaddress" class="dis_flex mylist">
+			<text class="iconfont iconGPS-xuanzhongdizhiguanli myicon mr20" style="color: #f15a29;"></text>
+			<text class="flex_1">地址管理</text>
+			<text class="iconfont iconnext myicon c9 myicon1"></text>
+		</navigator>
+		<navigator url="/pages/settel/settel" class="dis_flex mylist">
+			<text class="iconfont iconshouji myicon mr20" style="color: #E22829;"></text>
+			<text class="flex_1">换绑手机</text>
+			<text class="iconfont iconnext myicon c9 myicon1"></text>
+		</navigator>
+	</view>
+	<view class="heng1"></view>
+	<view class="w100">
+		<navigator url="/pages/mysc/mysc" class="dis_flex mylist">
+			<text class="iconfont iconfenxiang1 myicon mr20" style="color: #eabb26;"></text>
+			<text class="flex_1">分享我们</text>
+			<text class="iconfont iconnext myicon c9 myicon1"></text>
+		</navigator>
+		<navigator url="/pages/setyj/setyj" class="dis_flex mylist">
+			<text class="iconfont icontubiao05 myicon mr20" style="color: #59b94e;"></text>
+			<text class="flex_1">意见反馈</text>
+			<text class="iconfont iconnext myicon c9 myicon1"></text>
+		</navigator>
+		<navigator url="/pages/mysc/mysc" class="dis_flex mylist">
+			<!-- <text class="iconfont iconshezhi myicon mr20" style="color: #5d85dc;"></text> -->
+			<text class="iconfont iconguanyu myicon cf15a29 mr20"></text>
+			<text class="flex_1">关于我们</text>
+			<text class="iconfont iconnext myicon c9 myicon1"></text>
+		</navigator>
+	</view>
+</view>

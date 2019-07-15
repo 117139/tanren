@@ -1,2 +1,37 @@
 /* pages/centertk/centertk.wxss */
+page{
+	position: relative;
+	/* height: 100%; */
+	background-color: #f2f2f2;
+}
+.bgt{
+	width: auto;
+	height: auto;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom:0rpx;
+}
+.container{
+	height: auto;
+	position: fixed;
+	bottom:0rpx;
+	background-color: #fff;
+	border-top-left-radius: 30rpx ;
+	border-top-right-radius: 30rpx ;
+	padding: 40rpx 20rpx 80rpx;
+}
+.tkbox{
+	
+	width: 100%;
+	
+	
+	
+}
+.fbicon{
+	width: 150rpx;
+	height: 150rpx;
+	border-radius:50%;
+}
 

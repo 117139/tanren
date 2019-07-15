@@ -1,0 +1,15 @@
+/* pages/myjf/myjf.wxss */
+.jfcz{
+	width: 120rpx;
+	height: 46rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+	background-color: #E22829;
+	font-size: 30rpx;
+	border-radius: 46rpx;
+}
+.jfcz1{
+	background-color: #e6e7e8;
+}

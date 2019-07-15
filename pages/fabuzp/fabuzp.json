@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "发布招聘信息",
+  "usingComponents":{
+  	"van-popup": "../../miniprogram_npm/vant-weapp/popup/index"
+   }
+}

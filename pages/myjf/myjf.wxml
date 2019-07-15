@@ -1,0 +1,51 @@
+<!--pages/myjf/myjf.wxml-->
+<view class="container">
+	<view class="tac pt100 pb100">
+		<view class="ce22829 fz60 fwb mb20">106</view>
+		<view class="c9 fz30">当前可用积分</view>
+	</view>
+	<view class="heng1"></view>
+	<view class="w100">
+		<view class="fwb c0 fz36 mt40">
+			积分充值
+		</view>
+		<view class="dis_flex mylist bb1d0">
+			<text class="iconfont icondiamond myicon mr20" style="color: #F15A29;"></text>
+			<text class="flex_1">100</text>
+			<text class="jfcz">10.00</text>
+		</view>
+		<view class="dis_flex mylist bb1d0">
+			<text class="iconfont icondiamond myicon mr20" style="color: #F15A29;"></text>
+			<text class="flex_1">300</text>
+			<text class="jfcz">30.00</text>
+		</view>
+		<view class="dis_flex mylist">
+			<text class="iconfont icondiamond myicon mr20" style="color: #F15A29;"></text>
+			<text class="flex_1">500</text>
+			<text class="jfcz">50.00</text>
+		</view>
+		<view class="fwb c0 fz36 mt60">
+			积分任务
+		</view>
+		<view class="dis_flex mylist bb1d0">
+			<text class="iconfont iconqiandao myicon mr20" style="color: #a57ac9;"></text>
+			<text class="flex_1">每日签到+3</text>
+			<text class="jfcz jfcz1">已完成</text>
+		</view>
+		<view class="dis_flex mylist bb1d0">
+			<text class="iconfont icondiamond myicon mr20" style="color: #59b94e;"></text>
+			<text class="flex_1">发表动态</text>
+			<text class="jfcz">未完成</text>
+		</view>
+		<view class="dis_flex mylist bb1d0">
+			<text class="iconfont iconwujiaoxing myicon mr20" style="color: #ffa217;"></text>
+			<text class="flex_1">收藏内容</text>
+			<text class="jfcz">未完成</text>
+		</view>
+		<view class="dis_flex mylist mb60">
+			<text class="iconfont iconfenxiang2 myicon mr20" style="color: #F15A29;"></text>
+			<text class="flex_1">分享内容</text>
+			<text class="jfcz">未完成</text>
+		</view>
+	</view>
+</view>

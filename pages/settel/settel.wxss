@@ -1,0 +1,17 @@
+/* pages/settel/settel.wxss */
+.intbox{
+	height: 80rpx;
+	padding: 0 20rpx;
+	border: 1px solid #ddd;
+	display: flex;
+	align-items: center;
+}
+.thbtn{
+	width: 350rpx;
+	background-color: #E22829;
+	height: 80rpx;
+	line-height: 80rpx;
+	color: #fff;
+	border-radius: 80rpx;
+	font-size: 36rpx;
+}

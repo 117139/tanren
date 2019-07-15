@@ -50,3 +50,8 @@
 	margin-left: 65rpx;
 	margin-right: 10px;
 }
+.iconyiguoqi{
+	position: absolute;
+	top: 0;
+	right: 0;
+}

@@ -1,16 +1,20 @@
 <!--pages/fabu/fabu.wxml-->
+<import src="/pages/component/zhiding/zhiding.wxml" />
 <view class="container">
 		<view class="textareabox">
 			<textarea bindinput="bint" class="ttaa" name="" maxlength="550" id="" cols="30" rows="10"></textarea>
 			<view class="ttnum">{{tmpdata.fblen}}/550</view>
 		</view>
 		<view class="dis_flex w100 aic ju_b mb40">
-			<view style="color:#525252"><text>0</text>选择主题</view>
-			<view style="color:#a0a0a0">未选择<text>></text></view>
+			<view class="dis_flex aic" style="color:#525252"><text class="iconfont icontubiao05 c9 mr10"></text>选择主题</view>
+			
+			<picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+				<view style="color:#a0a0a0">{{array[index]? array[index]:'未选择'}}<text class="iconfont iconnext c9 mr10"></text></view>
+			</picker>
 		</view>
-		<view class="dis_flex w100 aic ju_b mb40">
-			<view style="color:#525252"><text>0</text>是否置顶</view>
-			<view style="color:#a0a0a0">未选择<text>></text></view>
+		<view class="dis_flex w100 aic ju_b mb40"  bindtap="showpp">
+			<view style="color:#525252"><text class="iconfont icondfdabf c9 mr10"></text>是否置顶</view>
+			<view style="color:#a0a0a0">未选择<text class="iconfont iconnext c9 mr10"></text></view>
 		</view>
 		<view class="imgbox mb40">
 			<view class="addimg1" wx:for="{{tmpdata.imgb}}" 
@@ -31,4 +35,7 @@
 		<view class="fabubtn" bindtap="fabusub">
 			发表评论
 		</view>
+		<van-popup show="{{ show }}" position="bottom" bind:close="onClose">
+			<template is="zhiding" data="{{tmpdata}}" />
+		</van-popup>
 	</view>

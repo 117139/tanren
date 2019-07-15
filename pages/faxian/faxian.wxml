@@ -21,8 +21,9 @@
 					<view>
 						<view class="c0 fz30 mb20 oh1">七月海鲜大优惠</view>
 						<view class="cadadad fz20 mb10">优惠说明</view>
-						<view class="cadadad fz20 mb10 oh1">仅到店消费满660元可减免</view>
+						<view class="cadadad fz20 mb10 oh2">仅到店消费满660元可减免</view>
 					</view>
+					<text class="iconfont iconyiguoqi" style="font-size: 200rpx;"></text>
 				</view>
 				<view class="boxsiz pt20">
 					<view class="dis_flex aic pt20">
@@ -47,7 +48,7 @@
 					<view>
 						<view class="c0 fz30 mb20 oh1">七月海鲜大优惠</view>
 						<view class="cadadad fz20 mb10">优惠说明</view>
-						<view class="cadadad fz20 mb10 oh1">仅到店消费满660元可减免</view>
+						<view class="cadadad fz20 mb10 oh2">仅到店消费满660元可减免</view>
 					</view>
 				</view>
 				<view class="boxsiz pt20">
