@@ -151,5 +151,11 @@ Page({
 		this.setData({
 			NewDate:date
 		})
+	},
+	jump(e){
+		console.log(e.currentTarget.dataset.url)
+		wx.navigateTo({
+			url:e.currentTarget.dataset.url
+		})
 	}
 })

@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+		show: false,
+		tmpdata:''
   },
 
   /**
@@ -62,5 +63,11 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+	onClose() {
+	  this.setData({ show: false });
+	},
+	showpp(){
+	  this.setData({ show: true });
+	},
 })

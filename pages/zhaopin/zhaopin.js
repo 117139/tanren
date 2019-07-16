@@ -1,5 +1,6 @@
 // pages/zhaopin/zhaopin.js
 const app = getApp()
+var pageState = require('../../utils/pageState/index.js')
 Page({
 
   /**
@@ -53,6 +54,7 @@ Page({
   onLoad: function () {
    console.log(1)
 	 wx.hideShareMenu()
+	 this.getyhlist()
   },
 
   /**
@@ -152,5 +154,54 @@ Page({
 		wx.makePhoneCall({
 			phoneNumber: e.currentTarget.dataset.tel //仅为示例，并非真实的电话号码
 		})
-	}   
+	},
+	//获取首页list（搜索）
+	getyhlist(){
+		// console.log(pageState)
+		let that = this
+		const pageState1 = pageState.default(that)
+	  pageState1.loading()    // 切换为loading状态
+		
+	
+		wx.request({
+			url:  app.IPurl2+'/api/job_seek/index',
+			data:{
+				"page":1,
+				"region_id":2,
+				"profession_id":2,
+				"search":''
+			},
+			header: {
+				'content-type': 'application/x-www-form-urlencoded' 
+			},
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+				let rlist=res.data.retData
+				
+				if(res.data.errcode==0){
+					
+					if(rlist.length>0){
+						that.data.yhlist=that.data.yhlist.concat(rlist)
+						console.log(rlist)
+						that.setData({
+							yhlist:that.data.yhlist
+						})
+						console.log(that.data.yhlist)
+					}
+					if(rlist.length<10){
+						console.log('没了')
+						
+					}
+					 pageState1.finish()    // 切换为finish状态
+				}
+				
+				  // pageState1.error()    // 切换为error状态
+			},
+			fail() {
+				 pageState1.error()    // 切换为error状态
+			}
+		})
+	},
 })

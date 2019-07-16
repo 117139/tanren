@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/faxian/faxian",
     "pages/setyj/setyj", 
     "pages/myset/myset",
     "pages/settel/settel",
@@ -21,7 +22,6 @@
     "pages/detailssq/detailssq",
     "pages/zhaopin/zhaopin",
     "pages/share/share",
-    "pages/faxian/faxian",
     "pages/shequ/shequ",
     "pages/chuzu/chuzu",
     "pages/ershou/ershou",

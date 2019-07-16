@@ -9,6 +9,7 @@
 }
 
 .page-state-container {
+	padding-top: 200rpx;
   animation: fadein 2s 1 ease-out;
   height: 100%;
   width: 100%;
@@ -19,7 +20,7 @@
 }
 
 page {
-  /* height: 100%; */
+  /* min-height: 100%; */
   /* overflow-y: auto; */
 }
 .pstatemessage{

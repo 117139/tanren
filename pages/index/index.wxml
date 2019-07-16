@@ -24,35 +24,35 @@
 		</block>
 	</swiper>
 	<view class='dis_flex ju_a mb45 w100'>
-		<navigator class='ibone' url="/pages/zhaopin/zhaopin">
+		<view class='ibone' data-url="/pages/zhaopin/zhaopin" bindtap="jump">
 			<image class='indebtnicon' src='/static/images/index_07.jpg'></image>
 			<text>招聘求职</text>
-		</navigator>
-		<navigator class='ibone' url="/pages/chuzu/chuzu">
+		</view>
+		<view class='ibone' bindtap="jump" data-url="/pages/chuzu/chuzu">
 			<image class='indebtnicon' src='/static/images/index_09.jpg'></image>
 			<text>房屋出租</text>
-		</navigator>
-		<navigator class='ibone' url="/pages/ershou/ershou">
+		</view>
+		<view class='ibone' bindtap="jump" data-url="/pages/ershou/ershou">
 			<image class='indebtnicon' src='/static/images/index_11.jpg'></image>
 			<text>二手买卖</text>
-		</navigator>
-		<navigator class='ibone' url="/pages/meishi/meishi">
+		</view>
+		<view class='ibone' bindtap="jump" data-url="/pages/meishi/meishi">
 			<image class='indebtnicon' src='/static/images/index_13.jpg'></image>
 			<text>附近美食</text>
-		</navigator>
+		</view>
 	</view>
 	<view class="w100 dis_flex ju_b mb45">
-		<navigator class="ib2one" url="/pages/jiaoche/jiaoche">
+		<view class="ib2one"  bindtap="jump" data-url="/pages/jiaoche/jiaoche">
 			<image src='/static/images/index_20.jpg'></image>
-		</navigator>
-		<navigator class="ib2one" url="/pages/jiudian/jiudian">
+		</view>
+		<view class="ib2one"  bindtap="jump" data-url="/pages/jiudian/jiudian">
 			<image src='/static/images/index_22.jpg'></image>
-		</navigator>
+		</view>
 	</view>
 	<view class="w100 mb45">
 		<view class="tac mb40">// 美食推荐 //</view>
 		<view class="w100 dis_flex ju_b">
-			<navigator url="/pages/details_ms/details_ms" class="msone">
+			<view  bindtap="jump" data-url="/pages/details_ms/details_ms" class="msone">
 				<image class="mb10" src="/static/images/index_27.jpg"></image>
 				<view class="fz28">麦当劳</view>
 				<view class="dis_flex xingji">
@@ -63,8 +63,8 @@
 					<image class="wjx" src="/static/images/index_40.jpg"></image>
 					<text class="ml5">4.9</text>
 				</view>
-			</navigator>
-			<navigator url="/pages/details_ms/details_ms" class="msone">
+			</view>
+			<view  bindtap="jump" data-url="/pages/details_ms/details_ms" class="msone">
 				<image class="mb10" src="/static/images/index_29.jpg"></image>
 				<view class=" fz28">喜茶</view>
 				<view class="dis_flex xingji">
@@ -75,8 +75,8 @@
 					<image class="wjx" src="/static/images/index_40.jpg"></image>
 					<text class="ml5">4.9</text>
 				</view>
-			</navigator>
-			<navigator url="/pages/details_ms/details_ms" class="msone">
+			</view>
+			<view  bindtap="jump" data-url="/pages/details_ms/details_ms" class="msone">
 				<image class="mb10" src="/static/images/index_32.jpg"></image>
 				<view class="fz28">星巴克</view>
 				<view class="dis_flex xingji">
@@ -87,8 +87,8 @@
 					<image class="wjx" src="/static/images/index_40.jpg"></image>
 					<text class="ml5">4.9</text>
 				</view>
-			</navigator>
-			<navigator url="/pages/details_ms/details_ms" class="msone">
+			</view>
+			<view  bindtap="jump" data-url="/pages/details_ms/details_ms" class="msone">
 				<image class="mb10" src="/static/images/index_34.jpg"></image>
 				<view class=" fz28">瑞幸</view>
 				<view class="dis_flex xingji">
@@ -99,14 +99,14 @@
 					<image class="wjx" src="/static/images/index_40.jpg"></image>
 					<text class="ml5">4.9</text>
 				</view>
-			</navigator>
+			</view>
 		</view>
 	</view>
 	<view class="w100 mb45">
 		<view class="fwb mb40 fz32">
 			推荐内容
 		</view>
-		<navigator url="/pages/detailssq/detailssq" class='tjone'>
+		<view  bindtap="jump" data-url="/pages/detailssq/detailssq" class='tjone'>
 			<view class="w100 dis_flex ju_b aic mb20">
 				<view class="dis_flex aic">
 					<image class="headimg" src="/static/images/index_27.jpg"></image>
@@ -143,8 +143,8 @@
 					</view>
 				</view>
 			</view>
-		</navigator>
-		<navigator url="/pages/detailssq/detailssq" class='tjone'>
+		</view>
+		<view  bindtap="jump" data-url="/pages/detailssq/detailssq" class='tjone'>
 			<view class="w100 dis_flex ju_b aic mb20">
 				<view class="dis_flex aic">
 					<image class="headimg" src="/static/images/index_27.jpg"></image>
@@ -173,6 +173,6 @@
 					</view>
 				</view>
 			</view>
-		</navigator>
+		</view>
 	</view>
 </view>

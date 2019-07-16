@@ -1,4 +1,5 @@
 <!--pages/myjf/myjf.wxml-->
+<import src="/pages/component/chongzhi/chongzhi.wxml" />
 <view class="container">
 	<view class="tac pt100 pb100">
 		<view class="ce22829 fz60 fwb mb20">106</view>
@@ -12,7 +13,7 @@
 		<view class="dis_flex mylist bb1d0">
 			<text class="iconfont icondiamond myicon mr20" style="color: #F15A29;"></text>
 			<text class="flex_1">100</text>
-			<text class="jfcz">10.00</text>
+			<text class="jfcz" bindtap="showpp">10.00</text>
 		</view>
 		<view class="dis_flex mylist bb1d0">
 			<text class="iconfont icondiamond myicon mr20" style="color: #F15A29;"></text>
@@ -48,4 +49,7 @@
 			<text class="jfcz">未完成</text>
 		</view>
 	</view>
+	<van-popup show="{{ show }}" position="bottom" bind:close="onClose">
+		<template is="chongzhi" data="{{tmpdata}}" />
+	</van-popup>
 </view>
