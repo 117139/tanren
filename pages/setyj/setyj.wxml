@@ -2,7 +2,7 @@
 <view class="container">
 	<form class="topform" bindsubmit="formSubmit">
 		<view class="dis_flex pb100">
-			<view class="mr20 lh50 mt20">反馈意见</view>
+			<view class="mr20 lh50 ">反馈意见</view>
 			<view class="intbox  flex_1">
 				<!-- <input class="ssint" type="text" placeholder="请输入手机号" name="sr"/> -->
 				<textarea class="ssint" placeholder="请输入反馈意见" name="sr" id="" cols="30" rows="10"></textarea>
