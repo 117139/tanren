@@ -1,4 +1,5 @@
 // pages/ershou/ershou.js
+const app=getApp()
 Page({
 
   /**
@@ -128,5 +129,8 @@ Page({
 		wx.makePhoneCall({
 			phoneNumber: e.currentTarget.dataset.tel //仅为示例，并非真实的电话号码
 		})
+	},
+	jump(e){
+		app.jump(e)
 	}
 })

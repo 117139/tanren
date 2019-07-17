@@ -65,9 +65,16 @@ function dateLater(dates, later) {
   return dateObj;
 }
 
-
+function getDay(nowtime, firtime) {
+  var firtime1=firtime+'000'
+	var daytime=nowtime-firtime1
+	daytime=(daytime-daytime%1000)/1000/3600/24
+	daytime=Math.ceil(daytime)
+  return daytime;
+}
 
 module.exports = {
   formatTime: formatTime,
-	getDates: getDates
+	getDates: getDates,
+	getDay:getDay
 }

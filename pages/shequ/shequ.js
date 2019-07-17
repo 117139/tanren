@@ -1,4 +1,5 @@
 // pages/shequ/shequ.js
+const app=getApp()
 Page({
 
   /**
@@ -149,13 +150,9 @@ Page({
      * 预览图片  
      */
   previewImage: function (e) {
-    var current = e.target.dataset.src;
-		var arr1=[]
-		arr1.push(current)
-		console.log(arr1);
-    wx.previewImage({
-      current: current, // 当前显示图片的http链接  
-      urls: arr1 // 需要预览的图片http链接列表  
-    })
-  }
+    app.previewImage(e)
+  },
+	jump(e){
+		app.jump(e)
+	}
 })

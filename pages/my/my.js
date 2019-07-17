@@ -1,18 +1,29 @@
 // pages/my/my.js
+const app=getApp()
+const util = require('../../utils/util.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+			userwxmsg:'',
+			userxcxmsg:wx.getStorageSync('usermsg'),
+			day:0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+		this.setData({
+			userwxmsg:app.globalData.userInfo
+		})
+		console.log(Date.now())
+		var daytime=util.getDay(Date.now(),wx.getStorageSync('usermsg').login_time)
+		this.setData({
+			day:daytime
+		})
   },
 
   /**
@@ -62,5 +73,11 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+	jump(e){
+		console.log(e.currentTarget.dataset.url)
+		wx.navigateTo({
+			url:e.currentTarget.dataset.url
+		})
+	}
 })

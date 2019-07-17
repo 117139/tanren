@@ -1,10 +1,11 @@
 <!--pages/zhaopin/zhaopin.wxml-->
 <import src="/utils/pageState/index.wxml" />
 <template is="pageState" data="{{...pageState}}" />
+<wxs src="../../utils/filter.wxs" module="filter" />
 <view class="container">
 	<form class="topform" bindsubmit="formSubmit">
 		<view class="ssbox mb30">
-			<input class="ssint" type="text" name="sr" />
+			<input class="ssint" type="text" name="sr" bindblur="onblur" />
 
 			<view class='ss_btn'>
 				<button form-type="submit"></button>
@@ -28,26 +29,27 @@
 	</view>
 	<block wx:for="{{datalist}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
 		<view wx:if="{{type==idx}}" class="w100 mb45">
-			<view class='tjone' wx:for="{{item.list}}"
+			<view wx:if="{{lists[type].length==0}}" class="tac fz36 c9 pt100">暂无数据</view>
+			<view class='tjone' wx:for="{{lists[type]}}"
 				wx:for-index="idx1"
 				wx:for-item="item1"
 				wx:key="idx1">
 				<view class="w100 dis_flex ju_b aic mb20">
 					<view class="dis_flex aic">
-						<image class="headimg" src="/static/images/index_27.jpg"></image>
-						<text class="ml5 fz30 oh1">佛系怪兽君{{idx}}</text>
+						<image class="headimg" src="{{item1.user.head_img}}"></image>
+						<text class="ml5 fz30 oh1">{{item1.user.nickname}}</text>
 					</view>
-					<view class="ce22829 fz30 fwb">$4500~$5000</view>
+					<view class="ce22829 fz30 fwb">{{item1.salary}}</view>
 				</view>
-				<view class=" fz28 mb20 lh40"><text class="zpzdicon">置顶</text>芝加哥附近招聘上海菜师傅和电信师傅，包吃包住，住宿单人间，住宿环境好</view>
+				<view class=" fz28 mb20 lh40"><text class="zpzdicon">置顶</text>{{item1.body}}</view>
 				<view class="dis_flex w100 aic mb20" data-tel="1111" bindtap="call">
-					<text class="fz30 iconfont icondianhua mr10 c169fff"></text> <text class="fz30 c525155">909-939-6699</text>
+					<text class="fz30 iconfont icondianhua mr10 c169fff"></text> <text class="fz30 c525155">{{item1.phone}}</text>
 				</view>
 				<view class="dis_flex ju_b w100">
 					<text class="fz28 c9">发布时间2019年06月06日</text>
 					<view class="share1">
 						<text class="iconfont iconfenxiang fz36 c9"></text>
-						<button class="shareBtn" open-type='share' data-supid="1" data-type="{{idx1}}"></button>
+						<button class="shareBtn" open-type='share' data-id="{{id}}" data-type="{{idx1}}"></button>
 					</view>
 				</view>
 				

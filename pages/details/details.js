@@ -1,4 +1,5 @@
 // pages/details/details.js
+const app= getApp()
 Page({
 
   /**
@@ -175,5 +176,8 @@ Page({
 				}
 			}
 		})
-	}
+	},
+	previewImage: function (e) {
+	  app.previewImage(e)
+	},
 })

@@ -75,7 +75,7 @@ Page({
 		
 
 		wx.request({
-			url:  app.IPurl2+'/api/coupon/discovery',
+			url:  app.IPurl+'/api/coupon/discovery',
 			data:{
 				
 			},
@@ -83,7 +83,7 @@ Page({
 				'content-type': 'application/x-www-form-urlencoded' 
 			},
 			dataType:'json',
-			method:'POST',
+			method:'get',
 			success(res) {
 				console.log(res.data)
 				let rlist=res.data.retData

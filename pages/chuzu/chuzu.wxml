@@ -1,10 +1,11 @@
 <!--pages/chuzu/chuzu.wxml-->
 <import src="/utils/pageState/index.wxml" />
 <template is="pageState" data="{{...pageState}}" />
+<wxs src="../../utils/filter.wxs" module="filter" />
 <view class="container">
 	<form class="topform" bindsubmit="formSubmit">
 		<view class="ssbox mb30">
-			<input class="ssint" type="text" name="sr" />
+			<input class="ssint" type="text" name="sr"  bindblur="onblur"/>
 
 			<view class='ss_btn'>
 				<button form-type="submit"></button>
@@ -23,19 +24,20 @@
 
 	<view class='dis_flex ju_a w100 mb40'>
 		<block wx:for="{{datalist}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
-			<view class="{{type==idx?'typecur':''}}" data-type="{{idx}}" bindtap='bindcur'>{{item.name}}</view>
+			<view class="{{type==idx?'typecur':''}}" data-type="{{idx}}" bindtap='bindcur'>{{item.region_name}}</view>
 		</block>
 	</view>
 	<block wx:for="{{datalist}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
-		<view wx:if="{{type==idx}}" class="w100 mb45">
-			<view class='tjone' wx:for="{{item.list}}"
+		<view wx:if="{{lists[type].length==0}}" class="tac fz36 c9 pt100">暂无数据</view>
+		<view class='tjone' wx:for="{{lists[type]}}">
+			<view class='tjone' wx:for="{{lists}}"
 				wx:for-index="idx1"
 				wx:for-item="item1"
 				wx:key="idx1">
 				<view class="w100 dis_flex ju_b aic mb20">
 					<view class="dis_flex aic">
 						<image class="headimg" src="/static/images/index_27.jpg"></image>
-						<text class="ml5 fz30 oh1">佛系怪兽君{{idx}}</text>
+						<text class="ml5 fz30 oh1">{{idx}}</text>
 					</view>
 					<view class="ce22829 fz30 fwb">$4500~$5000</view>
 				</view>

@@ -7,35 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+		pages:[],
+		search:'',
     type:0,
-		datalist:[
-			{
-				"name":"日餐",
-				list:[
-					1,1,1,1,5
-				]
-			},{
-				"name":"中餐",
-				list:[
-					1,2,3,4,5
-				]
-			},{
-				"name":"铁板",
-				list:[
-					1,2,3,4,5
-				]
-			},{
-				"name":"企台",
-				list:[
-					1,2,3,4,5
-				]
-			},{
-				"name":"其他",
-				list:[
-					1,2,3,4,5
-				]
-			},
-		],
+		datalist:[],
+		lists:[],
     bannerimg: [
       '/static/images/banner_03.jpg',
       '/static/images/banner_03.jpg',
@@ -54,7 +30,7 @@ Page({
   onLoad: function () {
    console.log(1)
 	 wx.hideShareMenu()
-	 this.getyhlist()
+	 this.gethanye()
   },
 
   /**
@@ -97,13 +73,7 @@ Page({
    */
   onReachBottom: function () {
 		console.log('触底')
-		this.data.datalist[this.data.type].list.push(1)
-		this.data.datalist[this.data.type].list.push(1)
-		this.data.datalist[this.data.type].list.push(1)
-		this.data.datalist[this.data.type].list.push(1)
-		this.setData({
-			datalist:this.data.datalist
-		})
+		this.getyhlist()
   },
 
   /**
@@ -123,14 +93,83 @@ Page({
     // }
   },
   bindcur(e){
+		var that =this
     console.log(e.currentTarget.dataset.type)
-    this.setData({
+    that.setData({
       type: e.currentTarget.dataset.type
     })
+		if(that.data.lists[that.data.type].length==0){
+			that.getyhlist()
+		}
+		
   },
+	onblur(e){
+		var that =this
+		console.log(e.detail.value)
+		that.setData({
+			search:e.detail.value.sr
+		})
+	},
 	formSubmit: function(e) {
 		let that =this
 		console.log('form发生了submit事件，携带数据为：', e.detail.value)
+		for(var i=0;i<that.data.datalist.length-1;i++){
+			that.data.pages[i]=1
+			that.data.lists[i]=[]
+		}
+		that.setData({
+			search:e.detail.value.sr,
+			pages:that.data.pages,
+			lists:that.data.lists
+		})
+		wx.request({
+			url:  app.IPurl2+'/api/job_seek/index',
+			data:{
+				"page":that.data.pages[that.data.type],
+				"region_id":2,
+				"profession_id":that.data.datalist[that.data.type].id,
+				"search":e.detail.value.sr
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'get',
+			success(res) {
+				console.log(res.data)
+				let rlist=res.data.retData.data
+				
+				if(res.data.errcode==0){
+					
+					// if(rlist.length>0){
+						that.data.pages[that.data.type]++
+						that.data.lists[that.data.type]=rlist
+						console.log(rlist)
+						that.setData({
+							lists:that.data.lists,
+							pages:that.data.pages
+						})
+						console.log(that.data.yhlist)
+					// }
+					// if(rlist.length<10){
+					// 	console.log('没了')
+					// 	
+					// }
+					if(rlist.length==0){
+						 wx.showToast({
+						 icon:'none',
+						 title:'暂无数据'
+						})
+					}
+				}
+			},
+			fail() {
+				 wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				 })
+			}
+		})
 		// that.setData({
 		// 	keyword:e.detail.value.sr
 		// })
@@ -156,7 +195,7 @@ Page({
 		})
 	},
 	//获取首页list（搜索）
-	getyhlist(){
+	gethanye(){
 		// console.log(pageState)
 		let that = this
 		const pageState1 = pageState.default(that)
@@ -164,18 +203,13 @@ Page({
 		
 	
 		wx.request({
-			url:  app.IPurl2+'/api/job_seek/index',
-			data:{
-				"page":1,
-				"region_id":2,
-				"profession_id":2,
-				"search":''
-			},
-			header: {
-				'content-type': 'application/x-www-form-urlencoded' 
-			},
+			url:  app.IPurl2+'/api/profession_cate/index',
+			data:{},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
 			dataType:'json',
-			method:'POST',
+			method:'get',
 			success(res) {
 				console.log(res.data)
 				let rlist=res.data.retData
@@ -183,17 +217,25 @@ Page({
 				if(res.data.errcode==0){
 					
 					if(rlist.length>0){
-						that.data.yhlist=that.data.yhlist.concat(rlist)
-						console.log(rlist)
+						// that.data.yhlist=that.data.yhlist.concat(rlist)
+						// console.log(rlist)
+						var narr=[]
+						var narr1=[]
+						var pages=[]
+						for(var i=0;i<rlist.length;i++){
+							narr.push(narr1)
+							pages.push(1)
+						}
 						that.setData({
-							yhlist:that.data.yhlist
+							datalist:rlist,
+							pages:pages,
+							hangye:rlist[0].id,
+							lists:narr
 						})
-						console.log(that.data.yhlist)
+						that.getyhlist()
+						// console.log(that.data.yhlist)
 					}
-					if(rlist.length<10){
-						console.log('没了')
-						
-					}
+					
 					 pageState1.finish()    // 切换为finish状态
 				}
 				
@@ -201,6 +243,60 @@ Page({
 			},
 			fail() {
 				 pageState1.error()    // 切换为error状态
+			}
+		})
+	},
+	getyhlist(fir){
+		// console.log(pageState)
+		let that = this
+		wx.request({
+			url:  app.IPurl2+'/api/job_seek/index',
+			data:{
+				"page":that.data.pages[that.data.type],
+				"region_id":2,
+				"profession_id":that.data.datalist[that.data.type].id,
+				"search":that.data.search
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'get',
+			success(res) {
+				console.log(res.data)
+				let rlist=res.data.retData.data
+				
+				if(res.data.errcode==0){
+					
+					if(rlist.length>0){
+						that.data.lists[that.data.type]=that.data.lists[that.data.type].concat(rlist)
+						console.log(rlist)
+						that.data.pages[that.data.type]++
+						that.setData({
+							pages:that.data.pages,
+							lists:that.data.lists
+						})
+						console.log(that.data.yhlist)
+					}else{
+						// if(that.data.search){
+							wx.showToast({
+								 icon:'none',
+								 title:'没有更多数据了'
+							})
+						// }
+						// wx.showToast({
+						// 	 icon:'none',
+						// 	 title:'已经到底了'
+						// })
+					}
+				}
+			
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
 			}
 		})
 	},

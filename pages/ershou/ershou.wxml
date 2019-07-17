@@ -39,7 +39,7 @@
 					</view>
 					<view class="ce22829 fz30 fwb">$4500~$5000</view>
 				</view>
-				<navigator class="oh2 fz28 mb20 lh40"  url="/pages/details/details?id={{type}}"><text class="zpzdicon">置顶</text>芝加哥附近招聘上海菜师傅和电信师傅，包吃包住，住宿单人间，住宿环境好</navigator>
+				<view class="oh2 fz28 mb20 lh40" catchtap="jump" data-url="/pages/details/details?id={{type}}"><text class="zpzdicon">置顶</text>芝加哥附近招聘上海菜师傅和电信师傅，包吃包住，住宿单人间，住宿环境好</view>
 				<view class="dis_flex w100 aic mb20 ju_b">
 					<view class="dis_flex aic" data-tel="1111" bindtap="call">
 						<text class="iconfont icondianhua mr10 fz30 c169fff"></text> <text class="fz30 c525155">909-939-6699</text>
@@ -57,7 +57,7 @@
 						class="tjrvideo " mode="widthFix"
 						data-src="/static/images/index_29.jpg"
 						src="/static/images/index_29.jpg"
-						bindtap="previewImage"alt=""/>
+						catchtap="previewImage"alt=""/>
 					<image wx:if="{{item1.img.length>1}}"
 						wx:for="{{item1.img}}"
 						wx:for-index="idx2"
@@ -66,7 +66,7 @@
 						class="img9" mode="widthFix"
 						data-src="/static/images/index_29.jpg"
 						src="/static/images/index_29.jpg"
-						bindtap="previewImage"alt=""/>
+						catchtap="previewImage"alt=""/>
 					<!-- <image class="flex_1"  src="../../static/images/index_29.jpg" alt=""/> -->
 				</view>
 			</view>

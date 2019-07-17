@@ -45,7 +45,7 @@
     <view class="{{type==2?'typecur':''}}" data-type="2" bindtap='bindcur'>精华</view> -->
   </view>
   <view wx:if="{{type==idx}}" wx:for="{{datalist}}" wx:for-index="idx" wx:for-item="item" wx:key="idx" class="w100 mb45">
-		<navigator url="/pages/detailssq/detailssq" class='tjone'>
+		<view bindtap="jump" data-url="/pages/detailssq/detailssq" class='tjone'>
 			<view class="w100 dis_flex ju_b aic mb20">
 				<view class="dis_flex aic">
 					<image class="headimg" src="/static/images/index_27.jpg"></image>
@@ -80,8 +80,8 @@
 					</view>
 				</view>
 			</view>
-		</navigator>
-		<navigator url="/pages/detailssq/detailssq" class='tjone'>
+		</view>
+		<view bindtap="jump" data-url="/pages/detailssq/detailssq" class='tjone'>
 			<view class="w100 dis_flex ju_b aic mb20">
 				<view class="dis_flex aic">
 					<image class="headimg" src="/static/images/index_27.jpg"></image>
@@ -108,6 +108,6 @@
 					</view>
 				</view>
 			</view>
-		</navigator>
+		</view>
 	</view>
 </view>

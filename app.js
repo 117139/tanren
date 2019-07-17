@@ -2,6 +2,7 @@
 App({
 	IPurl1: 'http://192.168.129.119/',
 	IPurl2: "http://192.168.129.120/",
+	IPurl:"http://ceshi.800123456.top/index.php/",
 	onLaunch: function() {
 		// // 展示本地存储能力
 		// var logs = wx.getStorageSync('logs') || []
@@ -47,34 +48,13 @@ App({
 				}
 				let rcode = res.code
 				console.log(res.code)
-				/*wx.request({
-					// 发送到本地开发服务器
-					// url: 'http://www.tppay.com/v1/login_module/loginInit/' + res.code,
-					url: 'http://192.168.129.119/index/userlogin/login',
-					//get发送
-					method: "POST",
-					//发送code数据
-					data: {
-						"code": res.code
-					},
-					header: {
-						'content-type': 'application/json' // 默认值
-					},
-					success: function(res) {
-						console.log(res.data);
-						//如果有openid就存入小程序缓存
-						if (res.data.openid) {
-							wx.setStorage({
-								key: "tokenId",
-								data: res.data.openid,
-							})
-						}
-					}
-				})*/
+				// return
 				wx.request({
 					url:  that.IPurl1+'/index/userlogin/login', 
 					data: {
-						'code':rcode
+						'code':rcode,
+						'avatarUrl':that.globalData.userInfo.avatarUrl,
+						'nickName':that.globalData.userInfo.nickName,
 					},
 					// header: {
 					// 	'content-type': 'application/x-www-form-urlencoded' 
@@ -84,7 +64,7 @@ App({
 					success(res) {
 						console.log(res)
 						console.log(res.data)
-						if(res.data.error==0){
+						if(res.data.errCode==0){
 							wx.reLaunch({
 							  url: '/pages/index/index',
 							  fail: (err) => {
@@ -93,7 +73,12 @@ App({
 							})
 							console.log('登录成功')
 		          wx.setStorageSync('login', 'login')
-							wx.setStorageSync('morenaddress', res.data.user_member_shopping_address)
+							wx.setStorageSync('usermsg', res.data.retData)
+						}else{
+							wx.showToast({
+								icon:'none',
+								title:res.data.ertips
+							})
 						}
 						if(res.data.error==2){
 							wx.setStorageSync('tokenstr', res.data.tokenstr)
@@ -105,6 +90,25 @@ App({
 					}
 				})
 			}
+		})
+	},
+	/**   
+	   * 预览图片  
+	   */
+	previewImage(e) {
+	  var current = e.target.dataset.src;
+		var arr1=[]
+		arr1.push(current)
+		console.log(arr1);
+	  wx.previewImage({
+	    current: current, // 当前显示图片的http链接  
+	    urls: arr1 // 需要预览的图片http链接列表  
+	  })
+	},
+	jump(e){
+		console.log(e.currentTarget.dataset.url)
+		wx.navigateTo({
+			url:e.currentTarget.dataset.url
 		})
 	},
 	globalData: {
