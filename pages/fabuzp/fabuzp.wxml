@@ -26,7 +26,7 @@
 				具体薪资
 			</view>
 			<view class="dis_flex">
-				<text class="ce22829 mr10">$</text>
+				<!-- <text class="ce22829 mr10">$</text> -->
 				<input type="text" placeholder="请输入具体薪资" bindinput="userpri"/>
 			</view>
 		</view>
@@ -35,7 +35,9 @@
 				<text class="iconfont icondiqu c9 mr10"></text>
 				行业类别
 			</view>
-			<input type="text" placeholder="请输入行业类别" bindinput="useraddress"/>
+			<picker bindchange="bindPickerChange" value="{{index}}" range="{{datalist}}" range-key="{{'name'}}">
+				<view style="color:#a0a0a0">{{datalist[index].name? datalist[index].name:'未选择'}}<text class="iconfont iconnext c9 mr10"></text></view>
+			</picker>
 		</view>
 		<view class="dis_flex w100 aic ju_b mb40"  bindtap="showpp">
 			<view style="color:#525252"><text class="iconfont iconzhiding1 c9 mr10"></text>是否置顶</view>
@@ -57,7 +59,10 @@
 				<text class="iconfont iconjiahao fz100 c9"></text>
 			</view>
 		</view> -->
-		<view class="fabubtn mt60" bindtap="fabusub">
+		<view wx:if="{{kg==1}}" class="fabubtn mt60" bindtap="fabusub">
+			发表评论
+		</view>
+		<view wx:if="{{kg==0}}" class="fabubtn mt60">
 			发表评论
 		</view>
 		<van-popup show="{{ show }}" position="bottom" bind:close="onClose">

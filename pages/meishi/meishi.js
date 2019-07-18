@@ -1,30 +1,19 @@
 // pages/meishi/meishi.js
+const app=getApp()
+var pageState = require('../../utils/pageState/index.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    type: 0,
-    datalist: [
-      {
-        "name": "唐人街",
-        list: [
-          1, { "img": [1] }, { "img": [1, 1, 1] }, { "img": [1, 1, 1, 1, 1] }, 5
-        ]
-      }, {
-        "name": "布鲁克林",
-        list: [
-          1, 2, 3, 4, 5
-        ]
-      }, {
-        "name": "法拉盛",
-        list: [
-          1, 2, 3, 4, 5
-        ]
-      }
-    ],
-    bannerimg: [
+    pages:[],
+    hangye:0,
+    search:'',
+    lists:[],
+    type:0,
+    datalist:[],
+		bannerimg: [
       '/static/images/banner_03.jpg',
       '/static/images/banner_03.jpg',
       '/static/images/banner_03.jpg',
@@ -39,7 +28,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+		this.getquyu()
   },
 
   /**
@@ -121,6 +110,111 @@ Page({
 		console.log(e.currentTarget.dataset.tel)
 		wx.makePhoneCall({
 			phoneNumber: e.currentTarget.dataset.tel //仅为示例，并非真实的电话号码
+		})
+	},
+	getquyu(){
+		// console.log(pageState)
+		let that = this
+		const pageState1 = pageState.default(that)
+	  pageState1.loading()    // 切换为loading状态
+		
+	
+		wx.request({
+			url:  app.IPurl2+'/api/region_cate/index',
+			data:{},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'get',
+			success(res) {
+				console.log(res.data)
+				let rlist=res.data.retData
+				
+				if(res.data.errcode==0){
+					
+					if(rlist.length>0){
+						// that.data.yhlist=that.data.yhlist.concat(rlist)
+						// console.log(rlist)
+						var narr=[]
+						var narr1=[]
+						var pages=[]
+						for(var i=0;i<rlist.length;i++){
+							narr.push(narr1)
+							pages.push(1)
+						}
+						that.setData({
+							datalist:rlist,
+							pages:pages,
+							hangye:rlist[0].region_name,
+							lists:narr
+						})
+						that.getyhlist()
+						// console.log(that.data.yhlist)
+					}
+					
+					 pageState1.finish()    // 切换为finish状态
+				}
+				
+				  // pageState1.error()    // 切换为error状态
+			},
+			fail() {
+				 pageState1.error()    // 切换为error状态
+			}
+		})
+	},
+	
+	getyhlist(){
+		// /index/dining/index
+		let that = this
+		wx.request({
+			url:  app.IPurl2+'/index/dining/index',
+			data:{
+				"page":that.data.pages[that.data.type],
+				"region_name":that.data.datalist[that.data.type].region_name,
+				"search":that.data.search
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'get',
+			success(res) {
+				console.log(res.data)
+				let rlist=res.data.retData.data
+				
+				if(res.data.errcode==0){
+					
+					if(rlist.length>0){
+						that.data.lists[that.data.type]=that.data.lists[that.data.type].concat(rlist)
+						console.log(rlist)
+						that.data.pages[that.data.type]++
+						that.setData({
+							pages:that.data.pages,
+							lists:that.data.lists
+						})
+						console.log(that.data.yhlist)
+					}else{
+						// if(that.data.search){
+							wx.showToast({
+								 icon:'none',
+								 title:'没有更多数据了'
+							})
+						// }
+						// wx.showToast({
+						// 	 icon:'none',
+						// 	 title:'已经到底了'
+						// })
+					}
+				}
+			
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			}
 		})
 	}
 })

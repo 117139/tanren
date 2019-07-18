@@ -9,6 +9,7 @@ Page({
   data: {
 		pages:[],
 		hangye:0,
+		search:'',
 		lists:[],
 		type:0,
 		datalist:[],
@@ -70,7 +71,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-		
+		this.getyhlist()
   },
 
   /**

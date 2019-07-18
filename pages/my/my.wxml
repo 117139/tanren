@@ -6,7 +6,7 @@
 			<view class="fwb fz50 oh1" style="color: #0a0a0a;">{{userwxmsg.nickName=='' ? userxcxmsg.nickName:userwxmsg.nickName}}</view>
 			<view class="fz30 oh1" style="color: #525155;">今天是你在唐人街的{{day}}天</view>
 		</view>
-		<view class="qdbtn">签到</view>
+		<view class="qdbtn" bindtap="qiandao">签到</view>
 	</view>
 	<view class="heng1"></view>
 	<view class="w100">

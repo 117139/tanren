@@ -12,11 +12,7 @@ Page({
     type:0,
 		datalist:[],
 		lists:[],
-    bannerimg: [
-      '/static/images/banner_03.jpg',
-      '/static/images/banner_03.jpg',
-      '/static/images/banner_03.jpg',
-    ],
+    bannerimg: [],
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
@@ -30,6 +26,7 @@ Page({
   onLoad: function () {
    console.log(1)
 	 wx.hideShareMenu()
+	 this.getbanner()
 	 this.gethanye()
   },
 
@@ -137,9 +134,9 @@ Page({
 			method:'get',
 			success(res) {
 				console.log(res.data)
-				let rlist=res.data.retData.data
 				
 				if(res.data.errcode==0){
+					let rlist=res.data.retData.data
 					
 					// if(rlist.length>0){
 						that.data.pages[that.data.type]++
@@ -264,10 +261,10 @@ Page({
 			method:'get',
 			success(res) {
 				console.log(res.data)
-				let rlist=res.data.retData.data
+				
 				
 				if(res.data.errcode==0){
-					
+					let rlist=res.data.retData.data
 					if(rlist.length>0){
 						that.data.lists[that.data.type]=that.data.lists[that.data.type].concat(rlist)
 						console.log(rlist)
@@ -300,4 +297,44 @@ Page({
 			}
 		})
 	},
+	getbanner(){
+		//192.168.129.119/index/turns/index
+		let that = this
+		wx.request({
+			url:  app.IPurl1+'/index/turns/index',
+			data:{
+				"turns_class":1,
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+				let rlist=res.data.retData
+				
+				if(res.data.errcode==0){
+					
+					
+						that.setData({
+							bannerimg:rlist
+						})
+				
+				}else{
+					wx.showToast({
+						 icon:'none',
+						 title:'操作失败'
+					})
+				}
+			
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			}
+		})
+	}
 })

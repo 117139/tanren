@@ -1,15 +1,17 @@
 // pages/fabuzp/fabuzp.js
-
+const app= getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+		kg:1,
 		num:0,
 		zan:0,
 		show: false,
 		fbtext:'',
+		datalist:[],
 		array: ['主题1', '主题2', '主题3', '主题4'],
 		dataxq:{
 			img:[1,1,1]
@@ -22,6 +24,7 @@ Page({
 		},
 		usertel:'',
 		userpri:'',
+		hangyelb:'', //行业类别
 		useraddress:'',
   },
 
@@ -30,6 +33,7 @@ Page({
    */
   onLoad: function (options) {
 		console.log(options.id)
+		this.gethanye()
   },
 
   /**
@@ -167,14 +171,93 @@ Page({
 			})
 			return
 		}
+		if(that.data.usertel==""){
+			wx.showToast({
+				icon:"none",
+				title:"请输入您的联系电话"
+			})
+			return
+		}
+		if(that.data.userpri==""){
+			wx.showToast({
+				icon:"none",
+				title:"请输入具体薪资"
+			})
+			return
+		}
+		if(that.data.hangyelb==""){
+			wx.showToast({
+				icon:"none",
+				title:"请选择行业类别"
+			})
+			return
+		}
 		wx.showModal({
 			title: '提示',
 			content: '是否要发布该评论',
 			success (res) {
 				if (res.confirm) {
 					console.log('用户点击确定')
-					console.log(that.data.fbtext)
-					console.log(that.data.tmpdata.imgb)
+					that.setData({
+						kg:0
+					})
+					wx.showLoading({
+						title:'请稍后。。'
+					})
+					// 'Authorization':wx.getStorageSync('usermsg').user_token
+					wx.request({
+						url:  app.IPurl2+'/api/job_seek/save',
+						data:{
+							'profession_id':that.data.hangyelb.id,
+							'body':that.data.fbtext,
+							'salary':that.data.userpri,
+							'phone':that.data.usertel,
+							'sticky_num':0,
+						},
+						header: {
+							'Authorization':wx.getStorageSync('usermsg').user_token
+						},
+						dataType:'json',
+						method:'POST',
+						success(res) {
+							console.log(res.data)
+						
+							
+							if(res.data.errcode==0){
+								
+								wx.showToast({
+									 icon:'none',
+									 title:'发表成功'
+								})
+								setTimeout(function(){
+									wx.navigateBack()
+								},1000)
+								
+							}else{
+								that.setData({
+									kg:1
+								})
+								wx.showToast({
+									 icon:'none',
+									 title:res.data.ertips
+								})
+							}
+							
+							 
+						},
+						fail() {
+							that.setData({
+								kg:1
+							})
+							wx.showToast({
+								 icon:'none',
+								 title:'操作失败'
+							})
+						},
+						complete() {
+							wx.hideLoading()
+						}
+					})
 					
 				} else if (res.cancel) {
 					console.log('用户点击取消')
@@ -182,10 +265,13 @@ Page({
 			}
 		})
 	},
+	//行业类别
 	bindPickerChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      index: e.detail.value
+		var that= this
+    that.setData({
+			index:e.detail.value,
+      hangyelb:that.data.datalist[e.detail.value]
     })
   },
 	zhidingSelet(e){
@@ -213,6 +299,43 @@ Page({
 		this.setData({
 			useraddress:e.detail.value
 		})
-	}
+	},
+	gethanye(){
+		// console.log(pageState)
+		let that = this
+		wx.request({
+			url:  app.IPurl2+'/api/profession_cate/index',
+			data:{},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'get',
+			success(res) {
+				console.log(res.data)
+				let rlist=res.data.retData
+				
+				if(res.data.errcode==0){
+					
+					// if(rlist.length>0){
+						that.setData({
+							datalist:rlist,
+						})
+					
+					// }
+					
+				}
+				
+				 
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'获取行业失败'
+				})
+			}
+		})
+	},
+	
 	
 })

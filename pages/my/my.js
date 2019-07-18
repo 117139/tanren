@@ -79,5 +79,58 @@ Page({
 		wx.navigateTo({
 			url:e.currentTarget.dataset.url
 		})
+	},
+	qiandao(){
+		///index/personal/sign
+		let that = this
+		var qdtype=wx.getStorageSync('usermsg').sign_type
+		console.log(qdtype)
+		if(qdtype!=2){
+			wx.showToast({
+				 icon:'none',
+				 title:'今天已签到'
+			})
+			return
+		}
+		wx.request({
+			url:  app.IPurl2+'/index/personal/sign',
+			data:{
+				id:wx.getStorageSync('usermsg').id
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'get',
+			success(res) {
+				console.log(res.data)
+				
+				
+				if(res.data.errcode==0){
+					
+					// if(rlist.length>0){
+						wx.showToast({
+							 icon:'none',
+							 title:'签到成功'
+						})
+					
+					// }
+					
+				}else{
+					wx.showToast({
+						 icon:'none',
+						 title:'操作失败'
+					})
+				}
+				
+				 
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			}
+		})
 	}
 })

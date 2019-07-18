@@ -1,6 +1,6 @@
 //app.js
 App({
-	IPurl1: 'http://192.168.129.119/',
+	IPurl1: 'http://192.168.129.120/',
 	IPurl2: "http://192.168.129.120/",
 	IPurl:"http://ceshi.800123456.top/index.php/",
 	onLaunch: function() {

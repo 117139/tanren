@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/fabuzp/fabuzp",
     "pages/faxian/faxian",
     "pages/setyj/setyj", 
     "pages/myset/myset",
@@ -12,7 +13,6 @@
     "pages/myjfsc/myjfsc",
     "pages/myjf/myjf",
     "pages/mysc/mysc",
-    "pages/fabuzp/fabuzp",
     "pages/fabufw/fabufw",
     "pages/fabues/fabues",
     "pages/fabu/fabu",

@@ -26,7 +26,7 @@
 				出租价格
 			</view>
 			<view class="dis_flex">
-				<text class="ce22829 mr10">$</text>
+				<!-- <text class="ce22829 mr10">$</text> -->
 				<input type="text" placeholder="请输入价格" bindinput="userpri"/>
 			</view>
 		</view>
@@ -35,7 +35,9 @@
 				<text class="iconfont icondiqu c9 mr10"></text>
 				具体地区
 			</view>
-			<input type="text" placeholder="请输入交易地区" bindinput="useraddress"/>
+			<picker bindchange="bindPickerChange" value="{{index}}" range="{{datalist}}" range-key="{{'region_name'}}">
+				<view style="color:#a0a0a0">{{datalist[index].region_name? datalist[index].region_name:'未选择'}}<text class="iconfont iconnext c9 mr10"></text></view>
+			</picker>
 		</view>
 		<view class="dis_flex w100 aic ju_b mb40"  bindtap="showpp">
 			<view style="color:#525252"><text class="iconfont iconzhiding1 c9 mr10"></text>是否置顶</view>
