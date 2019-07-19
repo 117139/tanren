@@ -1,6 +1,7 @@
 <!--pages/ershou/ershou.wxml-->
 <import src="/utils/pageState/index.wxml" />
 <template is="pageState" data="{{...pageState}}" />
+<wxs src="../../utils/filter.wxs" module="filter" />
 <view class="container">
 	<form class="topform" bindsubmit="formSubmit">
 		<view class="ssbox mb30">
@@ -16,7 +17,7 @@
 	 duration="{{duration}}" indicator-active-color='#fff' circular='true'>
 		<block wx:for="{{bannerimg}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
 			<swiper-item>
-				<image src="{{item}}" class="slide-image" />
+				<image lazy-load='true' src="{{filter.imgIP(item.turns_img)}}" class="slide-image" />
 			</swiper-item>
 		</block>
 	</swiper>
@@ -36,7 +37,7 @@
 				<view class="w100 dis_flex ju_b aic mb20">
 					<view class="dis_flex aic">
 						<image class="headimg" src="{{item1.user.head_img}}"></image>
-						<text class="ml5 fz30 oh1">{{item1.user.account}}</text>
+						<text class="ml5 fz30 oh1" wx:if="{{item1.user.account!==null}}">{{item1.user.account}}</text>
 					</view>
 					<view class="ce22829 fz30 fwb">{{item1.price}}</view>
 				</view>
@@ -50,24 +51,15 @@
 				
 				
 				<view class="w100 dis_flex flex_ww">
-					<image wx:if="{{item1.img.length==1}}"
-						wx:for="{{item1.img}}"
+					
+					<image wx:for="{{item1.used_image}}"
 						wx:for-index="idx2"
 						wx:for-item="item2"
 						wx:key="idx2"
-						class="tjrvideo " mode="widthFix"
-						data-src="/static/images/index_29.jpg"
-						src="/static/images/index_29.jpg"
-						catchtap="previewImage"alt=""/>
-					<image wx:if="{{item1.img.length>1}}"
-						wx:for="{{item1.img}}"
-						wx:for-index="idx2"
-						wx:for-item="item2"
-						wx:key="idx2"
-						class="img9" mode="widthFix"
-						data-src="/static/images/index_29.jpg"
-						src="/static/images/index_29.jpg"
-						catchtap="previewImage"alt=""/>
+						class="{{item1.used_image.length>1 ? 'img9':'tjrvideo'}}" mode="aspectFill"
+						data-src="{{filter.imgIP(item2.path)}}"
+						src="{{filter.imgIP(item2.path)}}"
+						catchtap="previewImage"alt="" lazy-load='true'/>
 					<!-- <image class="flex_1"  src="../../static/images/index_29.jpg" alt=""/> -->
 				</view>
 			</view>

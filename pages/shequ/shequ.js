@@ -1,29 +1,25 @@
 // pages/shequ/shequ.js
 const app=getApp()
+var pageState = require('../../utils/pageState/index.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    type: 0,
-		datalist: [
-		  {
-		    "name": "唐人街",
-		    list: [
-		      1, { "img": [1] }, { "img": [1, 1, 1] }, { "img": [1, 1, 1, 1, 1] }, 5
-		    ]
-		  }, {
-		    "name": "布鲁克林",
-		    list: [
-		      1, 2, 3, 4, 5
-		    ]
-		  }, {
-		    "name": "法拉盛",
-		    list: [
-		      1, 2, 3, 4, 5
-		    ]
-		  }
+    pages:[1,1,1],
+    hangye:0,
+    search:'',
+    lists:[
+			[],
+			[],
+			[]
+		],
+    type:0,
+    datalist:[
+			'最新',
+			'热门',
+			'精华',
 		],
 		bannerimg: [
       '/static/images/banner_03.jpg',
@@ -46,7 +42,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+		this.getbanner(7)
+		this.getyhlist()
   },
 
   /**
@@ -101,58 +98,277 @@ Page({
   onPullDownRefresh: function () {
 
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-  bindcur(e) {
-    console.log(e.currentTarget.dataset.type)
-    this.setData({
-      type: e.currentTarget.dataset.type
-    })
-  },
-	runMarquee: function () {
-    var that = this;
-    var interval = setInterval(function () {
-      //文字一直移动到末端
-      if (-that.data.marqueeDistance < that.data.length) {
-        that.setData({
-          marqueeDistance: that.data.marqueeDistance - that.data.marqueePace,
-        });
-      } else {
-        clearInterval(interval);
-        that.setData({
-          marqueeDistance: that.data.windowWidth
-        });
-        that.runMarquee();
-      }
-    }, that.data.interval1);
-  },
+  
+	/**
+	 * 页面上拉触底事件的处理函数
+	 */
+	onReachBottom: function () {
+		this.getyhlist()
+	},
+	
+	/**
+	 * 用户点击右上角分享
+	 */
+	onShareAppMessage: function (res) {
+		if (res.from === 'button') {
+			console.log(res.target.dataset.type)
+		}
+	},
+	bindcur(e){
+		var that =this
+	  console.log(e.currentTarget.dataset.type)
+	  that.setData({
+	    type: e.currentTarget.dataset.type
+	  })
+		if(that.data.lists[that.data.type].length==0){
+			that.getyhlist()
+		}
+	},
+	onblur(e){
+		var that =this
+		console.log(e.detail.value)
+		that.setData({
+			search:e.detail.value.sr
+		})
+	},
 	formSubmit: function(e) {
 		let that =this
 		console.log('form发生了submit事件，携带数据为：', e.detail.value)
-		// that.setData({
-		// 	keyword:e.detail.value.sr
-		// })
-		// that.getshoplist(1)
+		for(var i=0;i<that.data.datalist.length-1;i++){
+			that.data.pages[i]=1
+			that.data.lists[i]=[]
+		}
+		that.setData({
+			search:e.detail.value.sr,
+			pages:that.data.pages,
+			lists:that.data.lists
+		})
+		var tnt=that.data.type
+		if(tnt==0){
+			tnt=3
+		}
+		wx.request({
+			url:  app.IPurl+'/api/rent_house/index',
+			data:{
+				"page":that.data.pages[that.data.type],
+				"order":tnt,
+				"search":e.detail.value.sr
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'get',
+			success(res) {
+				console.log(res.data)
+				let rlist=res.data.retData.data
+				
+				if(res.data.errcode==0){
+					
+					// if(rlist.length>0){
+						that.data.pages[that.data.type]++
+						that.data.lists[that.data.type]=rlist
+						console.log(rlist)
+						that.setData({
+							lists:that.data.lists,
+							pages:that.data.pages
+						})
+						console.log(that.data.yhlist)
+					// }
+					// if(rlist.length<10){
+					// 	console.log('没了')
+					// 	
+					// }
+					if(rlist.length==0){
+						 wx.showToast({
+						 icon:'none',
+						 title:'暂无数据'
+						})
+					}
+				}
+			},
+			fail() {
+				 wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				 })
+			}
+		})
+	},
+	getyhlist(fir){
+		// console.log(pageState)
+		let that = this
+		var tnt=that.data.type
+		if(tnt==0){
+			tnt=3
+		}
+		wx.request({
+			url:  app.IPurl+'/api/community/index',
+			data:{
+				"page":that.data.pages[that.data.type],
+				"order":tnt,
+				"search":that.data.search
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'get',
+			success(res) {
+				console.log(res.data)
+				
+				
+				if(res.data.errcode==0){
+					let rlist=res.data.retData.data
+					if(rlist.length>0){
+						that.data.lists[that.data.type]=that.data.lists[that.data.type].concat(rlist)
+						console.log(rlist)
+						that.data.pages[that.data.type]++
+						that.setData({
+							pages:that.data.pages,
+							lists:that.data.lists
+						})
+						console.log(that.data.yhlist)
+					}else{
+						// if(that.data.search){
+							wx.showToast({
+								 icon:'none',
+								 title:'没有更多数据了'
+							})
+						// }
+						// wx.showToast({
+						// 	 icon:'none',
+						// 	 title:'已经到底了'
+						// })
+					}
+				}
+			
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			}
+		})
 	},
 	/**   
-     * 预览图片  
-     */
-  previewImage: function (e) {
-    app.previewImage(e)
-  },
+	 * 预览图片  
+	 */
+	previewImage: function (e) {
+	  var current = e.target.dataset.src;
+		var arr1=[]
+		arr1.push(current)
+		console.log(arr1);
+	  wx.previewImage({
+	    current: current, // 当前显示图片的http链接  
+	    urls: arr1 // 需要预览的图片http链接列表  
+	  })
+	},
+	call(e){
+		console.log(e.currentTarget.dataset.tel)
+		wx.makePhoneCall({
+			phoneNumber: e.currentTarget.dataset.tel //仅为示例，并非真实的电话号码
+		})
+	},
+	getbanner(num){
+		//192.168.129.119/index/turns/index
+		let that = this
+		wx.request({
+			url:  app.IPurl+'/index/turns/index',
+			data:{
+				"turns_class":num,
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+				
+				
+				if(res.data.errcode==0){
+					let rlist=res.data.retData
+					that.setData({
+						bannerimg:rlist
+					})
+				
+				}else{
+					wx.showToast({
+						 icon:'none',
+						 title:'操作失败'
+					})
+				}
+			
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			}
+		})
+	},
+	
 	jump(e){
 		app.jump(e)
-	}
+	},
+	dianzan(e){
+		// /api/community/praise
+		console.log(e.currentTarget.dataset.id)
+		var cid =e.currentTarget.dataset.id
+		var cidx =e.currentTarget.dataset.idx
+		let that = this
+		wx.request({
+			url:  app.IPurl+'/api/community/praise',
+			data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
+				"community_id":cid,
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+				
+				
+				if(res.data.errcode==0){
+					
+				
+				}else{
+					wx.showToast({
+						 icon:'none',
+						 title:'操作失败'
+					})
+				}
+			
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			}
+		})
+	},
+	runMarquee: function () {
+	  var that = this;
+	  var interval = setInterval(function () {
+	    //文字一直移动到末端
+	    if (-that.data.marqueeDistance < that.data.length) {
+	      that.setData({
+	        marqueeDistance: that.data.marqueeDistance - that.data.marqueePace,
+	      });
+	    } else {
+	      clearInterval(interval);
+	      that.setData({
+	        marqueeDistance: that.data.windowWidth
+	      });
+	      that.runMarquee();
+	    }
+	  }, that.data.interval1);
+	},
 })

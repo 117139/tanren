@@ -2,6 +2,7 @@
 
 <import src="/utils/pageState/index.wxml" />
 <template is="pageState" data="{{...pageState}}" />
+<wxs src="../../utils/filter.wxs" module="filter" />
 <view class="container">
 	<view class='dis_flex ju_b header1 mb40'>
 		<view>
@@ -19,7 +20,7 @@
 		circular='true'>
 		<block wx:for="{{bannerimg}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
 			<swiper-item>
-				<image src="{{item}}" class="slide-image" />
+				<image lazy-load='true' src="{{filter.imgIP(item.turns_img)}}" class="slide-image" />
 			</swiper-item>
 		</block>
 	</swiper>
@@ -120,10 +121,10 @@
 					<image mode="aspectFill" class="tjrimg" catchtap="previewImage" 
 			data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562849455583&di=0847a965036ad704fa554b1a062fd199&imgtype=0&src=http%3A%2F%2Fimg2.ctoutiao.com%2Fuploads%2F2017%2F06%2F22%2Fe691e01010f70eb33f153b7c75eaf6e5.jpg" 
 			src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562849455583&di=0847a965036ad704fa554b1a062fd199&imgtype=0&src=http%3A%2F%2Fimg2.ctoutiao.com%2Fuploads%2F2017%2F06%2F22%2Fe691e01010f70eb33f153b7c75eaf6e5.jpg"></image>
-					<image mode="aspectFill" class="tjrimg" catchtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
-					<image mode="aspectFill" class="tjrimg" catchtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
-					<image mode="aspectFill" class="tjrimg" catchtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
-					<image mode="aspectFill" class="tjrimg" catchtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
+					<image  lazy-load='true' mode="aspectFill" class="tjrimg" catchtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
+					<image lazy-load='true' mode="aspectFill" class="tjrimg" catchtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
+					<image lazy-load='true' mode="aspectFill" class="tjrimg" catchtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
+					<image lazy-load='true' mode="aspectFill" class="tjrimg" catchtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
 
 				</scroll-view>
 			</view>

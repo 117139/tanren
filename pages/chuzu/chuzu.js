@@ -29,6 +29,7 @@ Page({
    */
   onLoad: function (options) {
 		wx.hideShareMenu()
+		this.getbanner(2)
 		this.getquyu()
   },
 
@@ -112,7 +113,7 @@ Page({
 			lists:that.data.lists
 		})
 		wx.request({
-			url:  app.IPurl2+'/api/rent_house/index',
+			url:  app.IPurl+'/api/rent_house/index',
 			data:{
 				"page":that.data.pages[that.data.type],
 				"region_id":that.data.datalist[that.data.type].region_id,
@@ -167,7 +168,7 @@ Page({
 		
 	
 		wx.request({
-			url:  app.IPurl2+'/api/region_cate/index',
+			url:  app.IPurl+'/api/region_cate/index',
 			data:{},
 			// header: {
 			// 	'content-type': 'application/x-www-form-urlencoded'
@@ -214,7 +215,7 @@ Page({
 		// console.log(pageState)
 		let that = this
 		wx.request({
-			url:  app.IPurl2+'/api/rent_house/index',
+			url:  app.IPurl+'/api/rent_house/index',
 			data:{
 				"page":that.data.pages[that.data.type],
 				"region_id":that.data.datalist[that.data.type].region_id,
@@ -281,5 +282,46 @@ Page({
 		wx.makePhoneCall({
 			phoneNumber: e.currentTarget.dataset.tel //仅为示例，并非真实的电话号码
 		})
+	},
+	getbanner(num){
+		//192.168.129.119/index/turns/index
+		let that = this
+		wx.request({
+			url:  app.IPurl+'/index/turns/index',
+			data:{
+				"turns_class":num,
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+				
+				
+				if(res.data.errcode==0){
+					
+					let rlist=res.data.retData
+						that.setData({
+							bannerimg:rlist
+						})
+				
+				}else{
+					wx.showToast({
+						 icon:'none',
+						 title:'操作失败'
+					})
+				}
+			
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			}
+		})
 	}
+	
 })

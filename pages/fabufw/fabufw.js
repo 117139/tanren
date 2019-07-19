@@ -158,19 +158,26 @@ Page({
 				
 				///api/upload_image/upload
 				wx.uploadFile({
-					url: app.IPurl2+'/api/upload_image/upload', //仅为示例，非真实的接口地址
+					url: app.IPurl+'/api/upload_image/upload', //仅为示例，非真实的接口地址
 					filePath: tempFilePaths[0],
 					name: 'images',
 					formData: {
 						'module_name': 'used'
 					},
 					success (res){
-						const data = res.data
+						console.log(res.data)
+						console.log(res.data.errcode)
+						console.log(res.data.errcode==0)
+						if(res.data.errcode==0){
+							that.data.tmpdata.imgb.push(app.IPurl+res.data.retData.path)
+							that.setData({
+								tmpdata:that.data.tmpdata
+							})
+							console.log(app.IPurl+res.data.retData.path)
+						}
+						
 						//do something
-						// that.data.tmpdata.imgb.push(res.tempFilePaths[0])
-						// that.setData({
-						// 	tmpdata:that.data.tmpdata
-						// })
+						
 					}
 				})
 			}
@@ -220,8 +227,9 @@ Page({
 					})
 					// 'Authorization':wx.getStorageSync('usermsg').user_token
 					wx.request({
-						url:  app.IPurl2+'/api/job_seek/save',
+						url:  app.IPurl+'/api/rent_house/save',
 						data:{
+							"authorization":wx.getStorageSync('usermsg').user_token,
 							'region_id':that.data.hangyelb.region_id,
 							'body':that.data.fbtext,
 							'price':that.data.userpri,
@@ -230,9 +238,9 @@ Page({
 							'path':'',
 							'module_name':'rent'
 						},
-						header: {
-							'Authorization':wx.getStorageSync('usermsg').user_token
-						},
+						// header: {
+						// 	'content-type': 'application/x-www-form-urlencoded'
+						// },
 						dataType:'json',
 						method:'POST',
 						success(res) {
@@ -320,7 +328,7 @@ Page({
 		// console.log(pageState)
 		let that = this
 		wx.request({
-			url:  app.IPurl2+'/api/region_cate/index',
+			url:  app.IPurl+'/api/region_cate/index',
 			data:{},
 			// header: {
 			// 	'content-type': 'application/x-www-form-urlencoded'
@@ -351,7 +359,5 @@ Page({
 				})
 			}
 		})
-	},
-	
-	
+	}
 })

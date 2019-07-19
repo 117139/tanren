@@ -120,7 +120,7 @@ Page({
 			lists:that.data.lists
 		})
 		wx.request({
-			url:  app.IPurl2+'/api/job_seek/index',
+			url:  app.IPurl+'/api/job_seek/index',
 			data:{
 				"page":that.data.pages[that.data.type],
 				"region_id":2,
@@ -200,7 +200,7 @@ Page({
 		
 	
 		wx.request({
-			url:  app.IPurl2+'/api/profession_cate/index',
+			url:  app.IPurl+'/api/profession_cate/index',
 			data:{},
 			// header: {
 			// 	'content-type': 'application/x-www-form-urlencoded'
@@ -247,7 +247,7 @@ Page({
 		// console.log(pageState)
 		let that = this
 		wx.request({
-			url:  app.IPurl2+'/api/job_seek/index',
+			url:  app.IPurl+'/api/job_seek/index',
 			data:{
 				"page":that.data.pages[that.data.type],
 				"region_id":2,
@@ -301,7 +301,7 @@ Page({
 		//192.168.129.119/index/turns/index
 		let that = this
 		wx.request({
-			url:  app.IPurl1+'/index/turns/index',
+			url:  app.IPurl+'/index/turns/index',
 			data:{
 				"turns_class":1,
 			},

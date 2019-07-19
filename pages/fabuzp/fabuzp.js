@@ -206,17 +206,18 @@ Page({
 					})
 					// 'Authorization':wx.getStorageSync('usermsg').user_token
 					wx.request({
-						url:  app.IPurl2+'/api/job_seek/save',
+						url:  app.IPurl+'/api/job_seek/save',
 						data:{
+							'authorization':wx.getStorageSync('usermsg').user_token,
 							'profession_id':that.data.hangyelb.id,
 							'body':that.data.fbtext,
 							'salary':that.data.userpri,
 							'phone':that.data.usertel,
 							'sticky_num':0,
 						},
-						header: {
-							'Authorization':wx.getStorageSync('usermsg').user_token
-						},
+						// header: {
+						// 	
+						// },
 						dataType:'json',
 						method:'POST',
 						success(res) {
@@ -304,7 +305,7 @@ Page({
 		// console.log(pageState)
 		let that = this
 		wx.request({
-			url:  app.IPurl2+'/api/profession_cate/index',
+			url:  app.IPurl+'/api/profession_cate/index',
 			data:{},
 			// header: {
 			// 	'content-type': 'application/x-www-form-urlencoded'

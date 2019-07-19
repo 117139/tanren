@@ -27,6 +27,7 @@ Page({
   onLoad: function () {
 		this.getdizhi()
 		this.gettime()
+		this.getbanner()
 		this.getshoplist(0)
   },
   /**
@@ -156,6 +157,46 @@ Page({
 		console.log(e.currentTarget.dataset.url)
 		wx.navigateTo({
 			url:e.currentTarget.dataset.url
+		})
+	},
+	getbanner(){
+		//192.168.129.119/index/turns/index
+		let that = this
+		wx.request({
+			url:  app.IPurl+'/index/turns/index',
+			data:{
+				"turns_class":0,
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+				let rlist=res.data.retData
+				
+				if(res.data.errcode==0){
+					
+					
+						that.setData({
+							bannerimg:rlist
+						})
+				
+				}else{
+					wx.showToast({
+						 icon:'none',
+						 title:'操作失败'
+					})
+				}
+			
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			}
 		})
 	}
 })

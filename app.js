@@ -2,7 +2,7 @@
 App({
 	IPurl1: 'http://192.168.129.120/',
 	IPurl2: "http://192.168.129.120/",
-	IPurl:"http://ceshi.800123456.top/index.php/",
+	IPurl:"http://ceshi.800123456.top/",
 	onLaunch: function() {
 		// // 展示本地存储能力
 		// var logs = wx.getStorageSync('logs') || []
@@ -50,7 +50,7 @@ App({
 				console.log(res.code)
 				// return
 				wx.request({
-					url:  that.IPurl1+'/index/userlogin/login', 
+					url:  that.IPurl+'/index/userlogin/login', 
 					data: {
 						'code':rcode,
 						'avatarUrl':that.globalData.userInfo.avatarUrl,
@@ -109,6 +109,44 @@ App({
 		console.log(e.currentTarget.dataset.url)
 		wx.navigateTo({
 			url:e.currentTarget.dataset.url
+		})
+	},
+	getbanner(num){
+		//192.168.129.119/index/turns/index
+		let that = this
+		wx.request({
+			url:  that.IPurl+'/index/turns/index',
+			data:{
+				"turns_class":num
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+				
+				
+				if(res.data.errcode==0){
+					let rlist=res.data.retData
+						return rlist
+						
+				
+				}else{
+					wx.showToast({
+						 icon:'none',
+						 title:'操作失败'
+					})
+				}
+			
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			}
 		})
 	},
 	globalData: {

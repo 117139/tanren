@@ -5,8 +5,11 @@ var dateFormat = function(date) {
     return dates[0] + "年" + dates[1] + "月" + dates[2] + "日";
 }
 var imgIP=function(img){
-	var newimg ='http://192.168.129.120/'+img
-	console.log(newimg)
+	if(img==undefined){
+		return
+	}
+	var newimg ='http://ceshi.800123456.top/'+img
+	// console.log(newimg)
 	return newimg
 }
 var moneyFormat = function(money) {
