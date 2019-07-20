@@ -122,8 +122,8 @@ Page({
 		wx.request({
 			url:  app.IPurl+'/api/job_seek/index',
 			data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
 				"page":that.data.pages[that.data.type],
-				"region_id":2,
 				"profession_id":that.data.datalist[that.data.type].id,
 				"search":e.detail.value.sr
 			},
@@ -249,8 +249,8 @@ Page({
 		wx.request({
 			url:  app.IPurl+'/api/job_seek/index',
 			data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
 				"page":that.data.pages[that.data.type],
-				"region_id":2,
 				"profession_id":that.data.datalist[that.data.type].id,
 				"search":that.data.search
 			},

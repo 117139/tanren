@@ -65,12 +65,12 @@ App({
 						console.log(res)
 						console.log(res.data)
 						if(res.data.errCode==0){
-							wx.reLaunch({
-							  url: '/pages/index/index',
-							  fail: (err) => {
-							    console.log("失败: " + JSON.stringify(err));
-							  }
-							})
+							// wx.reLaunch({
+							//   url: '/pages/index/index',
+							//   fail: (err) => {
+							//     console.log("失败: " + JSON.stringify(err));
+							//   }
+							// })
 							console.log('登录成功')
 		          wx.setStorageSync('login', 'login')
 							wx.setStorageSync('usermsg', res.data.retData)

@@ -26,6 +26,7 @@ Page({
       '/static/images/banner_03.jpg',
       '/static/images/banner_03.jpg',
     ],
+		zdxx:'',
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
@@ -44,6 +45,7 @@ Page({
   onLoad: function (options) {
 		this.getbanner(7)
 		this.getyhlist()
+		this.getxiaoxi()
   },
 
   /**
@@ -131,6 +133,126 @@ Page({
 			search:e.detail.value.sr
 		})
 	},
+	dianzan(e){
+		var that =this
+		console.log(e.currentTarget.dataset.id)
+		var idx=e.currentTarget.dataset.idx
+		var idx1=e.currentTarget.dataset.idx1
+		wx.request({
+			url:  app.IPurl+'/api/community/praise',
+			data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
+				'community_id':e.currentTarget.dataset.id
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+			
+				
+				if(res.data.errcode==0){
+					that.data.lists[idx][idx1].user_praise = !that.data.lists[idx][idx1].user_praise
+					that.setData({
+						lists:that.data.lists
+					})
+					if(that.data.lists[idx][idx1].user_praise==1){
+						that.data.lists[idx][idx1].praise--
+					}else{
+						that.data.lists[idx][idx1].praise++
+					}
+					console.log(that.data.lists[idx][idx1].user_praise)
+					console.log(that.data.lists[idx][idx1].praise)
+					that.setData({
+						lists:that.data.lists
+					})
+				}else{
+					
+					wx.showToast({
+						 icon:'none',
+						 title:res.data.ertips
+					})
+				}
+				 
+			},
+			fail() {
+				that.setData({
+					kg:1
+				})
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			},
+			complete() {
+				wx.hideLoading()
+			}
+		})
+		
+		
+	},
+	shoucangff(e){
+		var that =this
+		console.log(e.currentTarget.dataset.id)
+		var idx=e.currentTarget.dataset.idx
+		var idx1=e.currentTarget.dataset.idx1
+		wx.request({
+			url:  app.IPurl+'/api/community/collect',
+			data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
+				'community_id':e.currentTarget.dataset.id
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+			
+				
+				if(res.data.errcode==0){
+					that.data.lists[idx][idx1].user_collect = !that.data.lists[idx][idx1].user_collect
+					that.setData({
+						lists:that.data.lists
+					})
+					if(that.data.lists[idx][idx1].user_collect==1){
+						that.data.lists[idx][idx1].collect--
+					}else{
+						that.data.lists[idx][idx1].collect++
+					}
+					console.log(that.data.lists[idx][idx1].user_collect)
+					console.log(that.data.lists[idx][idx1].collect)
+					that.setData({
+						lists:that.data.lists
+					})
+				}else{
+					
+					wx.showToast({
+						 icon:'none',
+						 title:res.data.ertips
+					})
+				}
+				 
+			},
+			fail() {
+				that.setData({
+					kg:1
+				})
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			},
+			complete() {
+				wx.hideLoading()
+			}
+		})
+		
+		
+	},
 	formSubmit: function(e) {
 		let that =this
 		console.log('form发生了submit事件，携带数据为：', e.detail.value)
@@ -148,8 +270,9 @@ Page({
 			tnt=3
 		}
 		wx.request({
-			url:  app.IPurl+'/api/rent_house/index',
+			url:  app.IPurl+'/api/community/index',
 			data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
 				"page":that.data.pages[that.data.type],
 				"order":tnt,
 				"search":e.detail.value.sr
@@ -205,6 +328,7 @@ Page({
 		wx.request({
 			url:  app.IPurl+'/api/community/index',
 			data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
 				"page":that.data.pages[that.data.type],
 				"order":tnt,
 				"search":that.data.search
@@ -274,6 +398,8 @@ Page({
 	getbanner(num){
 		//192.168.129.119/index/turns/index
 		let that = this
+		const pageState1 = pageState.default(that)
+		pageState1.loading()    // 切换为loading状态
 		wx.request({
 			url:  app.IPurl+'/index/turns/index',
 			data:{
@@ -293,12 +419,13 @@ Page({
 					that.setData({
 						bannerimg:rlist
 					})
-				
+				pageState1.finish()    // 切换为finish状态
 				}else{
 					wx.showToast({
 						 icon:'none',
 						 title:'操作失败'
 					})
+					pageState1.error()
 				}
 			
 			},
@@ -307,42 +434,40 @@ Page({
 					 icon:'none',
 					 title:'操作失败'
 				})
+				pageState1.error()
 			}
 		})
 	},
-	
-	jump(e){
-		app.jump(e)
-	},
-	dianzan(e){
-		// /api/community/praise
-		console.log(e.currentTarget.dataset.id)
-		var cid =e.currentTarget.dataset.id
-		var cidx =e.currentTarget.dataset.idx
+	getxiaoxi(){
+		//192.168.129.119/index/turns/index
 		let that = this
+		
 		wx.request({
-			url:  app.IPurl+'/api/community/praise',
+			url:  app.IPurl+'/api/marquee/index',
 			data:{
-				"authorization":wx.getStorageSync('usermsg').user_token,
-				"community_id":cid,
+			
 			},
 			// header: {
 			// 	'content-type': 'application/x-www-form-urlencoded'
 			// },
 			dataType:'json',
-			method:'POST',
+			method:'get',
 			success(res) {
 				console.log(res.data)
 				
 				
 				if(res.data.errcode==0){
-					
+					let rlist=res.data.retData
+					that.setData({
+						zdxx:rlist
+					})
 				
 				}else{
 					wx.showToast({
 						 icon:'none',
 						 title:'操作失败'
 					})
+					
 				}
 			
 			},
@@ -351,8 +476,12 @@ Page({
 					 icon:'none',
 					 title:'操作失败'
 				})
+				pageState1.error()
 			}
 		})
+	},
+	jump(e){
+		app.jump(e)
 	},
 	runMarquee: function () {
 	  var that = this;

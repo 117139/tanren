@@ -19,7 +19,7 @@ Page({
 		tmpdata:{
 			fblen:0,
 			imgb:[],
-			zhidingcur:0,
+			zhidingcur:-1,
 			zhiding:[1,2,3,4]
 		},
 		usertel:'',
@@ -34,6 +34,8 @@ Page({
   onLoad: function (options) {
 		console.log(options.id)
 		this.gethanye()
+		this.getzhiding()
+		
   },
 
   /**
@@ -82,17 +84,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-		console.log(res)
-		if (res.from === 'button') {
-			console.log(res.target.dataset.supid)
-    }
-    return {
-      title: '转发',
-      path: '/pages/share/share/?supid=' + res.target.dataset.type,
-      success: function (res) {
-        console.log('成功', res)
-      }
-    }
+		
   },
 	call(e){
 		console.log(e.currentTarget.dataset.tel)
@@ -183,6 +175,43 @@ Page({
 			}
 		})
 	},
+	getzhiding(){
+		// console.log(pageState)
+		let that = this
+		wx.request({
+			url:  app.IPurl+'/api/sticky/index',
+			data:{},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'get',
+			success(res) {
+				console.log(res.data)
+				let rlist=res.data.retData
+				
+				if(res.data.errcode==0){
+						that.data.tmpdata.zhiding=rlist
+					// if(rlist.length>0){
+						that.setData({
+							tmpdata:that.data.tmpdata,
+						})
+					
+					// }
+					
+				}
+				
+				 
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'获取行业失败'
+				})
+			}
+		})
+	},
+	
 	fabusub(){
 		var that =this
 		if(that.data.fbtext==""){
@@ -225,6 +254,13 @@ Page({
 					wx.showLoading({
 						title:'请稍后。。'
 					})
+					var dztime
+					if(that.data.tmpdata.zhidingcur==-1){
+						dztime=0
+					}else{
+						dztime=that.data.tmpdata.zhiding[that.data.tmpdata.zhidingcur].id
+					}
+					console.log(dztime)
 					// 'Authorization':wx.getStorageSync('usermsg').user_token
 					wx.request({
 						url:  app.IPurl+'/api/rent_house/save',
@@ -234,7 +270,7 @@ Page({
 							'body':that.data.fbtext,
 							'price':that.data.userpri,
 							'phone':that.data.usertel,
-							'sticky_num':0,
+							'sticky_id':dztime,
 							'path':'',
 							'module_name':'rent'
 						},

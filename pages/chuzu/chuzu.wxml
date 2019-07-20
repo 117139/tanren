@@ -36,11 +36,11 @@
 				<view class="w100 dis_flex ju_b aic mb20">
 					<view class="dis_flex aic">
 						<image class="headimg" src="{{item1.user.head_img}}"></image>
-						<text class="ml5 fz30 oh1">{{item1.user.account}}</text>
+						<text class="ml5 fz30 oh1">{{item1.user.nickname}}</text>
 					</view>
 					<view class="ce22829 fz30 fwb">{{item1.price}}</view>
 				</view>
-				<view class=" fz28 mb20 lh40"><text class="zpzdicon">置顶</text>{{item1.body}}</view>
+				<view class=" fz28 mb20 lh40"><text wx:if="{{item1.sticky_status==0}}" class="zpzdicon">置顶</text>{{item1.body}}</view>
 				<view class="dis_flex w100 aic mb20" data-tel="{{item1.phone}}" bindtap="call">
 					<text class="iconfont icondianhua mr10 fz30 c169fff"></text> <text class="fz30 c525155">{{item1.phone}}</text>
 				</view>

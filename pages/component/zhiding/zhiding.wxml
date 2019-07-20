@@ -2,6 +2,12 @@
 <template name="zhiding">
 	<view class="container">
 		<view class="fabutit ">是否置顶</view>
+		<view class="dis_flex aic ju_b w100 h100 bb1d0"
+			data-idx="-1"
+			bindtap="zhidingSelet">
+			<text class="fz30 c0">不置顶</text>
+			<text class="iconfont iconiconfontxuanzhong fz36 {{tmpdata.zhidingcur==-1? 'cf15a29':'ca0a0a0'}}"></text>
+		</view>
 		<view class="dis_flex aic ju_b w100 h100 bb1d0" wx:for="{{tmpdata.zhiding}}" 
 			 wx:for-index="idx"
 			 wx:for-item="item"
@@ -10,7 +16,7 @@
 			 bindtap="zhidingSelet">
 			<view class="dis_flex aic ">
 				<text class="iconfont icondiamond fz36 cf15a29 mr10"></text>
-				<text class="fz30 c0">15积分/1天</text>
+				<text class="fz30 c0">{{item.integral}}积分/{{item.day_num}}天</text>
 			</view>
 			<text class="iconfont iconiconfontxuanzhong fz36 {{tmpdata.zhidingcur==idx? 'cf15a29':'ca0a0a0'}}"></text>
 		</view>

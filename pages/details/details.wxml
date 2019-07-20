@@ -1,75 +1,80 @@
 <!--pages/details/details.wxml-->
 
+<import src="/utils/pageState/index.wxml" />
+<template is="pageState" data="{{...pageState}}" />
+<wxs src="../../utils/filter.wxs" module="filter" />
 <import src="/pages/component/fabu1/fabu1.wxml" />
 <view class="container pb100">
 	<view class="w100 dis_flex aic ju_b mb20">
 		<view class="dis_flex aic">
-			<image class="xqheadimg" src="../../static/images/index_27.jpg"></image>
+			<image class="xqheadimg" src="{{dataxq.user.head_img}}"></image>
 			<view>
-				<view class="fz36 fwb">Vengeanc</view>
-				<view class="fz30 c9">2019年05月28日</view>
+				<view class="fz36 fwb">{{dataxq.user.nickname}}</view>
+				<view class="fz30 c9">{{dataxq.create_time}}</view>
 			</view>
 		</view>
-		<view class="fz36 fwb ce22829">$180</view>
+		<view class="fz36 fwb ce22829">{{dataxq.price}}</view>
 	</view>
-	<view class="fz36 lh50 mb20">【95新】Bose qc30 无线耳机 QC30 耳机 塞式蓝牙降噪黑色 黑色95新</view>
+	<view class="fz36 lh50 mb20 w100">{{dataxq.body}}</view>
 	<view class="dis_flex w100 aic mb40">
-		<text class="iconfont icondianhua mr10 fz30 c169fff"></text> <text class="fz30 c525155">909-939-6699</text>
+		<text class="iconfont icondianhua mr10 fz30 c169fff"></text> <text class="fz30 c525155">{{dataxq.phone}}</text>
 	</view>
 	<view class="w100 dis_flex flex_ww mb40">
-		<image wx:if="{{dataxq.img.length==1}}"
-			wx:for="{{dataxq.img}}"
+		<image wx:for="{{dataxq.community_file}}"
 			wx:for-index="idx2"
 			wx:for-item="item2"
 			wx:key="idx2"
-			class="tjrvideo " mode="widthFix"
-			data-src="/static/images/index_29.jpg"
-			src="/static/images/index_29.jpg"
-			bindtap="previewImage"alt=""/>
-		<image wx:if="{{dataxq.img.length>1}}"
-			wx:for="{{dataxq.img}}"
-			wx:for-index="idx2"
-			wx:for-item="item2"
-			wx:key="idx2"
-			class="img9" mode="widthFix"
-			data-src="/static/images/index_29.jpg"
-			src="/static/images/index_29.jpg"
-			bindtap="previewImage"alt=""/>
+			class="{{dataxq.used_image.length>1 ? 'img9':'tjrvideo'}}" mode="aspectFill"
+			data-src="{{filter.imgIP(item2.path)}}"
+			src="{{filter.imgIP(item2.path)}}"
+			catchtap="previewImage"alt="" lazy-load='true'/>
 		<!-- <image class="flex_1"  src="../../static/images/index_29.jpg" alt=""/> -->
 	</view>
 	<view class="dis_flex aic w100 mb40 cadadad">
-		<text class="mr10 fz28">浏览</text><text class="mr20 fz28">85</text>
-		<text class="mr10 fz28">评论</text><text class="mr20 fz28">85</text>
+		<text class="mr10 fz28">浏览</text><text class="mr20 fz28">{{dataxq.browse}}</text>
+		<text class="mr10 fz28">评论</text><text class="mr20 fz28">{{total}}</text>
 	</view>
 	<view class="heng2 mb40"></view>
 	<view class="fz36 c3 mb40 w100">
 		最新评论
 	</view>
-	<block wx:for="{{dataxq.img}}"
+	<view wx:if="{{dataxqpl.length==0}}" class="tac fz36 c9 pt100">暂无评论</view>
+	<block wx:for="{{dataxqpl}}"
 			wx:for-index="idx2"
 			wx:for-item="item2"
 			wx:key="idx2">
-		<view class="dis_flex mb40">
-			<image class="headimg mr20" src="/static/images/index_32.jpg"></image>
+		<view class="dis_flex mb40 w100">
+			<image class="headimg mr20" src="{{item2.user.head_img}}"></image>
 			<view class="flex_1">
-				<view class="c0 fz32 fwb mb10">银小杏</view>
-				<view class="cadadad fz30 mb20">05月28日</view>
-				<view class="c3 fz32 lh40">哥们能不能再便宜一点哥们能不能再便宜一点哥们能不能再便宜一点哥们能不能再便宜一点</view>
+				<view class="c0 fz32 fwb mb10">{{item2.user.nickname}}</view>
+				<view class="cadadad fz30 mb20">{{item2.create_time}}</view>
+				<view class="c3 fz32 lh40">{{item2.body}}</view>
+				<view class="w100 dis_flex flex_ww mb40">
+					<image wx:for="{{item2.community_file}}"
+						wx:for-index="idx2"
+						wx:for-item="item2"
+						wx:key="idx2"
+						class="{{dataxq.used_image.length>1 ? 'img9':'tjrvideo'}}" mode="aspectFill"
+						data-src="{{filter.imgIP(item2.path)}}"
+						src="{{filter.imgIP(item2.path)}}"
+						catchtap="previewImage"alt="" lazy-load='true'/>
+					<!-- <image class="flex_1"  src="../../static/images/index_29.jpg" alt=""/> -->
+				</view>
 			</view>
 		</view>
-		<view wx:if="{{idx2!=dataxq.img.length-1}}" class="heng2 mb40"></view>
+		<view wx:if="{{idx2!=dataxqpl.length-1}}" class="heng2 mb40"></view>
 	</block>
 	<view class="bbbtnz dis_flex aic ju_b">
-		<view class="dis_flex aic ju_c lxbtn" data-tel="1111" bindtap="call">
+		<view class="dis_flex aic ju_c lxbtn" data-tel="{{dataxq.phone}}" bindtap="call">
 			<text class="iconfont icondianhua mr10 fz30 cfff"></text> <text class="fz30 cfff">联系卖主</text>
 		</view>
-		<view class="dis_flex aic mr20" data-id="22" bindtap="dianzan">
+		<view class="dis_flex aic mr20" data-id="{{dataxq.id}}" bindtap="dianzan">
 			<text  class="iconfont icondianzan2 myicon mr10 fz50 {{zan==0?'c9':'ce22829'}}"></text>
-			<text class='trbox'>56</text>
+			<text class='trbox'>{{dataxq.praise}}</text>
 		</view>
-		<view class="dis_flex aic mr20" bindtap="showpp">
+		<view class="dis_flex aic mr20" data-id="{{dataxq.id}}" bindtap="showpp">
 			<text class="iconfont iconpinglun myicon mr10 fz50 c9" ></text>
-			<text class='trbox'>56</text>
+			<text class='trbox'>{{total}}</text>
 		</view>
 		<view class="share1">
 			<text class="iconfont iconfenxiang fz36 c9"></text>

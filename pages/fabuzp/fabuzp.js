@@ -19,7 +19,7 @@ Page({
 		tmpdata:{
 			fblen:0,
 			imgb:[],
-			zhidingcur:0,
+			zhidingcur:-1,
 			zhiding:[1,2,3,4]
 		},
 		usertel:'',
@@ -34,6 +34,7 @@ Page({
   onLoad: function (options) {
 		console.log(options.id)
 		this.gethanye()
+		this.getzhiding()
   },
 
   /**
@@ -162,6 +163,43 @@ Page({
 			}
 		})
 	},
+	getzhiding(){
+		// console.log(pageState)
+		let that = this
+		wx.request({
+			url:  app.IPurl+'/api/sticky/index',
+			data:{},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'get',
+			success(res) {
+				console.log(res.data)
+				let rlist=res.data.retData
+				
+				if(res.data.errcode==0){
+						that.data.tmpdata.zhiding=rlist
+					// if(rlist.length>0){
+						that.setData({
+							tmpdata:that.data.tmpdata,
+						})
+					
+					// }
+					
+				}
+				
+				 
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'获取行业失败'
+				})
+			}
+		})
+	},
+	
 	fabusub(){
 		var that =this
 		if(that.data.fbtext==""){
@@ -204,6 +242,12 @@ Page({
 					wx.showLoading({
 						title:'请稍后。。'
 					})
+					var dztime
+					if(that.data.tmpdata.zhidingcur==-1){
+						dztime=0
+					}else{
+						dztime=that.data.tmpdata.zhiding[that.data.tmpdata.zhidingcur].id
+					}
 					// 'Authorization':wx.getStorageSync('usermsg').user_token
 					wx.request({
 						url:  app.IPurl+'/api/job_seek/save',
@@ -213,7 +257,7 @@ Page({
 							'body':that.data.fbtext,
 							'salary':that.data.userpri,
 							'phone':that.data.usertel,
-							'sticky_num':0,
+							'sticky_id':dztime,
 						},
 						// header: {
 						// 	

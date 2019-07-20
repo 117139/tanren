@@ -1,5 +1,5 @@
 <!--pages/centertk/centertk.wxml-->
-<image class="bgt "  src="/static/images/centerbg.jpg"></image>
+<image class="bgt " bindtap="goindex" src="/static/images/centerbg.jpg"></image>
 <view class="container">
 	<view class="fabutit ">发表内容到</view>
 	<view class='tkbox dis_flex aic ju_b fz30 w100'>

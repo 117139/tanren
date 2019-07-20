@@ -20,6 +20,7 @@
 			</view>
 			<input type="text" placeholder="请输入您的电话" bindinput="usertel"/>
 		</view>
+		<view class="c9 fz30 w100 pl40 boxsiz">价格示例: $100 或 $100-$200</view>
 		<view class="dis_flex w100 aic ju_b mb40">
 			<view style="color:#525252">
 				<text class="iconfont iconbiaoqian c9 mr10"></text>
@@ -40,8 +41,8 @@
 			</picker>
 		</view>
 		<view class="dis_flex w100 aic ju_b mb40"  bindtap="showpp">
-			<view style="color:#525252"><text class="iconfont iconzhiding1 c9 mr10"></text>是否置顶</view>
-			<view style="color:#a0a0a0">未选择<text class="iconfont iconnext c9 mr10"></text></view>
+			<view style="color:#525252"><text class="iconfont icondfdabf c9 mr10"></text>是否置顶</view>
+			<view style="color:#a0a0a0">{{tmpdata.zhiding[tmpdata.zhidingcur].day_num?tmpdata.zhiding[tmpdata.zhidingcur].day_num+'天':'不置顶'}}<text class="iconfont iconnext c9 mr10"></text></view>
 		</view>
 		<view class="imgbox mb40">
 			<view class="addimg1" wx:for="{{tmpdata.imgb}}" 

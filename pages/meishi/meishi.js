@@ -13,21 +13,19 @@ Page({
     lists:[],
     type:0,
     datalist:[],
-		bannerimg: [
-      '/static/images/banner_03.jpg',
-      '/static/images/banner_03.jpg',
-      '/static/images/banner_03.jpg',
-    ],
+		bannerimg: [],
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
-    duration: 1000
+    duration: 1000,
+		mstj:[],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+		this.getbanner(4)
 		this.getquyu()
   },
 
@@ -80,10 +78,14 @@ Page({
 
   },
   bindcur(e){
+		var that =this
     console.log(e.currentTarget.dataset.type)
-    this.setData({
+    that.setData({
       type: e.currentTarget.dataset.type
     })
+		if(that.data.lists[that.data.type].length==0){
+			that.getyhlist()
+		}
   },
 	formSubmit: function(e) {
 		let that =this
@@ -97,19 +99,55 @@ Page({
      * 预览图片  
      */
   previewImage: function (e) {
-    var current = e.target.dataset.src;
-		var arr1=[]
-		arr1.push(current)
-		console.log(arr1);
-    wx.previewImage({
-      current: current, // 当前显示图片的http链接  
-      urls: arr1 // 需要预览的图片http链接列表  
-    })
+    app.previewImage(e)
   },
 	call(e){
 		console.log(e.currentTarget.dataset.tel)
 		wx.makePhoneCall({
 			phoneNumber: e.currentTarget.dataset.tel //仅为示例，并非真实的电话号码
+		})
+	},
+	jump(e){
+		app.jump(e)
+	},
+	getbanner(num){
+		//192.168.129.119/index/turns/index
+		let that = this
+		wx.request({
+			url:  app.IPurl+'/index/turns/index',
+			data:{
+				"turns_class":num,
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+				
+				
+				if(res.data.errcode==0){
+					
+					let rlist=res.data.retData
+					that.setData({
+						bannerimg:rlist
+					})
+				
+				}else{
+					wx.showToast({
+						 icon:'none',
+						 title:'操作失败'
+					})
+				}
+			
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			}
 		})
 	},
 	getquyu(){
@@ -120,7 +158,7 @@ Page({
 		
 	
 		wx.request({
-			url:  app.IPurl2+'/api/region_cate/index',
+			url:  app.IPurl+'/api/region_cate/index',
 			data:{},
 			// header: {
 			// 	'content-type': 'application/x-www-form-urlencoded'
@@ -129,10 +167,10 @@ Page({
 			method:'get',
 			success(res) {
 				console.log(res.data)
-				let rlist=res.data.retData
+				
 				
 				if(res.data.errcode==0){
-					
+					let rlist=res.data.retData
 					if(rlist.length>0){
 						// that.data.yhlist=that.data.yhlist.concat(rlist)
 						// console.log(rlist)
@@ -168,7 +206,7 @@ Page({
 		// /index/dining/index
 		let that = this
 		wx.request({
-			url:  app.IPurl2+'/index/dining/index',
+			url:  app.IPurl+'/index/dining/index',
 			data:{
 				"page":that.data.pages[that.data.type],
 				"region_name":that.data.datalist[that.data.type].region_name,
@@ -181,9 +219,15 @@ Page({
 			method:'get',
 			success(res) {
 				console.log(res.data)
-				let rlist=res.data.retData.data
 				
-				if(res.data.errcode==0){
+				if(res.data.errCode==0){
+					let rlist=res.data.retData.dining.data
+					console.log(rlist)
+					// let tuijian1=res.data.retData.elect
+					// console.log(res.data.retData.elect)
+					that.setData({
+						mstj:res.data.retData.elect
+					})
 					
 					if(rlist.length>0){
 						that.data.lists[that.data.type]=that.data.lists[that.data.type].concat(rlist)

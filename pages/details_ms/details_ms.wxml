@@ -1,46 +1,48 @@
 <!--pages/details_ms/details_ms.wxml-->
 
+<import src="/utils/pageState/index.wxml" />
+<template is="pageState" data="{{...pageState}}" />
+<wxs src="../../utils/filter.wxs" module="filter" />
 <import src="/pages/component/fabu2/fabu2.wxml" />
 <view class="container pb50">
 	<view class='mb60 dis_flex w100'>
-		<image class='wh200 mr20' src="/static/images/index_27.jpg"></image>
+		<image class='wh200 mr20' src="{{filter.imgIP(dataxq[0].dining[0].dining_logo)}}"></image>
 		<view class="flex_1">
-			<view class="oh1 fz32 mb20 lh40 fwb">瑞兴咖啡厅 </view>
+			<view class="oh1 fz32 mb20 lh40 fwb">{{dataxq.dining[0].dining_name}} </view>
 			<view class="oh1 fz28 mb20 lh40 c9">营业时间： 07:00-22:30</view>
 			<view class="dis_flex w100 aic mb20 ju_b">
 				<view class="dis_flex xingji">
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<text class="ml5">4.9</text>
+					<text wx class="iconfont ce22829 fz24 {{dataxq[0].dining[0].dining_all>0?'iconstar':'iconwujiaoxing'}}"></text>
+					<text wx class="iconfont ce22829 fz24 {{dataxq[0].dining[0].dining_all>1?'iconstar':'iconwujiaoxing'}}"></text>
+					<text wx class="iconfont ce22829 fz24 {{dataxq[0].dining[0].dining_all>2?'iconstar':'iconwujiaoxing'}}"></text>
+					<text wx class="iconfont ce22829 fz24 {{dataxq[0].dining[0].dining_all>3?'iconstar':'iconwujiaoxing'}}"></text>
+					<text class="iconfont ce22829 fz24 {{dataxq[0].dining[0].dining_all>4?'iconstar':'iconwujiaoxing'}}"></text>
+					<text class="ml5">{{dataxq[0].dining[0].dining_all}}</text>
 				</view>
 			</view>
 		</view>
 	</view>
 	<view class="fz36 fwb w100 mb20">店铺介绍</view>
-	<view class="fz32 lh50 mb40 w100">店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍店铺介绍</view>
+	<view class="fz32 lh50 mb40 w100">{{dataxq[0].dining[0].dining_content}}</view>
 	
 	<view class="fz36 fwb w100 mb20">电话</view>
-	<view class="fz32  mb40 w100">212-966-2315</view>
+	<view class="fz32  mb40 w100">{{[dataxq[0].dining[0].dining_phone]}}</view>
 	
 	<view class="fz36 fwb w100 mb20">地址</view>
-	<view class="fz32  mb40 w100">212 Grand St, new York NY 10013</view>
+	<view class="fz32  mb40 w100">{{[dataxq[0].dining[0].dining_address]}}</view>
 	
 	<view class="fz36 fwb w100 mb20">营业时间</view>
 	<view class="fz32  mb40 w100">周一到周日 07:00-22:00</view>
 	<view class="fz36 fwb w100 mb20">店铺实景</view>
 	<view class="scrollbox mb30">
 		<scroll-view class="tjrimgbox" scroll-x style="width: 100%">
-			<image mode="aspectFill" class="tjrimg" bindtap="previewImage" 
-	data-src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562849455583&di=0847a965036ad704fa554b1a062fd199&imgtype=0&src=http%3A%2F%2Fimg2.ctoutiao.com%2Fuploads%2F2017%2F06%2F22%2Fe691e01010f70eb33f153b7c75eaf6e5.jpg" 
-	src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562849455583&di=0847a965036ad704fa554b1a062fd199&imgtype=0&src=http%3A%2F%2Fimg2.ctoutiao.com%2Fuploads%2F2017%2F06%2F22%2Fe691e01010f70eb33f153b7c75eaf6e5.jpg"></image>
-			<image mode="aspectFill" class="tjrimg" bindtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
-			<image mode="aspectFill" class="tjrimg" bindtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
-			<image mode="aspectFill" class="tjrimg" bindtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
-			<image mode="aspectFill" class="tjrimg" bindtap="previewImage" data-src="/static/images/index_27.jpg" src="../../static/images/index_27.jpg"></image>
-	
+			<image wx:for="{{dataxq[0].dining[0].images}}"
+				wx:for-index="idx1"
+				wx:for-item="item1"
+				wx:key="idx1" mode="aspectFill" class="tjrimg" bindtap="previewImage" 
+	data-src="{{filter.imgIP(dataxq[0].dining[0].dining_logo)}}" 
+	src="{{filter.imgIP(dataxq[0].dining[0].dining_logo)}}"></image>
+			
 		</scroll-view>
 	</view>
 	
@@ -49,32 +51,34 @@
 		用户评价
 	</view>
 	<view class="zongpj mb50 dis_flex aic ju_a">
-		<view class="ce22829 fz42 fwb"> 4.9</view>
+		<view class="ce22829 fz42 fwb">{{dataxq[0].dining[0].dining_all}}</view>
 		<view class="tac">
 			<view class="c525155 fz26">综合评分</view>
 			<view class="dis_flex xingji">
-				<image class="wjx" src="/static/images/index_40.jpg"></image>
-				<image class="wjx" src="/static/images/index_40.jpg"></image>
-				<image class="wjx" src="/static/images/index_40.jpg"></image>
-				<image class="wjx" src="/static/images/index_40.jpg"></image>
-				<image class="wjx" src="/static/images/index_40.jpg"></image>
+				<text wx class="iconfont ce22829 fz24 {{dataxq[0].dining[0].dining_all>0?'iconstar':'iconwujiaoxing'}}"></text>
+				<text wx class="iconfont ce22829 fz24 {{dataxq[0].dining[0].dining_all>1?'iconstar':'iconwujiaoxing'}}"></text>
+				<text wx class="iconfont ce22829 fz24 {{dataxq[0].dining[0].dining_all>2?'iconstar':'iconwujiaoxing'}}"></text>
+				<text wx class="iconfont ce22829 fz24 {{dataxq[0].dining[0].dining_all>3?'iconstar':'iconwujiaoxing'}}"></text>
+				<text class="iconfont ce22829 fz24 {{dataxq[0].dining[0].dining_all>4?'iconstar':'iconwujiaoxing'}}"></text>
+				
 			</view>
 		</view>
 		<view class="shuxian"></view>
 		<view>
-			<view class="fz26 c3">4.9</view>
+			<view class="fz26 c3 tac">{{dataxq[0].dining[0].dining_taste}}</view>
 			<view class="fz26 c9">味道</view>
 		</view>
 		<view>
-			<view class="fz26 c3">4.9</view>
+			<view class="fz26 c3  tac">{{dataxq[0].dining[0].dining_hygiene}}</view>
 			<view class="fz26 c9">卫生</view>
 		</view>
 		<view>
-			<view class="fz26 c3">4.9</view>
+			<view class="fz26 c3 tac">{{dataxq[0].dining[0].dining_service}}</view>
 			<view class="fz26 c9">服务</view>
 		</view>
 	</view>
-	<block wx:for="{{dataxq.list}}"
+	<view wx:if="{{dataxqpl.length==0}}" class="tac fz36 c9 pt100">暂无用户评价</view>
+	<block wx:for="{{dataxqpl}}"
 			wx:for-index="idx"
 			wx:for-item="item"
 			wx:key="idx">

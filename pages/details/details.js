@@ -1,19 +1,21 @@
 // pages/details/details.js
-const app= getApp()
+const app=getApp()
+var pageState = require('../../utils/pageState/index.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+		sqid:"",
+		page:1,
 		num:0,
 		zan:0,
 		show: false,
 		fbtext:'',
 		
-		dataxq:{
-			img:[1,1,1]
-		},
+		dataxq:{},
+		dataxqpl:[],
 		tmpdata:{
 			fblen:0,
 			imgb:[]
@@ -25,6 +27,10 @@ Page({
    */
   onLoad: function (options) {
 		console.log(options.id)
+		this.setData({
+			sqid:options.id
+		})
+		this.getdetails(options.id)
   },
 
   /**
@@ -73,17 +79,17 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-		console.log(res)
-		if (res.from === 'button') {
-			console.log(res.target.dataset.supid)
-    }
-    return {
-      title: '转发',
-      path: '/pages/share/share/?supid=' + res.target.dataset.type,
-      success: function (res) {
-        console.log('成功', res)
-      }
-    }
+		// console.log(res)
+		// if (res.from === 'button') {
+		// 	console.log(res.target.dataset.supid)
+  //   }
+  //   return {
+  //     title: '转发',
+  //     path: '/pages/share/share/?spid=' + this.data.sqid,
+  //     success: function (res) {
+  //       console.log('成功', res)
+  //     }
+  //   }
   },
 	call(e){
 		console.log(e.currentTarget.dataset.tel)
@@ -92,11 +98,114 @@ Page({
 		})
 	},
 	dianzan(e){
+		var that =this
 		console.log(e.currentTarget.dataset.id)
-		this.setData({
-			zan:!this.data.zan
+		wx.request({
+			url:  app.IPurl+'/api/used_product/praise',
+			data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
+				'used_id':that.data.sqid
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+			
+				
+				if(res.data.errcode==0){
+					that.setData({
+						zan:!that.data.zan
+					})
+					if(that.data.zan==1){
+						that.data.dataxq.praise--
+					}else{
+						that.data.dataxq.praise++
+					}
+					that.setData({
+						dataxq:that.data.dataxq
+					})
+				}else{
+					
+					wx.showToast({
+						 icon:'none',
+						 title:res.data.ertips
+					})
+				}
+				 
+			},
+			fail() {
+				that.setData({
+					kg:1
+				})
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			},
+			complete() {
+				wx.hideLoading()
+			}
+		})
+		
+		
+	},
+	shoucangff(e){
+		var that =this
+		console.log(e.currentTarget.dataset.id)
+		wx.request({
+			url:  app.IPurl+'/api/used_product/collect',
+			data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
+				'used_id':that.data.sqid
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+			
+				
+				if(res.data.errcode==0){
+					that.setData({
+						shoucang:!that.data.shoucang
+					})
+					if(that.data.shoucang==1){
+						that.data.dataxq.collect--
+					}else{
+						that.data.dataxq.collect++
+					}
+					that.setData({
+						dataxq:that.data.dataxq
+					})
+				}else{
+					
+					wx.showToast({
+						 icon:'none',
+						 title:res.data.ertips
+					})
+				}
+				 
+			},
+			fail() {
+				that.setData({
+					kg:1
+				})
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			},
+			complete() {
+				wx.hideLoading()
+			}
 		})
 	},
+	
 	onClose() {
     this.setData({ show: false });
   },
@@ -168,16 +277,190 @@ Page({
 			success (res) {
 				if (res.confirm) {
 					console.log('用户点击确定')
-					console.log(that.data.fbtext)
-					console.log(that.data.tmpdata.imgb)
+					that.setData({
+						kg:0
+					})
+					var imbox=that.data.tmpdata.imgb
+					imbox=imbox.join(',')
+					wx.showLoading({
+						title:'请稍后。。'
+					})
+					// 'Authorization':wx.getStorageSync('usermsg').user_token
+					wx.request({
+						url:  app.IPurl+'/api/used_comment/save',
+						data:{
+							"authorization":wx.getStorageSync('usermsg').user_token,
+							'used_id':that.data.sqid,
+							'body':that.data.fbtext,
+							'path':imbox,
+							'module_name':'used'
+						},
+						// header: {
+						// 	'content-type': 'application/x-www-form-urlencoded'
+						// },
+						dataType:'json',
+						method:'POST',
+						success(res) {
+							console.log(res.data)
+						
+							
+							if(res.data.errcode==0){
+								that.getpl(1)
+								wx.showToast({
+									 icon:'none',
+									 title:'发表成功'
+								})
+								setTimeout(function(){
+									that.onClose()
+									
+								},1000)
+								
+							}else{
+								that.setData({
+									kg:1
+								})
+								wx.showToast({
+									 icon:'none',
+									 title:res.data.ertips
+								})
+							}
+							
+							 
+						},
+						fail() {
+							that.setData({
+								kg:1
+							})
+							wx.showToast({
+								 icon:'none',
+								 title:'操作失败'
+							})
+						},
+						complete() {
+							wx.hideLoading()
+						}
+					})
 					
 				} else if (res.cancel) {
 					console.log('用户点击取消')
 				}
 			}
 		})
+	
 	},
-	previewImage: function (e) {
-	  app.previewImage(e)
+	getdetails(id){
+		var that =this
+		const pageState1 = pageState.default(that)
+		pageState1.loading()    // 切换为loading状态
+		wx.request({
+			url:  app.IPurl+'/api/used_product/show',
+			data:{
+				"used_id":id
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'get',
+			success(res) {
+				console.log(res.data)
+				
+				
+				if(res.data.errcode==0){
+					
+					let rlist=res.data.retData
+					// if(rlist.length>0){
+					
+						that.setData({
+							dataxq:rlist
+						})
+					that.getpl()
+					pageState1.finish()    // 切换为finish状态
+				}else{
+					 wx.showToast({
+						 icon:'none',
+						 title:'操作失败'
+					})
+					pageState1.error()
+				}
+				
+			},
+			fail() {
+				 wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				 })
+				 pageState1.error()    // 切换为error状态
+			}
+		})
 	},
+	getpl(type){
+		var that =this
+		
+		if(type==1){
+			that.data.page=1
+			that.data.dataxqpl=[]
+			that.setData({
+				page:that.data.page,
+				dataxqpl:that.data.dataxqpl
+			})
+		}
+		wx.request({
+			url:  app.IPurl+'/api/used_comment/index',
+			data:{
+				"used_id":that.data.sqid,
+				'page':that.data.page
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'get',
+			success(res) {
+				console.log(res.data)
+				
+				
+				if(res.data.errcode==0){
+					
+					let rlist=res.data.retData.data
+					var total =res.data.retData.total
+					if(rlist.length>0){
+						that.data.dataxqpl=that.data.dataxqpl.concat(rlist)
+						that.data.page++
+						that.setData({
+							page:that.data.page,
+							dataxqpl:rlist,
+							total:total
+						})
+					}else{
+						if(that.data.dataxqpl.length==0){
+							return
+						}
+						wx.showToast({
+							 icon:'none',
+							 title:'已经到底了'
+						})
+					}
+					
+				}else{
+					 wx.showToast({
+						 icon:'none',
+						 title:'操作失败'
+					})
+				}
+			},
+			fail() {
+				 wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				 })
+			}
+		})
+	},
+	previewImage(e){
+		app.previewImage(e)
+	},
+	onRetry(){
+		this.getdetails(this.data.id)
+	}
 })

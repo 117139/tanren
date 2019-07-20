@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/meishi/meishi",
     "pages/fabuzp/fabuzp",
     "pages/faxian/faxian",
     "pages/setyj/setyj", 
@@ -17,7 +18,6 @@
     "pages/fabues/fabues",
     "pages/fabu/fabu",
     "pages/details_ms/details_ms",
-    "pages/meishi/meishi",
     "pages/details/details",
     "pages/detailssq/detailssq",
     "pages/zhaopin/zhaopin",

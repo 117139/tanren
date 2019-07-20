@@ -32,8 +32,8 @@
 		</view>
   	<view class="marquee_box">
   		<view class="marquee_text dis_flex" style="{{orientation}}:{{marqueeDistance}}px;font-size: {{size}}px;">
-  			<view class="flex_1 oh1">{{text}}</view>
-				<view class="ml5">06月06日</view>
+  			<view class="flex_1 oh1">{{zdxx[0].content}}</view>
+				<view class="ml5">{{zdxx[0].create_time}}</view>
   		</view>
   	</view>
   </view>
@@ -47,19 +47,19 @@
   </view>
   <view wx:if="{{type==idx}}" wx:for="{{datalist}}" wx:for-index="idx" wx:for-item="item" wx:key="idx" class="w100 mb45">
 		<view wx:if="{{lists[type].length==0}}" class="tac fz36 c9 pt100">暂无数据</view>
-		<view bindtap="jump" data-url="/pages/detailssq/detailssq?id={{item1.id}}" class='tjone'
+		<view bindtap="jump" data-url="/pages/detailssq/detailssq?id={{item1.id}}" class='tjone w100'
 				wx:for="{{lists[idx]}}"
 				wx:for-index="idx1"
 				wx:for-item="item1"
 				wx:key="idx1">
 			<view class="w100 dis_flex ju_b aic mb20">
 				<view class="dis_flex aic">
-					<image class="headimg" src="/static/images/index_27.jpg"></image>
-					<text class="ml5 fz30">{{item1.user.account}}</text>
+					<image class="headimg" src="{{item1.user.head_img}}"></image>
+					<text class="ml5 fz30">{{item1.user.nickname}}</text>
 				</view>
 				<view class="c6 fz30">{{item1.create_time}}</view>
 			</view>
-			<view class="oh2 fz28 mb20">{{item.body}}</view>
+			<view class="oh2 fz28 mb20"><text wx:if="{{item1.sticky_status==0}}" class="zpzdicon">置顶</text>{{item1.body}}</view>
 			<view wx:if="{{item1.community_file.length>1}}" class="scrollbox mb30">
 				<scroll-view class="tjrimgbox" scroll-x style="width: 100%">
 					<image wx:for="{{item1.community_file}}"
@@ -83,19 +83,24 @@
 			<view class="dis_flex ju_b w100 aic">
 				<view class="dis_flex aic">
 					<image class="msgicon1" src="../../static/images/pl.png"></image>
-					<text class='fz24'>我在纽约</text>
+					<text class='fz24'>{{item1.region.name}}</text>
 				</view>
 				<view class="dis_flex aic">
 					<view class="dis_flex aic mr20" 
-					data-idx="{{item1.idx1}}"
-					data-id="{{item1.id}}"
-					 catchtap="dianzan">
-						<image class="msgicon1" src="../../static/images/zan.png"></image>
-						<text class='fz24'>56</text>
+						data-idx="{{idx}}"
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						catchtap="dianzan">
+						<text  class="iconfont icondianzan2 myicon mr10 fz30 {{item1.user_praise==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.praise}}</text>
 					</view>
-					<view class="dis_flex aic">
-						<image class="msgicon1" src="../../static/images/scicon.png"></image>
-						<text class='fz24'>56</text>
+					<view class="dis_flex aic"
+						data-idx="{{idx}}"
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						catchtap="shoucangff">
+						<text  class="iconfont iconstar myicon mr10 fz30 {{item1.user_collect==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.collect}}</text>
 					</view>
 				</view>
 			</view>

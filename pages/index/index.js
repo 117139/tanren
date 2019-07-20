@@ -25,7 +25,7 @@ Page({
     duration: 1000
   },
   onLoad: function () {
-		this.getdizhi()
+		// this.getdizhi()
 		this.gettime()
 		this.getbanner()
 		this.getshoplist(0)

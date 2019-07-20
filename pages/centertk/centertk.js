@@ -62,5 +62,10 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+	goindex(){
+		wx.switchTab({
+			url: '/pages/index/index'
+		})
+	}
 })

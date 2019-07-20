@@ -1,18 +1,24 @@
 // pages/detailssq/detailssq.js
+const app=getApp()
+var pageState = require('../../utils/pageState/index.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+		sqid:"",
+		page:1,
 		num:0,
-		zan:0,
+		zan:1,
+		shoucang:1,
 		show: false,
+		total:0,
 		fbtext:'',
 		
 		dataxq:{
-			img:[1,1,1]
 		},
+		dataxqpl:[],
 		tmpdata:{
 			fblen:0,
 			imgb:[]
@@ -24,6 +30,11 @@ Page({
    */
   onLoad: function (options) {
 		console.log(options.id)
+		this.setData({
+			sqid:options.id
+		})
+		this.getdetails(options.id)
+		
   },
 
   /**
@@ -65,7 +76,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+		this.getpl()
   },
 
   /**
@@ -91,9 +102,111 @@ Page({
 		})
 	},
 	dianzan(e){
+		var that =this
 		console.log(e.currentTarget.dataset.id)
-		this.setData({
-			zan:!this.data.zan
+		wx.request({
+			url:  app.IPurl+'/api/community/praise',
+			data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
+				'community_id':that.data.sqid
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+			
+				
+				if(res.data.errcode==0){
+					that.setData({
+						zan:!that.data.zan
+					})
+					if(that.data.zan==1){
+						that.data.dataxq.praise--
+					}else{
+						that.data.dataxq.praise++
+					}
+					that.setData({
+						dataxq:that.data.dataxq
+					})
+				}else{
+					
+					wx.showToast({
+						 icon:'none',
+						 title:res.data.ertips
+					})
+				}
+				 
+			},
+			fail() {
+				that.setData({
+					kg:1
+				})
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			},
+			complete() {
+				wx.hideLoading()
+			}
+		})
+		
+		
+	},
+	shoucangff(e){
+		var that =this
+		console.log(e.currentTarget.dataset.id)
+		wx.request({
+			url:  app.IPurl+'/api/community/collect',
+			data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
+				'community_id':that.data.sqid
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+			
+				
+				if(res.data.errcode==0){
+					that.setData({
+						shoucang:!that.data.shoucang
+					})
+					if(that.data.shoucang==1){
+						that.data.dataxq.collect--
+					}else{
+						that.data.dataxq.collect++
+					}
+					that.setData({
+						dataxq:that.data.dataxq
+					})
+				}else{
+					
+					wx.showToast({
+						 icon:'none',
+						 title:res.data.ertips
+					})
+				}
+				 
+			},
+			fail() {
+				that.setData({
+					kg:1
+				})
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			},
+			complete() {
+				wx.hideLoading()
+			}
 		})
 	},
 	onClose() {
@@ -143,11 +256,31 @@ Page({
 			sourceType: ['album', 'camera'],
 			success (res) {
 				// tempFilePath可以作为img标签的src属性显示图片
-				console.log(res)
+				// console.log(res)
 				const tempFilePaths = res.tempFilePaths
-				that.data.tmpdata.imgb.push(res.tempFilePaths[0])
-				that.setData({
-					tmpdata:that.data.tmpdata
+				///api/upload_image/upload
+				wx.uploadFile({
+					url: app.IPurl+'/api/upload_image/upload', //仅为示例，非真实的接口地址
+					filePath: tempFilePaths[0],
+					name: 'images',
+					formData: {
+						'module_name': 'used'
+					},
+					success (res){
+						console.log(res.data)
+						// console.log(res.data.errcode)
+						// console.log(res.data.errcode==0)
+						if(res.data!=0){
+							that.data.tmpdata.imgb.push(app.IPurl+res.data)
+							that.setData({
+								tmpdata:that.data.tmpdata
+							})
+							console.log(app.IPurl+res.data)
+						}
+						
+						//do something
+						
+					}
 				})
 			}
 		})
@@ -167,13 +300,193 @@ Page({
 			success (res) {
 				if (res.confirm) {
 					console.log('用户点击确定')
-					console.log(that.data.fbtext)
-					console.log(that.data.tmpdata.imgb)
+					that.setData({
+						kg:0
+					})
+					var imbox=that.data.tmpdata.imgb
+					imbox=imbox.join(',')
+					wx.showLoading({
+						title:'请稍后。。'
+					})
+					// 'Authorization':wx.getStorageSync('usermsg').user_token
+					wx.request({
+						url:  app.IPurl+'/api/community_comment/save',
+						data:{
+							"authorization":wx.getStorageSync('usermsg').user_token,
+							'community_id':that.data.sqid,
+							'body':that.data.fbtext,
+							'path':imbox,
+							'module_name':'community'
+						},
+						// header: {
+						// 	'content-type': 'application/x-www-form-urlencoded'
+						// },
+						dataType:'json',
+						method:'POST',
+						success(res) {
+							console.log(res.data)
+						
+							
+							if(res.data.errcode==0){
+								that.getpl(1)
+								wx.showToast({
+									 icon:'none',
+									 title:'发表成功'
+								})
+								setTimeout(function(){
+									that.onClose()
+									
+								},1000)
+								
+							}else{
+								that.setData({
+									kg:1
+								})
+								wx.showToast({
+									 icon:'none',
+									 title:res.data.ertips
+								})
+							}
+							
+							 
+						},
+						fail() {
+							that.setData({
+								kg:1
+							})
+							wx.showToast({
+								 icon:'none',
+								 title:'操作失败'
+							})
+						},
+						complete() {
+							wx.hideLoading()
+						}
+					})
 					
 				} else if (res.cancel) {
 					console.log('用户点击取消')
 				}
 			}
 		})
+	
+	},
+	getdetails(id){
+		var that =this
+		const pageState1 = pageState.default(that)
+		pageState1.loading()    // 切换为loading状态
+		wx.request({
+			url:  app.IPurl+'/api/community/show',
+			data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
+				"community_id":id
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'get',
+			success(res) {
+				console.log(res.data)
+				
+				
+				if(res.data.errcode==0){
+					
+					let rlist=res.data.retData
+					// if(rlist.length>0){
+					
+						that.setData({
+							dataxq:rlist,
+							zan:rlist.user_praise,
+							shoucang:rlist.user_collect
+						})
+					that.getpl()
+					pageState1.finish()    // 切换为finish状态
+				}else{
+					 wx.showToast({
+						 icon:'none',
+						 title:'操作失败'
+					})
+					pageState1.error()
+				}
+				
+			},
+			fail() {
+				 wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				 })
+				 pageState1.error()    // 切换为error状态
+			}
+		})
+	},
+	getpl(type){
+		var that =this
+		
+		if(type==1){
+			that.data.page=1
+			that.data.dataxqpl=[]
+			that.setData({
+				page:that.data.page,
+				dataxqpl:that.data.dataxqpl
+			})
+		}
+		wx.request({
+			url:  app.IPurl+'/api/community_comment/index',
+			data:{
+				"community_id":that.data.sqid,
+				'page':that.data.page
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'get',
+			success(res) {
+				console.log(res.data)
+				
+				
+				if(res.data.errcode==0){
+					
+					let rlist=res.data.retData.data
+					var total =res.data.retData.total
+					if(rlist.length>0){
+						that.data.dataxqpl=that.data.dataxqpl.concat(rlist)
+						that.data.page++
+						that.setData({
+							page:that.data.page,
+							dataxqpl:rlist,
+							total:total
+						})
+					}else{
+						if(that.data.dataxqpl.length==0){
+							return
+						}
+						wx.showToast({
+							 icon:'none',
+							 title:'已经到底了'
+						})
+					}
+					
+				}else{
+					 wx.showToast({
+						 icon:'none',
+						 title:'操作失败'
+					})
+				}
+			},
+			fail() {
+				 wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				 })
+			}
+		})
+	},
+	previewImage(e){
+		app.previewImage(e)
+	},
+	onRetry(){
+		this.getdetails(this.data.id)
 	}
 })

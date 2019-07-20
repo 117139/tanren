@@ -1,20 +1,21 @@
 // pages/details_ms/details_ms.js
+const app=getApp()
+var pageState = require('../../utils/pageState/index.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+		sqid:'',
 		num:0,
 		zan:0,
 		show: false,
 		fbtext:'',
 		
 		dataxq:{
-			list:[
-				1,{img:[1,2,3]},{img:[1]},1
-			]
 		},
+		dataxqpl:[],
 		tmpdata:{
 			fblen:0,
 			imgb:[],
@@ -29,6 +30,10 @@ Page({
    */
   onLoad: function (options) {
 		console.log(options.id)
+		this.getdetails(options.id)
+		this.setData({
+			sqid:options.id
+		})
   },
 
   /**
@@ -159,13 +164,6 @@ Page({
 	},
 	fabusub(){
 		var that =this
-		if(that.data.tmpdata.weidao==0||that.data.tmpdata.weishen==0||that.data.tmpdata.fuwu==0){
-			wx.showToast({
-				icon:"none",
-				title:"请结合您的体检进行打分"
-			})
-			return
-		}
 		if(that.data.fbtext==""){
 			wx.showToast({
 				icon:"none",
@@ -179,28 +177,197 @@ Page({
 			success (res) {
 				if (res.confirm) {
 					console.log('用户点击确定')
-					console.log(that.data.fbtext)
-					console.log(that.data.tmpdata.imgb)
+					that.setData({
+						kg:0
+					})
+					var imbox=that.data.tmpdata.imgb
+					imbox=imbox.join(',')
+					wx.showLoading({
+						title:'请稍后。。'
+					})
+					// 'Authorization':wx.getStorageSync('usermsg').user_token
+					wx.request({
+						url:  app.IPurl+'/index/dining/comment',
+						data:{
+							"authorization":wx.getStorageSync('usermsg').user_token,
+							'dining_id':that.data.sqid,
+							'comment_content':that.data.fbtext,
+							'comment_service':0,
+							'comment_hygiene':0,
+							'comment_taste':0,
+							'path':imbox,
+							'module_name':'community'
+						},
+						// header: {
+						// 	'content-type': 'application/x-www-form-urlencoded'
+						// },
+						dataType:'json',
+						method:'POST',
+						success(res) {
+							console.log(res.data)
+						
+							
+							if(res.data.errcode==0){
+								that.getpl(1)
+								wx.showToast({
+									 icon:'none',
+									 title:'发表成功'
+								})
+								setTimeout(function(){
+									that.onClose()
+									
+								},1000)
+								
+							}else{
+								that.setData({
+									kg:1
+								})
+								wx.showToast({
+									 icon:'none',
+									 title:res.data.ertips
+								})
+							}
+							
+							 
+						},
+						fail() {
+							that.setData({
+								kg:1
+							})
+							wx.showToast({
+								 icon:'none',
+								 title:'操作失败'
+							})
+						},
+						complete() {
+							wx.hideLoading()
+						}
+					})
 					
 				} else if (res.cancel) {
 					console.log('用户点击取消')
 				}
 			}
 		})
+	
 	},
-	/**   
-     * 预览图片  
-     */
-  previewImage: function (e) {
-    var current = e.target.dataset.src;
-		var arr1=[]
-		arr1.push(current)
-		console.log(arr1);
-    wx.previewImage({
-      current: current, // 当前显示图片的http链接  
-      urls: arr1 // 需要预览的图片http链接列表  
-    })
-  },
+	getdetails(id){
+		var that =this
+		const pageState1 = pageState.default(that)
+		pageState1.loading()    // 切换为loading状态
+		wx.request({
+			url:  app.IPurl+'/index/dining/details',
+			data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
+				"dining_id":id
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'post',
+			success(res) {
+				console.log(res.data)
+				
+				
+				if(res.data.errCode==0){
+					
+					let rlist=res.data.retData
+					// if(rlist.length>0){
+					
+						that.setData({
+							dataxq:rlist,
+							dataxqpl:rlist[0].user_comment.data
+						})
+					// that.getpl()
+					pageState1.finish()    // 切换为finish状态
+				}else{
+					 wx.showToast({
+						 icon:'none',
+						 title:'操作失败'
+					})
+					pageState1.error()
+				}
+				
+			},
+			fail() {
+				 wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				 })
+				 pageState1.error()    // 切换为error状态
+			}
+		})
+	},
+	getpl(type){
+		var that =this
+		
+		if(type==1){
+			that.data.page=1
+			that.data.dataxqpl=[]
+			that.setData({
+				page:that.data.page,
+				dataxqpl:that.data.dataxqpl
+			})
+		}
+		wx.request({
+			url:  app.IPurl+'/api/community_comment/index',
+			data:{
+				"community_id":that.data.sqid,
+				'page':that.data.page
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'get',
+			success(res) {
+				console.log(res.data)
+				
+				
+				if(res.data.errcode==0){
+					
+					let rlist=res.data.retData.data
+					var total =res.data.retData.total
+					if(rlist.length>0){
+						that.data.dataxqpl=that.data.dataxqpl.concat(rlist)
+						that.data.page++
+						that.setData({
+							page:that.data.page,
+							dataxqpl:rlist,
+							total:total
+						})
+					}else{
+						if(that.data.dataxqpl.length==0){
+							return
+						}
+						wx.showToast({
+							 icon:'none',
+							 title:'已经到底了'
+						})
+					}
+					
+				}else{
+					 wx.showToast({
+						 icon:'none',
+						 title:'操作失败'
+					})
+				}
+			},
+			fail() {
+				 wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				 })
+			}
+		})
+	},
+	previewImage(e){
+		app.previewImage(e)
+	},
+	onRetry(){
+		this.getdetails(this.data.sqid)
+	},
 	pingfen(e){
 		var that=this
 		var type = e.currentTarget.dataset.type

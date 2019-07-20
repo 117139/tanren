@@ -110,8 +110,9 @@ Page({
   		lists:that.data.lists
   	})
   	wx.request({
-  		url:  app.IPurl2+'/api/used_product/index',
+  		url:  app.IPurl+'/api/used_product/index',
   		data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
   			"page":that.data.pages[that.data.type],
   			"region_id":that.data.datalist[that.data.type].region_id,
   			"search":e.detail.value.sr
@@ -214,6 +215,7 @@ Page({
   	wx.request({
   		url:  app.IPurl+'/api/used_product/index',
   		data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
   			"page":that.data.pages[that.data.type],
   			"region_id":that.data.datalist[that.data.type].region_id,
   			"search":that.data.search
@@ -265,14 +267,7 @@ Page({
      * 预览图片  
      */
   previewImage: function (e) {
-    var current = e.target.dataset.src;
-		var arr1=[]
-		arr1.push(current)
-		console.log(arr1);
-    wx.previewImage({
-      current: current, // 当前显示图片的http链接  
-      urls: arr1 // 需要预览的图片http链接列表  
-    })
+    app.previewImage(e)
   },
 	call(e){
 		console.log(e.currentTarget.dataset.tel)
@@ -322,6 +317,8 @@ Page({
 				})
 			}
 		})
+	},
+	onRetry(){
+		this.getquyu()
 	}
-	
 })

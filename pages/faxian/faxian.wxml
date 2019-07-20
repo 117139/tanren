@@ -23,7 +23,7 @@
 						<view class="cadadad fz20 mb10">优惠说明</view>
 						<view class="cadadad fz20 mb10 oh2">{{item.description}}</view>
 					</view>
-					<text class="iconfont iconyiguoqi" style="font-size: 200rpx;"></text>
+					<text wx:if="{{item.expire==1}}" class="iconfont iconyiguoqi" style="font-size: 200rpx;"></text>
 				</view>
 				<view class="boxsiz pt20">
 					<view class="dis_flex aic pt20">
@@ -36,7 +36,7 @@
 					</view>
 					<view class="dis_flex aic pt20">
 						<image class="yhicon" src="../../static/images/bjicon.png"></image>
-						<text class="c6 fz20 oh1">活动时间{{item.activity_time}}</text>
+						<text class="c6 fz20 oh1">活动时间{{item.activity_create_time+'-'+item.activity_end_time}}</text>
 					</view>
 				</view>
 				
