@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-			userwxmsg:'',
+			userwxmsg:wx.getStorageSync('userWxmsg'),
 			userxcxmsg:wx.getStorageSync('usermsg'),
 			day:0
   },
@@ -16,9 +16,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-		this.setData({
-			userwxmsg:app.globalData.userInfo
-		})
+// 		this.setData({
+// 			userwxmsg:app.globalData.userInfo
+// 		})
 		console.log(Date.now())
 		var daytime=util.getDay(Date.now(),wx.getStorageSync('usermsg').login_time)
 		this.setData({
