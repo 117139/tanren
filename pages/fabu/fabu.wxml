@@ -1,5 +1,6 @@
 <!--pages/fabu/fabu.wxml-->
 <import src="/pages/component/zhiding/zhiding.wxml" />
+<wxs src="../../utils/filter.wxs" module="filter" />
 <view class="container">
 		<view class="textareabox">
 			<textarea bindinput="bint" class="ttaa" name="" maxlength="550" id="" cols="30" rows="10"></textarea>
@@ -25,7 +26,7 @@
 					 wx:key="idx"
 					 data-idx="{{idx}}"
 					 bindtap="imgdel">
-				<image  src="{{item}}" data-src="{{item}}"
+				<image  src="{{filter.imgIP(item)}}" data-src="{{filter.imgIP(item)}}"
 					 mode="aspectFill"></image>
 			</view>
 			

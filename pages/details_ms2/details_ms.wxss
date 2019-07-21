@@ -1,0 +1,4 @@
+/* pages/details_ms/details_ms.wxss */
+.w300r{
+	width: 300rpx;
+}

@@ -24,7 +24,7 @@
 	<view class="w100 mb45">
 		<view class="tac mb40">// 美食推荐 //</view>
 		<view class="w100 dis_flex ju_b">
-			<view bindtap="jump" 
+			<view wx:if="{{idx<4}}" bindtap="jump" 
 				data-url="/pages/details_ms/details_ms?id={{item.dining_id}}" 
 				class="msone"
 				wx:for="{{mstj}}"
@@ -32,14 +32,14 @@
 				wx:for-item="item"
 				wx:key="idx">
 				<image class="mb10 brs20" src="{{filter.imgIP(item.dining_logo)}}"></image>
-				<view class="fz28 oh1">{{item.dining_name}}</view>
+				<view class="fz28 oh1 tac">{{item.dining_name}}</view>
 				<view class="dis_flex xingji">
 					<text wx class="iconfont ce22829 {{item.dining_all>0?'iconstar':'iconwujiaoxing'}}" style="font-size: 24rpx;"></text>
 					<text wx class="iconfont ce22829 {{item.dining_all>1?'iconstar':'iconwujiaoxing'}}" style="font-size: 24rpx;"></text>
 					<text wx class="iconfont ce22829 {{item.dining_all>2?'iconstar':'iconwujiaoxing'}}" style="font-size: 24rpx;"></text>
 					<text wx class="iconfont ce22829 {{item.dining_all>3?'iconstar':'iconwujiaoxing'}}" style="font-size: 24rpx;"></text>
-					<text class="iconfont ce22829 {{item1.dining_all>4?'iconstar':'iconwujiaoxing'}}" style="font-size: 24rpx;"></text>
-					<text class="ml5">{{item.dining_all}}</text>
+					<text class="iconfont ce22829 {{item.dining_all>4?'iconstar':'iconwujiaoxing'}}" style="font-size: 24rpx;"></text>
+					<text >{{filter.pingjia(item.dining_all)}}</text><!-- class="ml5" -->
 				</view>
 			</view>
 		</view>
@@ -79,7 +79,7 @@
 							<text wx class="iconfont ce22829 fz24 {{item1.dining_all>2?'iconstar':'iconwujiaoxing'}}"></text>
 							<text wx class="iconfont ce22829 fz24 {{item1.dining_all>3?'iconstar':'iconwujiaoxing'}}"></text>
 							<text class="iconfont ce22829 fz24 {{item1.dining_all>4?'iconstar':'iconwujiaoxing'}}"></text>
-							<text class="ml5">{{item1.dining_all}}</text>
+							<text class="ml5">{{filter.pingjia(item1.dining_all)}}</text>
 						</view>
 					</view>
 				</view>

@@ -1,6 +1,7 @@
 <!--pages/jiudian/jiudian.wxml-->
 <import src="/utils/pageState/index.wxml" />
 <template is="pageState" data="{{...pageState}}" />
+<wxs src="../../utils/filter.wxs" module="filter" />
 <view class="container">
 	<!-- <form class="topform" bindsubmit="formSubmit">
 		<view class="ssbox mb30">
@@ -16,90 +17,70 @@
 	 duration="{{duration}}" indicator-active-color='#fff' circular='true'>
 		<block wx:for="{{bannerimg}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
 			<swiper-item>
-				<image src="{{item}}" class="slide-image" />
+				<image lazy-load='true' src="{{filter.imgIP(item.turns_img)}}" class="slide-image" />
 			</swiper-item>
 		</block>
 	</swiper>
 	<view class="w100 mb45">
 		<view class="tac mb40">// 品质优选 //</view>
 		<view class="w100 dis_flex ju_b">
-			<navigator url="/pages/details_ms/details_ms" class="msone">
-				<image class="mb10" src="/static/images/index_27.jpg"></image>
-				<view class="fz28 oh1">沃森酒店</view>
+			<view wx:if="{{idx<4}}" bindtap="jump" 
+				data-url="/pages/details_ms2/details_ms?type=jiudian&id={{item.hotel_id}}" 
+				class="msone"
+				wx:for="{{mstj}}"
+				wx:for-index="idx"
+				wx:for-item="item"
+				wx:key="idx">
+				<image class="mb10 brs20" src="{{filter.imgIP(item.hotel_logo)}}"></image>
+				<view class="fz28 oh1 tac">{{item.hotel_name}}</view>
 				<view class="dis_flex xingji">
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<text class="ml5">4.9</text>
+					<text wx class="iconfont ce22829 {{item.hotel_all>0?'iconstar':'iconwujiaoxing'}}" style="font-size: 22rpx;"></text>
+					<text wx class="iconfont ce22829 {{item.hotel_all>1?'iconstar':'iconwujiaoxing'}}" style="font-size: 22rpx;"></text>
+					<text wx class="iconfont ce22829 {{item.hotel_all>2?'iconstar':'iconwujiaoxing'}}" style="font-size: 22rpx;"></text>
+					<text wx class="iconfont ce22829 {{item.hotel_all>3?'iconstar':'iconwujiaoxing'}}" style="font-size: 22rpx;"></text>
+					<text class="iconfont ce22829 {{item.hotel_all>4?'iconstar':'iconwujiaoxing'}}" style="font-size: 22rpx;"></text>
+					<text class="ml5">{{filter.pingjia(item.hotel_all)}}</text>
 				</view>
-			</navigator>
-			<navigator url="/pages/details_ms/details_ms" class="msone" class="msone">
-				<image class="mb10" src="/static/images/index_29.jpg"></image>
-				<view class=" fz28 oh1">奎恩酒店</view>
-				<view class="dis_flex xingji">
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<text class="ml5">4.9</text>
-				</view>
-			</navigator>
-			<navigator url="/pages/details_ms/details_ms" class="msone" class="msone">
-				<image class="mb10" src="/static/images/index_32.jpg"></image>
-				<view class="fz28 oh1">宾夕法尼亚ssss</view>
-				<view class="dis_flex xingji">
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<text class="ml5">4.9</text>
-				</view>
-			</navigator>
-			<navigator url="/pages/details_ms/details_ms" class="msone" class="msone">
-				<image class="mb10" src="/static/images/index_34.jpg"></image>
-				<view class=" fz28 oh1">文化东方酒店</view>
-				<view class="dis_flex xingji">
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<image class="wjx" src="/static/images/index_40.jpg"></image>
-					<text class="ml5">4.9</text>
-				</view>
-			</navigator>
+			</view>
+			
 		</view>
 	</view>
 	<view class='dis_flex ju_a w100 mb40'>
 		<block wx:for="{{datalist}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
-			<view class="{{type==idx?'typecur':''}}" data-type="{{idx}}" bindtap='bindcur'>{{item.name}}</view>
+			<view class="{{type==idx?'typecur':''}}" data-type="{{idx}}" bindtap='bindcur'>{{item.region_name}}</view>
 		</block>
 	</view>
 	<block wx:for="{{datalist}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
 		<view wx:if="{{type==idx}}" class="w100 mb45">
-			<view class='tjone dis_flex' wx:for="{{item.list}}" wx:for-index="idx1" wx:for-item="item1" wx:key="idx1">
-				<image class='wh200 mr20' src="/static/images/index_27.jpg"></image>
+			<view wx:if="{{lists[type].length==0}}" class="tac fz36 c9 pt100">暂无数据</view>
+			<view class='tjone dis_flex' 
+				wx:for="{{lists[type]}}"
+				wx:for-index="idx1"
+				wx:for-item="item1"
+				wx:key="idx1"
+				catchtap="jump"
+				data-url="/pages/details_ms2/details_ms?type=jiudian&id={{item1.hotel_id}}">
+				<image class='wh200 mr20' src="{{filter.imgIP(item1.hotel_logo)}}"></image>
 				<view class="flex_1">
-					<navigator class="oh1 fz32 mb20 lh40" url="/pages/details_ms/details_ms?id={{type}}">纽约法拉盛温馨旅馆{{type}}</navigator>
-					<navigator class="oh1 fz28 mb20 lh40 c9" url="/pages/details_ms/details_ms?id={{type}}">212 Grend Si new york NY 10013</navigator>
+					<view class="oh1 fz32 mb20 lh40">{{item1.hotel_name}}</view>
+					<view class="oh1 fz28 mb20 lh40 c9">{{item1.hotel_address}}</view>
 					<view class="dis_flex flex_ww mb10">
-						<view class="biaoqian">24小时热水</view>
-						<view class="biaoqian">房间干净</view>
+						<view wx:for="{{item1.hotel_label}}"
+							wx:for-index="idx2"
+							wx:for-item="item2"
+							wx:key="idx2" class="biaoqian mr10">{{item2}}</view>
 					</view>
 					<view class="dis_flex w100 aic mb20 ju_b">
-						<view class="dis_flex aic" data-tel="1111" bindtap="call">
-							<text class="iconfont icondianhua mr10 fz30 c169fff"></text> <text class="fz30 c525155">909-939-6699</text>
+						<view class="dis_flex aic" data-tel="{{item1.hotel_phone}}" bindtap="call">
+							<text class="iconfont icondianhua mr10 fz30 c169fff"></text> <text class="fz30 c525155">{{item1.hotel_phone}}</text>
 						</view>
 						<view class="dis_flex xingji">
-							<image class="wjx" src="/static/images/index_40.jpg"></image>
-							<image class="wjx" src="/static/images/index_40.jpg"></image>
-							<image class="wjx" src="/static/images/index_40.jpg"></image>
-							<image class="wjx" src="/static/images/index_40.jpg"></image>
-							<image class="wjx" src="/static/images/index_40.jpg"></image>
-							<text class="ml5">4.9</text>
+							<text wx class="iconfont ce22829 fz24 {{item1.hotel_all>0?'iconstar':'iconwujiaoxing'}}"></text>
+							<text wx class="iconfont ce22829 fz24 {{item1.hotel_all>1?'iconstar':'iconwujiaoxing'}}"></text>
+							<text wx class="iconfont ce22829 fz24 {{item1.hotel_all>2?'iconstar':'iconwujiaoxing'}}"></text>
+							<text wx class="iconfont ce22829 fz24 {{item1.hotel_all>3?'iconstar':'iconwujiaoxing'}}"></text>
+							<text class="iconfont ce22829 fz24 {{item1.hotel_all>4?'iconstar':'iconwujiaoxing'}}"></text>
+							<text class="ml5">{{filter.pingjia(item1.hotel_all)}}</text>
 						</view>
 					</view>
 				</view>

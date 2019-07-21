@@ -3,36 +3,36 @@
 <import src="/utils/pageState/index.wxml" />
 <template is="pageState" data="{{...pageState}}" />
 <wxs src="../../utils/filter.wxs" module="filter" />
-<import src="/pages/component/fabu2/fabu2.wxml" />
+<import src="/pages/component/fabu2jc/fabu2.wxml" />
 <view class="container pb50">
 	<view class='mb60 dis_flex w100'>
-		<image class='wh200 mr20' src="{{filter.imgIP(dataxq.dining_logo)}}"></image>
+		<image class='wh200 mr20' src="{{filter.imgIP(dataxq.taxi_logo)}}"></image>
 		<view class="flex_1">
-			<view class="oh1 fz32 mb20 lh40 fwb">{{dataxq.dining_name}} </view>
-			<view class="oh1 fz28 mb20 lh40 c9">营业时间： {{dataxq.dining_time}}</view>
+			<view class="oh1 fz32 mb20 lh40 fwb">{{dataxq.taxi_name}} </view>
+			<view class="oh1 fz28 mb20 lh40 c9">营业时间：{{ dataxq.taxi_time}}</view>
 			<view class="dis_flex w100 aic mb20 ju_b">
 				<view class="dis_flex xingji">
-					<text wx class="iconfont ce22829 fz24 {{dataxq.dining_all>0?'iconstar':'iconwujiaoxing'}}"></text>
-					<text wx class="iconfont ce22829 fz24 {{dataxq.dining_all>1?'iconstar':'iconwujiaoxing'}}"></text>
-					<text wx class="iconfont ce22829 fz24 {{dataxq.dining_all>2?'iconstar':'iconwujiaoxing'}}"></text>
-					<text wx class="iconfont ce22829 fz24 {{dataxq.dining_all>3?'iconstar':'iconwujiaoxing'}}"></text>
-					<text class="iconfont ce22829 fz24 {{dataxq.dining_all>4?'iconstar':'iconwujiaoxing'}}"></text>
-					<text class="ml5">{{filter.pingjia(dataxq.dining_all)}}</text>
+					<text wx class="iconfont ce22829 fz24 {{dataxq.taxi_all>0?'iconstar':'iconwujiaoxing'}}"></text>
+					<text wx class="iconfont ce22829 fz24 {{dataxq.taxi_all>1?'iconstar':'iconwujiaoxing'}}"></text>
+					<text wx class="iconfont ce22829 fz24 {{dataxq.taxi_all>2?'iconstar':'iconwujiaoxing'}}"></text>
+					<text wx class="iconfont ce22829 fz24 {{dataxq.taxi_all>3?'iconstar':'iconwujiaoxing'}}"></text>
+					<text class="iconfont ce22829 fz24 {{dataxq.taxi_all>4?'iconstar':'iconwujiaoxing'}}"></text>
+					<text class="ml5">{{filter.pingjia(dataxq.taxi_all)}}</text>
 				</view>
 			</view>
 		</view>
 	</view>
 	<view class="fz36 fwb w100 mb20">店铺介绍</view>
-	<view class="fz32 lh50 mb40 w100">{{dataxq.dining_content}}</view>
+	<view class="fz32 lh50 mb40 w100">{{dataxq.taxi_content}}</view>
 	
 	<view class="fz36 fwb w100 mb20">电话</view>
-	<view class="fz32  mb40 w100">{{[dataxq.dining_phone]}}</view>
+	<view class="fz32  mb40 w100">{{[dataxq.taxi_phone]}}</view>
 	
 	<view class="fz36 fwb w100 mb20">地址</view>
-	<view class="fz32  mb40 w100">{{[dataxq.dining_address]}}</view>
+	<view class="fz32  mb40 w100">{{[dataxq.taxi_address]}}</view>
 	
 	<view class="fz36 fwb w100 mb20">营业时间</view>
-	<view class="fz32  mb40 w100">{{dataxq.dining_day}}{{ dataxq.dining_time}}</view>
+	<view class="fz32  mb40 w100">{{dataxq.taxi_day}}{{ dataxq.taxi_time}}</view>
 	<view class="fz36 fwb w100 mb20">店铺实景</view>
 	<view class="scrollbox mb30">
 		<scroll-view class="tjrimgbox" scroll-x style="width: 100%">
@@ -40,8 +40,8 @@
 				wx:for-index="idx1"
 				wx:for-item="item1"
 				wx:key="idx1" mode="aspectFill" class="tjrimg" bindtap="previewImage" 
-	data-src="{{filter.imgIP(dataxq.dining_logo)}}" 
-	src="{{filter.imgIP(dataxq.dining_logo)}}"></image>
+	data-src="{{filter.imgIP(dataxq.taxi_logo)}}" 
+	src="{{filter.imgIP(dataxq.taxi_logo)}}"></image>
 			
 		</scroll-view>
 	</view>
@@ -51,29 +51,29 @@
 		用户评价
 	</view>
 	<view class="zongpj mb50 dis_flex aic ju_a">
-		<view class="ce22829 fz42 fwb">{{filter.pingjia(dataxq.dining_all)}}</view>
+		<view class="ce22829 fz42 fwb">{{filter.pingjia(dataxq.taxi_all)}}</view>
 		<view class="tac">
 			<view class="c525155 fz26">综合评分</view>
 			<view class="dis_flex xingji">
-				<text wx class="iconfont ce22829 fz24 {{dataxq.dining_all>0?'iconstar':'iconwujiaoxing'}}"></text>
-				<text wx class="iconfont ce22829 fz24 {{dataxq.dining_all>1?'iconstar':'iconwujiaoxing'}}"></text>
-				<text wx class="iconfont ce22829 fz24 {{dataxq.dining_all>2?'iconstar':'iconwujiaoxing'}}"></text>
-				<text wx class="iconfont ce22829 fz24 {{dataxq.dining_all>3?'iconstar':'iconwujiaoxing'}}"></text>
-				<text class="iconfont ce22829 fz24 {{dataxq.dining_all>4?'iconstar':'iconwujiaoxing'}}"></text>
+				<text wx class="iconfont ce22829 fz24 {{dataxq.taxi_all>0?'iconstar':'iconwujiaoxing'}}"></text>
+				<text wx class="iconfont ce22829 fz24 {{dataxq.taxi_all>1?'iconstar':'iconwujiaoxing'}}"></text>
+				<text wx class="iconfont ce22829 fz24 {{dataxq.taxi_all>2?'iconstar':'iconwujiaoxing'}}"></text>
+				<text wx class="iconfont ce22829 fz24 {{dataxq.taxi_all>3?'iconstar':'iconwujiaoxing'}}"></text>
+				<text class="iconfont ce22829 fz24 {{dataxq.taxi_all>4?'iconstar':'iconwujiaoxing'}}"></text>
 				
 			</view>
 		</view>
 		<view class="shuxian"></view>
 		<view>
-			<view class="fz26 c3 tac">{{filter.pingjia(dataxq.dining_taste)}}</view>
-			<view class="fz26 c9">味道</view>
+			<view class="fz26 c3 tac">{{filter.pingjia(dataxq.taxi_speed)}}</view>
+			<view class="fz26 c9">速度</view>
 		</view>
 		<view>
-			<view class="fz26 c3  tac">{{filter.pingjia(dataxq.dining_hygiene)}}</view>
-			<view class="fz26 c9">卫生</view>
+			<view class="fz26 c3  tac">{{filter.pingjia(dataxq.taxi_quality)}}</view>
+			<view class="fz26 c9">车辆</view>
 		</view>
 		<view>
-			<view class="fz26 c3 tac">{{filter.pingjia(dataxq.dining_service)}}</view>
+			<view class="fz26 c3 tac">{{filter.pingjia(dataxq.taxi_service)}}</view>
 			<view class="fz26 c9">服务</view>
 		</view>
 	</view>
@@ -131,7 +131,7 @@
 		</view>
 	</view>
 	<van-popup show="{{ show }}" position="bottom" bind:close="onClose">
-		<template is="fabu2" data="{{tmpdata}}" />
+		<template is="fabu2jc" data="{{tmpdata}}" />
 	</van-popup>
 	
 </view> 

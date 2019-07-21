@@ -256,8 +256,9 @@ Page({
 			sourceType: ['album', 'camera'],
 			success (res) {
 				// tempFilePath可以作为img标签的src属性显示图片
-				// console.log(res)
+				console.log(res)
 				const tempFilePaths = res.tempFilePaths
+				
 				///api/upload_image/upload
 				wx.uploadFile({
 					url: app.IPurl+'/api/upload_image/upload', //仅为示例，非真实的接口地址
@@ -268,18 +269,20 @@ Page({
 					},
 					success (res){
 						console.log(res.data)
-						// console.log(res.data.errcode)
-						// console.log(res.data.errcode==0)
-						if(res.data!=0){
-							that.data.tmpdata.imgb.push(app.IPurl+res.data)
+						var ndata=JSON.parse(res.data)
+						console.log(ndata)
+						console.log(ndata.errcode==0)
+						if(ndata.errcode==0){
+							that.data.tmpdata.imgb.push(ndata.retData[0])
 							that.setData({
 								tmpdata:that.data.tmpdata
 							})
-							console.log(app.IPurl+res.data)
+						}else{
+							wx.showToast({
+								icon:"none",
+								title:"上传失败"
+							})
 						}
-						
-						//do something
-						
 					}
 				})
 			}
@@ -397,6 +400,7 @@ Page({
 					
 						that.setData({
 							dataxq:rlist,
+							total:rlist.review,
 							zan:rlist.user_praise,
 							shoucang:rlist.user_collect
 						})

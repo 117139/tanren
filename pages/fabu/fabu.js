@@ -171,15 +171,16 @@ Page({
 						console.log(ndata)
 						console.log(ndata.errcode==0)
 						if(ndata.errcode==0){
-							that.data.tmpdata.imgb.push(app.IPurl+ndata.retData.path)
+							that.data.tmpdata.imgb.push(ndata.retData[0])
 							that.setData({
 								tmpdata:that.data.tmpdata
 							})
-							console.log(app.IPurl+res.data.retData.path)
+						}else{
+							wx.showToast({
+								icon:"none",
+								title:"上传失败"
+							})
 						}
-						
-						//do something
-						
 					}
 				})
 			}
@@ -292,6 +293,8 @@ Page({
 					}else{
 						dztime=that.data.tmpdata.zhiding[that.data.tmpdata.zhidingcur].id
 					}
+					var imbox=that.data.tmpdata.imgb
+					imbox=imbox.join(',')
 					wx.request({
 						url:  app.IPurl+'/api/community/save',
 						data:{
@@ -299,7 +302,7 @@ Page({
 							'topic_id':that.data.hangyelb.id,
 							'body':that.data.fbtext,
 							'sticky_id':dztime,
-							'path':'',
+							'path':imbox,
 							'module_name':'community'
 						},
 						// header: {

@@ -7,6 +7,8 @@ var pageState = require('../../utils/pageState/index.js')
 const util = require('../../utils/util.js')
 Page({
   data: {
+		page:1,
+		search:'',
 		ak:"HHnGRVsuG6aDpQQQveZnpOE14sk1ZyLd", //填写申请到的ak  
     markers: [],  
     longitude:'',   //经度  
@@ -19,6 +21,8 @@ Page({
       '/static/images/banner_03.jpg',
       '/static/images/banner_03.jpg',
     ],
+		tuijian:[],
+		lists:[],
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
@@ -28,6 +32,7 @@ Page({
 		// this.getdizhi()
 		this.gettime()
 		this.getbanner()
+		this.gettuijian()
 		this.getshoplist(0)
   },
   /**
@@ -35,31 +40,18 @@ Page({
   */
   onReachBottom: function () {
     console.log(1)
+		this.getshoplist()
   },
 	//获取首页list（搜索）
 	getshoplist(type){
-		// console.log(pageState)
-		const pageState1 = pageState.default(this)
-	  pageState1.loading()    // 切换为loading状态
-		pageState1.finish()
-		return
-		let that = this
-		if(type){
-			let remove=[]
-			that.setData({
-				pageindex:1,
-				sp:remove
-			})
-		}
+		let that = this	
 		wx.request({
-			url:  app.IPurl1+'shoplist',
+			url:  app.IPurl+'/api/community/index',
 			data:{
-				key:app.jkkey,
-				tokenstr:wx.getStorageSync('tokenstr'),
-				pageindex:that.data.pageindex,
-				pagesize:that.data.pagesize,
-				goods_category_id: 0,            //(分类) 
-				keyword:that.data.keyword      //(搜索关键字)
+				"authorization":wx.getStorageSync('usermsg').user_token,
+				'recommend':1,
+				'search':that.data.search,
+				'page':that.data.page
 			},
 			header: {
 				'content-type': 'application/x-www-form-urlencoded' 
@@ -67,29 +59,34 @@ Page({
 			dataType:'json',
 			method:'POST',
 			success(res) {
-				// console.log(res.data.list)
-				let rlist=res.data.list
+				console.log(res.data)
 				
-				if(res.data.error==0){
-					
+				
+				if(res.data.errcode==0){
+					let rlist=res.data.retData.data
+					console.log(rlist)
 					if(rlist.length>0){
+						that.data.page++
+						that.data.lists=that.data.lists.concat(rlist)
+						that.setData({
+							page:that.data.page,
+							lists:that.data.lists
+						})
 						
-						
-						
+					}else{
+						wx.showToast({
+							 icon:'none',
+							 title:'已经到底了'
+						})
 					}
-					if(rlist.length<10){
-						console.log('没了')
-						// that.setData({
-						// 	more:false
-						// })
-					}
-					 pageState1.finish()    // 切换为finish状态
+					
 				}
-				
-				  // pageState1.error()    // 切换为error状态
 			},
 			fail() {
-				 pageState1.error()    // 切换为error状态
+				wx.showToast({
+					 icon:'none',
+					 title:'获取信息失败'
+				})
 			}
 		})
 	},
@@ -162,6 +159,9 @@ Page({
 	getbanner(){
 		//192.168.129.119/index/turns/index
 		let that = this
+		const pageState1 = pageState.default(that)
+		pageState1.loading()    // 切换为loading状态
+		
 		wx.request({
 			url:  app.IPurl+'/index/turns/index',
 			data:{
@@ -182,6 +182,47 @@ Page({
 						that.setData({
 							bannerimg:rlist
 						})
+				 pageState1.finish()    // 切换为finish状态
+				}else{
+					wx.showToast({
+						 icon:'none',
+						 title:'操作失败'
+					})
+					 pageState1.error() 
+				}
+			
+			},
+			fail() {
+				 pageState1.error() 
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			}
+		})
+	},
+	gettuijian(){
+		let that = this
+		wx.request({
+			url:  app.IPurl+'index/dining/homeelect',
+			data:{
+				"turns_class":0,
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+				
+				
+				if(res.data.errCode==0){
+					let rlist=res.data.retData
+					
+						that.setData({
+							tuijian:rlist
+						})
 				
 				}else{
 					wx.showToast({
@@ -198,5 +239,124 @@ Page({
 				})
 			}
 		})
+	},
+	dianzan(e){
+		var that =this
+		console.log(e.currentTarget.dataset.id)
+		var idx1=e.currentTarget.dataset.idx1
+		wx.request({
+			url:  app.IPurl+'/api/community/praise',
+			data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
+				'community_id':e.currentTarget.dataset.id
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+			
+				
+				if(res.data.errcode==0){
+					that.data.lists[idx1].user_praise = !that.data.lists[idx1].user_praise
+					that.setData({
+						lists:that.data.lists
+					})
+					if(that.data.lists[idx1].user_praise==1){
+						that.data.lists[idx1].praise--
+					}else{
+						that.data.lists[idx1].praise++
+					}
+					console.log(that.data.lists[idx1].user_praise)
+					console.log(that.data.lists[idx1].praise)
+					that.setData({
+						lists:that.data.lists
+					})
+				}else{
+					
+					wx.showToast({
+						 icon:'none',
+						 title:res.data.ertips
+					})
+				}
+				 
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			},
+			complete() {
+				wx.hideLoading()
+			}
+		})
+		
+		
+	},
+	shoucangff(e){
+		var that =this
+		console.log(e.currentTarget.dataset.id)
+		var idx1=e.currentTarget.dataset.idx1
+		wx.request({
+			url:  app.IPurl+'/api/community/collect',
+			data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
+				'community_id':e.currentTarget.dataset.id
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+			
+				
+				if(res.data.errcode==0){
+					that.data.lists[idx1].user_collect = !that.data.lists[idx1].user_collect
+					that.setData({
+						lists:that.data.lists
+					})
+					if(that.data.lists[idx1].user_collect==1){
+						that.data.lists[idx1].collect--
+					}else{
+						that.data.lists[idx1].collect++
+					}
+					console.log(that.data.lists[idx1].user_collect)
+					console.log(that.data.lists[idx1].collect)
+					that.setData({
+						lists:that.data.lists
+					})
+				}else{
+					
+					wx.showToast({
+						 icon:'none',
+						 title:res.data.ertips
+					})
+				}
+				 
+			},
+			fail() {
+				that.setData({
+					kg:1
+				})
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			},
+			complete() {
+				wx.hideLoading()
+			}
+		})
+		
+		
+	},
+	
+	onRetry(){
+		this.onload()
 	}
 })

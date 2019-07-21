@@ -118,5 +118,126 @@ Page({
 			}
 		})
 	},
-	
+  dianzan(e) {
+    var that = this
+    console.log(e.currentTarget.dataset.id)
+    var idx = e.currentTarget.dataset.idx
+    var idx1 = e.currentTarget.dataset.idx1
+    wx.request({
+      url: app.IPurl + '/api/community/praise',
+      data: {
+        "authorization": wx.getStorageSync('usermsg').user_token,
+        'community_id': e.currentTarget.dataset.id
+      },
+      // header: {
+      // 	'content-type': 'application/x-www-form-urlencoded'
+      // },
+      dataType: 'json',
+      method: 'POST',
+      success(res) {
+        console.log(res.data)
+
+
+        if (res.data.errcode == 0) {
+          that.data.lists[idx1].user_praise = !that.data.lists[idx1].user_praise
+          that.setData({
+            lists: that.data.lists
+          })
+          if (that.data.lists[idx1].user_praise == 1) {
+            that.data.lists[idx1].praise--
+          } else {
+            that.data.lists[idx1].praise++
+          }
+          console.log(that.data.lists[idx1].user_praise)
+          console.log(that.data.lists[idx1].praise)
+          that.setData({
+            lists: that.data.lists
+          })
+        } else {
+
+          wx.showToast({
+            icon: 'none',
+            title: res.data.ertips
+          })
+        }
+
+      },
+      fail() {
+        that.setData({
+          kg: 1
+        })
+        wx.showToast({
+          icon: 'none',
+          title: '操作失败'
+        })
+      },
+      complete() {
+        wx.hideLoading()
+      }
+    })
+
+
+  },
+  shoucangff(e) {
+    var that = this
+    console.log(e.currentTarget.dataset.id)
+    var idx1 = e.currentTarget.dataset.idx1
+    wx.request({
+      url: app.IPurl + '/api/community/collect',
+      data: {
+        "authorization": wx.getStorageSync('usermsg').user_token,
+        'community_id': e.currentTarget.dataset.id
+      },
+      // header: {
+      // 	'content-type': 'application/x-www-form-urlencoded'
+      // },
+      dataType: 'json',
+      method: 'POST',
+      success(res) {
+        console.log(res.data)
+
+
+        if (res.data.errcode == 0) {
+          that.data.lists[idx1].user_collect = !that.data.lists[idx1].user_collect
+          that.setData({
+            lists: that.data.lists
+          })
+          if (that.data.lists[idx1].user_collect == 1) {
+            that.data.lists[idx1].collect--
+          } else {
+            that.data.lists[idx1].collect++
+          }
+          console.log(that.data.lists[idx1].user_collect)
+          console.log(that.data.lists[idx1].collect)
+          that.setData({
+            lists: that.data.lists
+          })
+        } else {
+
+          wx.showToast({
+            icon: 'none',
+            title: res.data.ertips
+          })
+        }
+
+      },
+      fail() {
+        that.setData({
+          kg: 1
+        })
+        wx.showToast({
+          icon: 'none',
+          title: '操作失败'
+        })
+      },
+      complete() {
+        wx.hideLoading()
+      }
+    })
+
+
+  },
+	jump(e){
+    app.jump(e)
+  }
 })

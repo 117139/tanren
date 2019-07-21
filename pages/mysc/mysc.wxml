@@ -28,7 +28,7 @@
 					src="{{filter.imgIP(item2.path)}}"></image>
 			</scroll-view>
 		</view>
-		<image  wx:if="{{item.community_file.length==1}}" 
+		<image  wx:if="{{item1.community_file.length==1}}" 
 			class='tjrvideo mb20' 
 			mode="aspectFill" 
 			catchtap="previewImage" 
@@ -37,7 +37,7 @@
 		<view class="dis_flex ju_b w100 aic">
 			<view class="dis_flex aic">
 				<image class="msgicon1" src="../../static/images/pl.png"></image>
-				<text class='fz24'>{{item1.region.name}}</text>
+				<text class='fz24'>{{item1.topic.name}}</text>
 			</view>
 			<view class="dis_flex aic">
 				<view class="dis_flex aic mr20" 

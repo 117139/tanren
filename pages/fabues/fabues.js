@@ -168,18 +168,20 @@ Page({
 					},
 					success (res){
 						console.log(res.data)
-						console.log(res.data.errcode)
-						console.log(res.data.errcode==0)
-						if(res.data.errcode==0){
-							that.data.tmpdata.imgb.push(app.IPurl+res.data.retData.path)
+						var ndata=JSON.parse(res.data)
+						console.log(ndata)
+						console.log(ndata.errcode==0)
+						if(ndata.errcode==0){
+							that.data.tmpdata.imgb.push(ndata.retData[0])
 							that.setData({
 								tmpdata:that.data.tmpdata
 							})
-							console.log(app.IPurl+res.data.retData.path)
+						}else{
+							wx.showToast({
+								icon:"none",
+								title:"上传失败"
+							})
 						}
-						
-						//do something
-						
 					}
 				})
 			}
@@ -270,6 +272,8 @@ Page({
 					}else{
 						dztime=that.data.tmpdata.zhiding[that.data.tmpdata.zhidingcur].id
 					}
+					var imbox=that.data.tmpdata.imgb
+					imbox=imbox.join(',')
 					// 'Authorization':wx.getStorageSync('usermsg').user_token
 					wx.request({
 						url:  app.IPurl+'/api/used_product/save',
@@ -280,7 +284,7 @@ Page({
 							'price':that.data.userpri,
 							'phone':that.data.usertel,
 							'sticky_id':dztime,
-							'path':'',
+							'path':imbox,
 							'module_name':'used'
 						},
 						// header: {

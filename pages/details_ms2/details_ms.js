@@ -220,15 +220,15 @@ Page({
 					})
 					// 'Authorization':wx.getStorageSync('usermsg').user_token
 					wx.request({
-						url:  app.IPurl+'/index/dining/comment',
+						url:  app.IPurl+'/index/hotel/comment',
 						data:{
 							"authorization":wx.getStorageSync('usermsg').user_token,
 							"id":wx.getStorageSync('usermsg').id,
-							'dining_id':that.data.sqid,
+							'hotel_id':that.data.sqid,
 							'comment_content':that.data.fbtext,
 							'comment_service':that.data.tmpdata.fuwu,   //服务评分
 							'comment_hygiene':that.data.tmpdata.weishen,   //卫生评分
-							'comment_taste':that.data.tmpdata.weidao,     //味道评分
+							'comment_ambient':that.data.tmpdata.weidao,     //味道评分 环境
 							'path':imbox,
 							'module_name':'community'
 						},
@@ -293,10 +293,10 @@ Page({
 		const pageState1 = pageState.default(that)
 		pageState1.loading()    // 切换为loading状态
 		wx.request({
-			url:  app.IPurl+'/index/dining/details',
+			url:  app.IPurl+'/index/hotel/index',
 			data:{
 				"authorization":wx.getStorageSync('usermsg').user_token,
-				"dining_id":id
+				"hotel_id":id
 			},
 			// header: {
 			// 	'content-type': 'application/x-www-form-urlencoded'
@@ -315,7 +315,7 @@ Page({
 							that.data.page++
 						}
 						that.setData({
-              dataxq: rlist.dining[0],
+              dataxq: rlist.hotel[0],
 							dataxqpl:rlist.user_comment.data,
 							page:that.data.page
 						})
@@ -353,7 +353,7 @@ Page({
 		wx.request({
 			url:  app.IPurl+'/index/dining/selectcomm',
 			data:{
-				'model_type':0,
+				'model_type':2,   //(0->查美食 1->查叫车 2->查酒店),
 				"model_id":that.data.sqid,
 				'page':that.data.page
 			},
