@@ -3,19 +3,19 @@
 <view class="container">
 	<view class="fabutit ">发表内容到</view>
 	<view class='tkbox dis_flex aic ju_b fz30 w100'>
-		<navigator url="/pages/fabu/fabu" class="tac">
+		<view bindtap="jump" data-url="/pages/fabu/fabu" class="tac">
 			<image class="fbicon" src="/static/images/sqdt.png"></image>
 			社区动态
-		</navigator>
-		<navigator url="/pages/fabuzp/fabuzp" class="tac">
+		</view>
+		<view bindtap="jump" data-url="/pages/fabuzp/fabuzp" class="tac">
 			<image class="fbicon" src="/static/images/zpqz.png"></image>
-			招聘求职</navigator>
-		<navigator url="/pages/fabufw/fabufw" class="tac">
+			招聘求职</view>
+		<view bindtap="jump" data-url="/pages/fabufw/fabufw" class="tac">
 			<image class="fbicon" src="/static/images/fwcz.png"></image>
-			房屋出租</navigator>
-		<navigator url="/pages/fabues/fabues" class="tac">
+			房屋出租</view>
+		<view bindtap="jump" data-url="/pages/fabues/fabues" class="tac">
 			<image class="fbicon"l src="/static/images/esmm.png"></image>
 			二手买卖
-		</navigator>
+		</view>
 	</view>
 </view>

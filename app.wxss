@@ -635,6 +635,16 @@
 	background-color: #fff;
 	box-shadow: 4rpx 4rpx 8rpx  rgba(0,0,0,0.5);
 }
+.fixedEdit1{
+	position: fixed;
+	bottom: 30rpx;
+	right: 350rpx;
+	width: 100rpx;
+	height: 100rpx;
+	border-radius: 50%;
+	background-color: #fff;
+	box-shadow: 4rpx 4rpx 8rpx  rgba(0,0,0,0.5);
+}
 .fixedshare{
 	position: fixed;
 	bottom: 30rpx;

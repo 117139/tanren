@@ -122,6 +122,9 @@
 		<view wx:if="{{idx2!=dataxq.img.length-1}}" class="heng2 mb40"></view>
 	</block>
 	<view class=" dis_flex aic ju_b">
+		<view class="fixedEdit1 dis_flex aic  ju_c" bindtap="showpp">
+			<text class="iconfont iconstar myicon mr10 fz50 ce22829" ></text>
+		</view>
 		<view class="fixedEdit dis_flex aic  ju_c" bindtap="showpp">
 			<text class="iconfont iconpinglun myicon mr10 fz50 ce22829" ></text>
 		</view>

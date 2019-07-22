@@ -1,35 +1,30 @@
 <!--pages/myjfsc/myjfsc.wxml-->
+<wxs src="../../utils/filter.wxs" module="filter" />
 <view class="container">
 	<view class="w100 dis_flex ju_b scbg aic">
 		<view>
-			<view class="ce22829 fz50 fwb mb10">106</view>
+			<view class="ce22829 fz50 fwb mb10">{{tmpdata.fraction.integral}}</view>
 			<view class="c9 fz24">当前可用积分</view>
 		</view>
-		<image class="tximg" src="/static/images/index_27.jpg"></image>
+		<image class="tximg" src="{{tmpdata.fraction.head_img}}"></image>
 	</view>
 	<view class="w100 ">
 		<view class="fwb c0 fz36 mt60">
 			积分兑换
 		</view>
-		<view class="dis_flex mylist1 bb1d0 aic ju_b">
+		<view class="dis_flex mylist1 bb1d0 aic ju_b"
+			wx:for="{{tmpdata.goods.data}}"
+			wx:for-index="idx"
+			wx:for-item="item"
+			wx:key="idx">
 			<view class="dis_flex aic">
-				<image class="tximg mr20" src="/static/images/index_27.jpg"></image>
+				<image class="tximg mr20" src="{{filter.imgIP(item.goods_img)}}" data-src="{{filter.imgIP(item.goods_img)}}" bindtap="previewImage"></image>
 				<view>
-					<view class="c0 fz32">日用牙膏</view>
-					<view class="c9 fz26">500积分</view>
+					<view class="c0 fz32">{{item.goods_name}}</view>
+					<view class="c9 fz26">{{item.goods_fraction}}积分</view>
 				</view>
 			</view>
-			<text class="jfcz">马上兑</text>
-		</view>
-		<view class="dis_flex mylist1 aic ju_b">
-			<view class="dis_flex aic">
-				<image class="tximg mr20" src="/static/images/index_27.jpg"></image>
-				<view>
-					<view class="c0 fz32">日用牙膏</view>
-					<view class="c9 fz26">500积分</view>
-				</view>
-			</view>
-			<text class="jfcz">马上兑</text>
+			<text class="jfcz" data-url="/pages/Order/Order?id={{item.goods_id}}" bindtap="jump">马上兑</text>
 		</view>
 	</view>
 </view>

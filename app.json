@@ -1,6 +1,9 @@
 {
   "pages": [
+    "pages/myjfsc/myjfsc",
+    "pages/Order/Order",
     "pages/index/index",
+    "pages/myjf/myjf",
     "pages/xitong/xitong",
     "pages/sharewe/sharewe",
     "pages/meishi/meishi",
@@ -14,8 +17,6 @@
     "pages/myaddress/myaddress",
     "pages/my/my",
     "pages/addAdd/addAdd",
-    "pages/myjfsc/myjfsc",
-    "pages/myjf/myjf",
     "pages/fabufw/fabufw",
     "pages/fabues/fabues",
     "pages/fabu/fabu",

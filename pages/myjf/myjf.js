@@ -1,19 +1,22 @@
 // pages/myjf/myjf.js
+const app=getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+		jifen:0,
 		show: false,
-		tmpdata:''
+		tmpdata:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+		this.getjf()
+		this.getrenwu()
   },
 
   /**
@@ -57,8 +60,89 @@ Page({
   onReachBottom: function () {
 
   },
-
-  /**
+	getjf(){
+		let that = this
+		wx.request({
+			url:  app.IPurl+'/index/personal/integral',
+			data:{
+				"id":wx.getStorageSync('usermsg').id
+				
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'get',
+			success(res) {
+				console.log(res.data)
+				
+				
+				if(res.data.errCode==0){
+					// let rlist=res.data.retData.data
+					that.setData({
+						jifen:res.data.retData
+					})
+							
+						
+					
+				}else{
+					wx.showToast({
+						 icon:'none',
+						 title:'没有更多数据了'
+					})
+				}
+			
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			}
+		})
+	},
+	getrenwu(){
+		let that = this
+		wx.request({
+			url:  app.IPurl+'/index/personal/select_task',
+			data:{
+				"id":wx.getStorageSync('usermsg').id
+				
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'post',
+			success(res) {
+				console.log(res.data)
+				
+				
+				if(res.data.errCode==0){
+					// let rlist=res.data.retData.data
+					that.setData({
+						tmpdata:res.data.retData
+					})
+							
+						
+					
+				}else{
+					wx.showToast({
+						 icon:'none',
+						 title:'没有更多数据了'
+					})
+				}
+			
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			}
+		})
+	},
+	/**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
@@ -67,7 +151,14 @@ Page({
 	onClose() {
 	  this.setData({ show: false });
 	},
-	showpp(){
-	  this.setData({ show: true });
+	onClose1() {
+	  this.setData({ show: false });
+	},
+	showpp(e){
+		console.log(e.currentTarget.dataset.mon)
+		this.setData({
+			show: true ,
+			money:e.currentTarget.dataset.mon
+		});
 	},
 })

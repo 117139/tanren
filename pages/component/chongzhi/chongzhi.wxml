@@ -2,20 +2,22 @@
 
 <template name="chongzhi">
 	<view class="container">
+		
+		<wxs src="../../../utils/filter.wxs" module="filter" />
 		<view class="fabutit ">积分充值</view>
 		<view class="bb1d0 w100 dis_flex ju_b aic mt40 pb50">
 			<view class="fz36 c0">需支付</view>
-			<view class="fz36 c0">10.00元</view>
+			<view class="fz36 c0">{{filter.moneyFormat(money)}}元</view>
 		</view>
 		<view class=" w100 dis_flex ju_b aic mt40">
 			<view class="dis_flex aic">
-				<text class="iconfont iconwchart me20" style="color: #2aac38;"></text>
-				微信零钱
+				<text class="iconfont iconwchart mr20 fz36" style="color: #2aac38;"></text>
+				<text class="fz32 c3">微信支付</text>
 			</view>
 			<text class="iconfont iconiconfontxuanzhong fz36 cf15a29"></text>
 
 		</view>
-		<view class="fabubtn mt60" bindtap="onClose">
+		<view class="fabubtn mt60" bindtap="onClose1">
 			确认支付
 		</view>
 	</view>

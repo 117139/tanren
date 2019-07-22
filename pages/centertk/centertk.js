@@ -1,4 +1,5 @@
 // pages/centertk/centertk.js
+const app=getApp()
 Page({
 
   /**
@@ -67,5 +68,8 @@ Page({
 		wx.switchTab({
 			url: '/pages/index/index'
 		})
+	},
+	jump(e){
+		app.jump(e)
 	}
 })

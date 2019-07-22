@@ -13,6 +13,10 @@ var imgIP=function(img){
 	return newimg
 }
 var moneyFormat = function (money) {
+	if(money===''){
+		return
+	}
+	money = money-1+1
   return money.toFixed(2);
 }
 var pingjia = function (pingjias) {

@@ -112,6 +112,97 @@ App({
 			url:e.currentTarget.dataset.url
 		})
 	},
+	//获取支付信息
+	Pay(order_info_id,type){
+		let that=this
+		let datas
+		if(type==='info'){
+			datas= {
+				op:'pay',
+				key:that.jkkey,
+				tokenstr:wx.getStorageSync('tokenstr'),
+				order_info_id: order_info_id
+			}
+		}
+		if(type==='no'){
+			datas= {
+				op:'pay',
+				key:that.jkkey,
+				tokenstr:wx.getStorageSync('tokenstr'),
+				partner_trade_no: order_info_id
+			}
+		}
+		console.log(JSON.stringify(datas))
+		wx.request({
+			url: that.IPurl1 + 'order',
+			data: datas,
+			header: {
+					'content-type': 'application/x-www-form-urlencoded' // 默认值
+			},
+			method: "POST",
+			success: function (res) {
+				console.log('194'+res.data);
+				if(res.data.error==0){
+					that.doWxPay(res);
+				}else{
+					
+				}
+				
+			},
+			fail: function (err) {
+				wx.showToast({
+						icon: "none",
+						title: '服务器异常，清稍候再试'
+				})
+			},
+		});
+	},
+	doWxPay(param) {
+		// wx.showToast({
+		// 	title:'doWxPay'
+		// })
+		//小程序发起微信支付
+		wx.requestPayment({
+			timeStamp: param.data.timeStamp,//记住，这边的timeStamp一定要是字符串类型的，不然会报错
+			nonceStr: param.data.nonceStr,//随机字符串
+			package: param.data.package,
+			signType: 'MD5',
+			paySign: param.data.paySign,
+			success: function (event) {
+				// success
+				console.log(event);
+				
+				// wx.redirectTo({
+				// 	url: '/pages/OrderList/OrderList?id=-2'
+				// })
+				wx.showToast({
+					title: '支付成功',
+					icon: 'none',
+					duration: 1000
+				});
+			},
+			fail: function (error) {
+				// fail
+				console.log("支付失败")
+				
+				// wx.redirectTo({
+				// 	url: '/pages/OrderList/OrderList?id=0'
+				// })
+				wx.showToast({
+					title: '支付失败',
+					icon: 'none',
+					duration: 1000
+				});
+				console.log(error)
+			},
+			complete: function () {
+				// complete
+				console.log("pay complete")
+			}
+		 
+		});
+	},
+	
 	getbanner(num){
 		//192.168.129.119/index/turns/index
 		let that = this

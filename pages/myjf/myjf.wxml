@@ -1,8 +1,9 @@
 <!--pages/myjf/myjf.wxml-->
 <import src="/pages/component/chongzhi/chongzhi.wxml" />
+<wxs src="../../utils/filter.wxs" module="filter" />
 <view class="container">
 	<view class="tac pt100 pb100">
-		<view class="ce22829 fz60 fwb mb20">106</view>
+		<view class="ce22829 fz60 fwb mb20">{{jifen.integral[0].integral}}</view>
 		<view class="c9 fz30">当前可用积分</view>
 	</view>
 	<view class="heng1"></view>
@@ -10,46 +11,45 @@
 		<view class="fwb c0 fz36 mt40">
 			积分充值
 		</view>
-		<view class="dis_flex mylist bb1d0">
+		<view class="dis_flex mylist bb1d0"
+			wx:for="{{jifen.date}}"
+			wx:for-index="idx"
+			wx:for-item="item"
+			wx:key="idx">
 			<text class="iconfont icondiamond myicon mr20" style="color: #F15A29;"></text>
-			<text class="flex_1">100</text>
-			<text class="jfcz" bindtap="showpp">10.00</text>
+			<text class="flex_1">{{item.integral_number}}</text>
+			<text class="jfcz" data-mon="{{item.rmb_number}}" bindtap="showpp">{{filter.moneyFormat(item.rmb_number)}}</text>
 		</view>
-		<view class="dis_flex mylist bb1d0">
-			<text class="iconfont icondiamond myicon mr20" style="color: #F15A29;"></text>
-			<text class="flex_1">300</text>
-			<text class="jfcz">30.00</text>
-		</view>
-		<view class="dis_flex mylist">
-			<text class="iconfont icondiamond myicon mr20" style="color: #F15A29;"></text>
-			<text class="flex_1">500</text>
-			<text class="jfcz">50.00</text>
-		</view>
+
 		<view class="fwb c0 fz36 mt60">
 			积分任务
 		</view>
 		<view class="dis_flex mylist bb1d0">
 			<text class="iconfont iconqiandao myicon mr20" style="color: #a57ac9;"></text>
 			<text class="flex_1">每日签到+3</text>
-			<text class="jfcz jfcz1">已完成</text>
+			<text wx:if="{{tmpdata.sign_type==2}}" class="jfcz">未完成</text>
+			<text wx:if="{{tmpdata.sign_type==0}}" class="jfcz jfcz1">已完成</text>
 		</view>
 		<view class="dis_flex mylist bb1d0">
 			<text class="iconfont icondiamond myicon mr20" style="color: #59b94e;"></text>
-			<text class="flex_1">发表动态</text>
-			<text class="jfcz">未完成</text>
+			<text class="flex_1">发表动态+5</text>
+			<text wx:if="{{tmpdata.publish==2}}" class="jfcz">未完成</text>
+			<text wx:if="{{tmpdata.publish==0}}" class="jfcz jfcz1">已完成</text>
 		</view>
 		<view class="dis_flex mylist bb1d0">
 			<text class="iconfont iconwujiaoxing myicon mr20" style="color: #ffa217;"></text>
-			<text class="flex_1">收藏内容</text>
-			<text class="jfcz">未完成</text>
+			<text class="flex_1">收藏内容+5</text>
+			<text wx:if="{{tmpdata.collect_type==2}}" class="jfcz">未完成</text>
+			<text wx:if="{{tmpdata.collect_type==0}}" class="jfcz jfcz1">已完成</text>
 		</view>
 		<view class="dis_flex mylist mb60">
 			<text class="iconfont iconfenxiang2 myicon mr20" style="color: #F15A29;"></text>
-			<text class="flex_1">分享内容</text>
-			<text class="jfcz">未完成</text>
+			<text class="flex_1">分享内容+5</text>
+			<text wx:if="{{tmpdata.share==2}}" class="jfcz">未完成</text>
+			<text wx:if="{{tmpdata.share==0}}" class="jfcz jfcz1">已完成</text>
 		</view>
 	</view>
 	<van-popup show="{{ show }}" position="bottom" bind:close="onClose">
-		<template is="chongzhi" data="{{tmpdata}}" />
+		<template is="chongzhi" data="{{money}}" />
 	</van-popup>
 </view>
