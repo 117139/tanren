@@ -1,4 +1,4 @@
-// pages/myset/myset.js
+// pages/sharewe/sharewe.js
 Page({
 
   /**
@@ -12,7 +12,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.hideShareMenu()
+
   },
 
   /**
@@ -60,22 +60,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function (res) {
-    if (res.from === 'button') {
-      console.log(res.target.dataset)
-    }
-    return {
-      title: '转发',
-      path: '/pages/index/index?sid=' + wx.getStorageSync('usermsg').id,
-      success: function (res) {
-        console.log('成功', res)
-      }
-    }
-  },
-	jump(e){
-		console.log(e.currentTarget.dataset.url)
-		wx.navigateTo({
-			url:e.currentTarget.dataset.url
-		})
-	}
+  onShareAppMessage: function () {
+
+  }
 })

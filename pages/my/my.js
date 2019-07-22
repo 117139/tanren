@@ -93,7 +93,7 @@ Page({
 			return
 		}
 		wx.request({
-			url:  app.IPurl2+'/index/personal/sign',
+			url:  app.IPurl+'/index/personal/sign',
 			data:{
 				id:wx.getStorageSync('usermsg').id
 			},
@@ -101,19 +101,19 @@ Page({
 			// 	'content-type': 'application/x-www-form-urlencoded'
 			// },
 			dataType:'json',
-			method:'get',
+			method:'post',
 			success(res) {
 				console.log(res.data)
 				
 				
-				if(res.data.errcode==0){
+				if(res.data.errCode==0){
 					
 					// if(rlist.length>0){
 						wx.showToast({
 							 icon:'none',
 							 title:'签到成功'
 						})
-					
+						app.dologin()
 					// }
 					
 				}else{

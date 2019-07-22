@@ -58,7 +58,7 @@
 				wx:for-index="idx"
 				wx:for-item="item"
 				wx:key="idx">
-				<image class="mb10" src="{{filter.imgIP(item.dining_logo)}}"></image>
+				<image class="mb10 brs20" src="{{filter.imgIP(item.dining_logo)}}"></image>
 				<view class="fz28 tac">{{item.dining_name}}</view>
 				<view class="dis_flex xingji">
 					<text wx class="iconfont ce22829 {{item.dining_all>0?'iconstar':'iconwujiaoxing'}}" style="font-size: 22rpx;"></text>
@@ -97,7 +97,7 @@
 						wx:for-item="item2"
 						wx:key="idx2" 
 						lazy-load="true" 
-						class="tjrimg" 
+						class="tjrimg brs20" 
 						mode="aspectFill" 
 						catchtap="previewImage" 
 						data-src="{{filter.imgIP(item2.path)}}" 

@@ -14,7 +14,9 @@
 	</view>
 	<view class="heng1"></view>
 	<view class="w100">
-		<view bindtap="jump" data-url="/pages/mysc/mysc" class="dis_flex mylist">
+		<!-- <view bindtap="jump" data-url="/pages/sharewe/sharewe" class="dis_flex mylist"> -->
+		<view class="dis_flex mylist positionr">
+      <button class="shareBtn positiona" open-type='share' data-id="{{id}}" data-type="{{idx1}}"></button>
 			<text class="iconfont iconfenxiang1 myicon mr20" style="color: #eabb26;"></text>
 			<text class="flex_1">分享我们</text>
 			<text class="iconfont iconnext myicon c9 myicon1"></text>

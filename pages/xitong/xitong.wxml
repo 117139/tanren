@@ -1,0 +1,11 @@
+<!--pages/xitong/xitong.wxml-->
+<view class="container pt30">
+	<view class="w100 p20 mb30 bgfff brs20"
+		wx:for="{{zdxx}}"
+		wx:for-index="idx"
+		wx:for-item="item"
+		wx:key="idx">
+		<view class="flex_1 fz36 c3">{{item.content}}</view>
+		<view class="c9 fz30 pl40 tar mt40">{{item.create_time}}</view>
+	</view>
+</view>

@@ -137,6 +137,9 @@
 .tac{
 	text-align: center;
 }
+.tar{
+	text-align: right;
+}
 .dis_flex{
   display: flex;
 }
@@ -279,8 +282,17 @@
 .pt10{
 	padding-top: 10rpx;
 }
+.pt30{
+	padding-top: 30rpx;
+}
+.p20{
+	padding: 20rpx;
+}
 .pt20{
 	padding-top: 20rpx;
+}
+.pb20{
+	padding-bottom: 20rpx;
 }
 .pl40{
 	padding-left: 40rpx;
@@ -307,6 +319,9 @@
 	content: '';
 	display: block;
 	clear: both;
+}
+.bgfff{
+	background-color: #fff;
 }
 .oh1 {
     overflow: hidden;
@@ -347,6 +362,15 @@
 }
 .lh50{
 	line-height: 50rpx;
+}
+.positionr{
+  position: relative;
+}
+.positiona{
+  position: absolute;
+}
+.positionf{
+  position: fixed;
 }
 /**/
 .ssbox{
@@ -434,7 +458,7 @@
 	display:inline-block;
 	width: 150rpx;
 	height: 150rpx;
-	border-radius: 8rpx;
+	border-radius: 15rpx;
 	margin-right: 20rpx;
 }
 .msgicon1{

@@ -1,0 +1,5 @@
+/* pages/xitong/xitong.wxss */
+.container{
+	min-height: 100vh;
+	background-color: #f2f2f2;
+}

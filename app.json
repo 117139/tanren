@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/xitong/xitong",
+    "pages/sharewe/sharewe",
     "pages/meishi/meishi",
     "pages/mysc/mysc",
     "pages/fabuzp/fabuzp",
