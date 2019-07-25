@@ -12,11 +12,11 @@
 			</view>
 			<view>
 				<view class="fwb fz42 ce22829">{{filter.pingjia(tmpdata.call)}}</view>
-				<view wx:if="tmpdata.call==5" class="fz24 ce22829 tac">超满意</view>
-				<view wx:if="tmpdata.call>=4&&tmpdata.call<5" class="fz24 ce22829 tac">满意</view>
-				<view wx:if="tmpdata.call>=3&&tmpdata.call<4" class="fz24 ce22829 tac">一般</view>
-				<view wx:if="tmpdata.call>=2&&tmpdata.call<3" class="fz24 ce22829 tac">不满意</view>
-				<view wx:if="tmpdata.call>=1&&tmpdata.call<2" class="fz24 ce22829 tac">很不满意</view>
+				<view wx:if="{{tmpdata.call==5}}" class="fz24 ce22829 tac">超满意</view>
+				<view wx:if="{{tmpdata.call>=4&&tmpdata.call<5}}" class="fz24 ce22829 tac">满意</view>
+				<view wx:if="{{tmpdata.call>=3&&tmpdata.call<4}}" class="fz24 ce22829 tac">一般</view>
+				<view wx:if="{{tmpdata.call>=2&&tmpdata.call<3}}" class="fz24 ce22829 tac">不满意</view>
+				<view wx:if="{{tmpdata.call>=1&&tmpdata.call<2}}" class="fz24 ce22829 tac">很不满意</view>
 			</view>
 		</view>
 		<view class="dis_flex w100 aic mb30">

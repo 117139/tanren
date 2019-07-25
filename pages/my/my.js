@@ -16,9 +16,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-// 		this.setData({
-// 			userwxmsg:app.globalData.userInfo
-// 		})
+		// this.setData({
+		// 	userwxmsg:app.globalData.userInfo
+		// })
 		console.log(Date.now())
 		var daytime=util.getDay(Date.now(),wx.getStorageSync('usermsg').login_time)
 		this.setData({
@@ -114,6 +114,12 @@ Page({
 							 title:'签到成功'
 						})
 						app.dologin()
+						setTimeout(function() {
+							that.setData({
+								userwxmsg:wx.getStorageSync('userWxmsg'),
+								userxcxmsg:wx.getStorageSync('usermsg'),
+							})
+						}, 500);
 					// }
 					
 				}else{

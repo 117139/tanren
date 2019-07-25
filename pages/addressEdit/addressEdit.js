@@ -4,10 +4,28 @@ const app = getApp()
 Page({
   data: {
     region: [],
-		moren:true
+		moren:false,
+		editaddress:{
+			name: "aaa", 
+			tel: "18300000000", 
+			address: "北京市北京市东城区", 
+			xxaddress: "街道街道街道", 
+			moren: "true"}
   },
-  onLoad: function () {
-    
+  onLoad: function (option) {
+    if(option.address){
+			console.log(option.address)
+		}
+		this.setData({
+			editaddress:JSON.parse(option.address)
+		})
+		this.data.region[0]=this.data.editaddress.province
+		this.data.region[1]=this.data.editaddress.city
+		this.data.region[2]=this.data.editaddress.county
+		this.setData({
+			region:this.data.region
+		})
+		console.log(this.data.region)
   },
 	//选择地区
 	bindRegionChange(e) {
@@ -25,7 +43,7 @@ Page({
   },
 	//提交表单
 	formSubmit(e) {
-		let that =this
+    let that =this
 		console.log('form发生了submit事件，携带数据为：', e.detail.value)
 		let formresult=e.detail.value
 		if (formresult.name=='') {
@@ -61,15 +79,16 @@ Page({
 			});
 			return false;
 		}
-	//http://water5100.800123456.top/WebService.asmx/useraddress
+
 		wx.request({
-			url:  app.IPurl+'/index/personal/address',
+			url:  app.IPurl+'/index/personal/address_edit',
 			data:  {
 					id:wx.getStorageSync('usermsg').id,
 					name:formresult.name, 
 					city:formresult.xxaddress,
-					phone:formresult.tel
-		    },
+					phone:formresult.tel,
+					'address_id':that.data.editaddress.address_id
+				},
 			// header: {
 			// 	'content-type': 'application/x-www-form-urlencoded' 
 			// },
@@ -77,7 +96,6 @@ Page({
 			method:'POST',
 			success(res) {
 				console.log(res.data)
-				
 				if(res.data.errCode==0){
 					wx.showToast({
 						title:'保存成功'
@@ -100,5 +118,6 @@ Page({
 				 })
 			}
 		})
-  },
+  }
+	
 })

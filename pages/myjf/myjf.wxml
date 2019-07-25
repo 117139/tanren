@@ -33,8 +33,8 @@
 		<view class="dis_flex mylist bb1d0">
 			<text class="iconfont icondiamond myicon mr20" style="color: #59b94e;"></text>
 			<text class="flex_1">发表动态+5</text>
-			<text wx:if="{{tmpdata.publish==2}}" class="jfcz">未完成</text>
-			<text wx:if="{{tmpdata.publish==0}}" class="jfcz jfcz1">已完成</text>
+			<text wx:if="{{tmpdata.publish_type==2}}" class="jfcz">未完成</text>
+			<text wx:if="{{tmpdata.publish_type==0}}" class="jfcz jfcz1">已完成</text>
 		</view>
 		<view class="dis_flex mylist bb1d0">
 			<text class="iconfont iconwujiaoxing myicon mr20" style="color: #ffa217;"></text>
@@ -45,8 +45,8 @@
 		<view class="dis_flex mylist mb60">
 			<text class="iconfont iconfenxiang2 myicon mr20" style="color: #F15A29;"></text>
 			<text class="flex_1">分享内容+5</text>
-			<text wx:if="{{tmpdata.share==2}}" class="jfcz">未完成</text>
-			<text wx:if="{{tmpdata.share==0}}" class="jfcz jfcz1">已完成</text>
+			<text wx:if="{{tmpdata.share_type==2}}" class="jfcz">未完成</text>
+			<text wx:if="{{tmpdata.share_type==0}}" class="jfcz jfcz1">已完成</text>
 		</view>
 	</view>
 	<van-popup show="{{ show }}" position="bottom" bind:close="onClose">

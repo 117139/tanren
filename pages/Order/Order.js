@@ -7,66 +7,14 @@ Page({
 		paykg:true,
   },
   onLoad: function (option) {
-    console.log(option)
+    console.log(option.id)
 		
 	
-		// this.getskuadd()  //获取时间地点
+		this.getorder(id)  //获取时间地点
 		
   },
 	onReady(){
 		
-	},
-	bindPickerChange(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      show0: e.detail.value
-    })
-  },
-	//address
-	bchange1(e){
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      show1: e.detail.value,
-			ztaddress:this.data.columns1[e.detail.value].id,
-			zttime:this.data.columns2[e.detail.value][0].id
-    })
-		// that.setData({
-		// 	ztaddress:that.data.columns1[0].id,
-		// 	zttime:that.data.columns2[0][0].id
-		// })
-  },
-	//time
-	bchange2(e){
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      show2: e.detail.value,
-			zttime:this.data.columns2[this.data.show1][e.detail.value].id
-    })
-  },
-	/*计算价格*/
-	countpri(){
-		let heji=0
-		let var2= this.data.goods_sele
-		// console.log(this.data.goods_sele)
-		// console.log(var2)
-		for (let i in var2) {
-			if(var2[i].xuan==true){
-				if(var2[i].laddermsgs){
-					
-						heji +=var2[i].laddermsgs.Totalpri*100
-
-				}else{
-					heji +=var2[i].num*(var2[i].pri*100)
-				}
-			}
-			
-			
-		}
-		console.log(heji)
-		heji=(heji/100).toFixed(2)
-		this.setData({
-			sum:heji
-		})
 	},
 	subbtn(){
 		
@@ -83,7 +31,6 @@ Page({
 				paykg:false
 			})
 		}
-		if(that.data.goods_sku_id!==''){
 			data={
 				op:'orderpub',
 				key:app.jkkey,
@@ -97,22 +44,9 @@ Page({
 				num:that.data.goodsnum,
 				goods_unit:that.data.goodsguige
 			}
-		}else{
-			let idg=that.data.idg.join(',')
-			console.log(idg)
-			// return
-			data={
-				op:'orderpub',
-				key:app.jkkey,
-				tokenstr:wx.getStorageSync('tokenstr'),
-				carids:idg,
-				logistics_self:0,											//自提
-				shop_store_house_id:that.data.ztaddress,
-				shop_delivery_time_id:that.data.zttime,
-			}
-		}
+		
 		wx.request({
-			url:  app.IPurl1+'order',
+			url:  app.IPurl+'order',
 			data:data,
 			header: {
 				'content-type': 'application/x-www-form-urlencoded' 
@@ -166,185 +100,18 @@ Page({
 		
 	},
 	goaddress(){
-		app.goaddress()
-	},
-	//单品
-	getGoodsDetails(id){
-		const pageState1 = pageState.default(this)
-		pageState1.loading()    // 切换为loading状态
-		let that = this
-		wx.request({
-			url:  app.IPurl1+'shopinfo',
-			data:{
-				key:app.jkkey,
-				tokenstr:wx.getStorageSync('tokenstr'),
-				goods_sku_id:id
-			},
-			header: {
-				'content-type': 'application/x-www-form-urlencoded' 
-			},
-			dataType:'json',
-			method:'POST',
-			success(res) {
-				// console.log(res.data)
-				
-				if(res.data.error==-2){
-					app.checktoken(res.data.error)
-					that.onLoad()
-				}
-				if(res.data.error==0){
-					let resultd=res.data
-					console.log(res.data)
-					that.data.goodslist.push(res.data)
-						that.setData({
-							goodslist:that.data.goodslist,
-						})
-						
-						let shopimg=resultd.data.goods_img.split(",")
-						// let guige=resultd.data.goods_unit.split(",")
-						// // that.data.spimg = that.data.spimg.concat(rlb)
-						console.log(shopimg[0])
-						that.data.spimg.push(shopimg[0])
-						that.setData({
-							spimg:that.data.spimg
-						})
-						let arra=[]
-						if(that.data.goodslist[0].goods_total_limit!=''){
-							
-							arra.push({
-								 xuan:true,
-								// pri:res.data.shopinfo_sku_price_list[dbggidx].goods_sku_info.internal_price,
-								num:that.data.goodsnum,
-								// order_cart_id:that.data.goodslist[0].order_cart.order_cart_id,
-								laddermsgs:that.ladderpri(0)
-							})
-						}else{
-							var dbggidx=that.data.dbggtype
-							console.log(dbggidx)
-							let ss=res.data.shopinfo_sku_price_list[dbggidx].goods_sku_info.internal_price * that.data.goodsnum
-							
-							let Totalpri=ss.toFixed(2)
-							
-							arra.push({
-								xuan:true,
-								pri:res.data.shopinfo_sku_price_list[dbggidx].goods_sku_info.internal_price,
-								num:that.data.goodsnum,
-								Totalpri:Totalpri
-							})
-						}
-						that.setData({
-							goods_sele:arra
-						})
-						that.countpri()
-				}
-				pageState1.finish()    // 切换为finish状态
-				  // pageState1.error()    // 切换为error状态
-			},
-			fail() {
-				 pageState1.error()    // 切换为error状态
-			}
-		})
-	},
-	//gwc
-	getGoodsDetailsgwc(id){
-		const pageState1 = pageState.default(this)
-		pageState1.loading()    // 切换为loading状态
-		let that = this
-		wx.request({
-			url:  app.IPurl1+'shopcar',
-			data:{
-				op:'list',
-				key:app.jkkey,
-				tokenstr:wx.getStorageSync('tokenstr')
-			},
-			header: {
-				'content-type': 'application/x-www-form-urlencoded' 
-			},
-			dataType:'json',
-			method:'POST',
-			success(res) {
-				// console.log(res.data)
-				
-				if(res.data.error==-2){
-					app.checktoken(res.data.error)
-					that.onLoad()
-				}
-				if(res.data.error==0){
-
-						let resultd=res.data.list
-						that.setData({
-							goodslist:resultd
-						})
-						let imgb=[]
-						for(let i in resultd){
-							// console.log(rlist[i].goods_img)
-							let rlb=resultd[i].order_cart.goods_img.split(",")
-							imgb.push(rlb[0])
-						}
-						that.data.spimg = that.data.spimg.concat(imgb)
-						that.setData({
-							spimg:that.data.spimg
-						})
-						//设置选中的数组
-						let arra=[]
-						for (let i=0;i<resultd.length;i++) {
-							let aa=resultd[i].order_cart
-							let showkg=false
-							for(let s in that.data.idg){
-								if(aa.order_cart_id==that.data.idg[s]){
-									showkg=true
-									break
-								}
-							}
-							if(resultd[i].order_cart.is_ladder_pricing==1){
-								
-								arra.push({
-									xuan:showkg,
-									pri:resultd[i].order_cart.internal_price,
-									num:resultd[i].order_cart.goods_count,
-									order_cart_id:resultd[i].order_cart.order_cart_id,
-									goods_sku_id:resultd[i].order_cart.goods_sku_id,
-									laddermsgs:that.ladderpri1(i)
-								})
-							}else{
-								
-								let ss=aa.internal_price * aa.goods_count
-								
-								let Totalpri=ss.toFixed(2)
-								
-								arra.push({
-									xuan:showkg,
-									pri:resultd[i].order_cart.internal_price,
-									num:resultd[i].order_cart.goods_count,
-									Totalpri:Totalpri,
-									goods_sku_id:resultd[i].order_cart.goods_sku_id,
-									order_cart_id:resultd[i].order_cart.order_cart_id
-								})
-							}
-						}
-						that.setData({
-							goods_sele:arra
-						})
-						that.ladderpri_gb()
-						that.countpri()
-				}
-				pageState1.finish()    // 切换为finish状态
-				  // pageState1.error()    // 切换为error状态
-			},
-			fail() {
-				 pageState1.error()    // 切换为error状态
-			}
+		wx.navigateTo({
+		  url: '/pages/myaddress/myaddress?id=' + id
 		})
 	},
 	//获取地点时间
-	getskuadd(){
-		//http://water5100.800123456.top/WebService.asmx/shop_store_house_list
+	getorder(id){
 		let that = this
 			wx.request({
-				url:  app.IPurl1+'shop_store_house_list',
+				url:  app.IPurl+'/index/personal/integral_shop',
 				data:{
-					key:app.jkkey,
-					tokenstr:wx.getStorageSync('tokenstr')
+					goods_id:id,
+					"id":wx.getStorageSync('usermsg').id
 				},
 				header: {
 					'content-type': 'application/x-www-form-urlencoded' 

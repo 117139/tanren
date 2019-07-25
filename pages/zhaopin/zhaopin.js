@@ -107,6 +107,68 @@ Page({
 			search:e.detail.value.sr
 		})
 	},
+	shoucangff(e){
+		var that =this
+		console.log(e.currentTarget.dataset.id)
+		var idx=e.currentTarget.dataset.idx
+		var idx1=e.currentTarget.dataset.idx1
+		wx.request({
+			url:  app.IPurl+'/api/community/collect',
+			data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
+				'module_id':e.currentTarget.dataset.id,
+				'module_type':3,
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+			
+				
+				if(res.data.errcode==0){
+					that.data.lists[idx][idx1].user_collect = !that.data.lists[idx][idx1].user_collect
+					that.setData({
+						lists:that.data.lists
+					})
+					if(that.data.lists[idx][idx1].user_collect==1){
+						that.data.lists[idx][idx1].collect--
+					}else{
+						that.data.lists[idx][idx1].collect++
+					}
+					console.log(that.data.lists[idx][idx1].user_collect)
+					console.log(that.data.lists[idx][idx1].collect)
+					that.setData({
+						lists:that.data.lists
+					})
+				}else{
+					
+					wx.showToast({
+						 icon:'none',
+						 title:res.data.ertips
+					})
+				}
+				 
+			},
+			fail() {
+				that.setData({
+					kg:1
+				})
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			},
+			complete() {
+				wx.hideLoading()
+			}
+		})
+		
+		
+	},
+	
 	formSubmit: function(e) {
 		let that =this
 		console.log('form发生了submit事件，携带数据为：', e.detail.value)

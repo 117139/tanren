@@ -21,36 +21,44 @@ Page({
     mridx:0
   },
   onLoad: function (option) {
-  
+		
   },
 	onShow(){
-		// this.getaddlist()
+		this.getaddlist(1)
 	},
 	selecmr(e){
 		let that =this
 		console.log(e.currentTarget.dataset.id)
 		let id=e.currentTarget.dataset.id
 		wx.request({
-			url:  app.IPurl1+'useraddress',
+			url:  app.IPurl+'/index/personal/update_defa',
 			data:  {
-					op:'moren',
-					key:app.jkkey,
-					tokenstr:wx.getStorageSync('tokenstr'),
-					user_member_shopping_address_id :id
+					'id':wx.getStorageSync('usermsg').id,
+					'address_id' :id,
+					'default_address' :0,
 		    },
-			header: {
-				'content-type': 'application/x-www-form-urlencoded' 
-			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded' 
+			// },
 			dataType:'json',
 			method:'POST',
 			success(res) {
 				console.log(res.data)
-				if(res.data.error==-2){
-					app.checktoken(res.data.error)
-				}
-				if(res.data.error==0){
+				
+				if(res.data.errCode==0){
 					that.getaddlist()
+				}else{
+					wx.showToast({
+						 icon:'none',
+						 title:'操作失败'
+					})
 				}
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
 			}
 		})
 	},
@@ -73,26 +81,33 @@ Page({
 				if (res.confirm) {
 					console.log('用户点击确定')
 					wx.request({
-						url:  app.IPurl1+'useraddress',
+						url:  app.IPurl+'/index/personal/address_del',
 						data:  {
-								op:'del',
-								key:app.jkkey,
-								tokenstr:wx.getStorageSync('tokenstr'),
-								user_member_shopping_address_id :id
+								'id':wx.getStorageSync('usermsg').id,
+								'address_id' :id
 					    },
-						header: {
-							'content-type': 'application/x-www-form-urlencoded' 
-						},
+						// header: {
+						// 	'content-type': 'application/x-www-form-urlencoded' 
+						// },
 						dataType:'json',
 						method:'POST',
 						success(res) {
 							console.log(res.data)
-							if(res.data.error==-2){
-								app.checktoken(res.data.error)
+							
+							if(res.data.errCode==0){
+								that.getaddlist()
+							}else{
+								wx.showToast({
+									 icon:'none',
+									 title:'操作失败'
+								})
 							}
-							if(res.data.error==0){
-								that.onLoad()
-							}
+						},
+						fail() {
+							wx.showToast({
+								 icon:'none',
+								 title:'操作失败'
+							})
 						}
 					})
 					
@@ -102,43 +117,49 @@ Page({
 			}
 		})
 	},
-	getaddlist(){
-		const pageState1 = pageState.default(this)
-		pageState1.loading()    // 切换为loading状态
+	getaddlist(type1){
+		
+		
 		let that =this
 		//http://water5100.800123456.top/WebService.asmx/useraddress
 		wx.request({
-			url:  app.IPurl1+'useraddress',
+			url:  app.IPurl+'/index/personal/address_select',
 			data:  {
-					op:'list',
-					key:app.jkkey,
-					tokenstr:wx.getStorageSync('tokenstr')
+					id:wx.getStorageSync('usermsg').id,
 				},
 			header: {
 				'content-type': 'application/x-www-form-urlencoded' 
 			},
 			dataType:'json',
-			method:'POST',
+			method:'get',
 			success(res) {
 				console.log(res.data)
-				if(res.data.error==-2){
-					app.checktoken(res.data.error)
-					that.onLoad()
-				}
-				if(res.data.error==0){
+				
+				if(res.data.errCode==0){
 					that.setData({
-						addresslist:res.data.list
+						addresslist:res.data.retData
+					})
+				}else{
+					wx.showToast({
+						 icon:'none',
+						 title:'操作失败'
 					})
 				}
-				pageState1.finish()    // 切换为finish状态
+				
+			
 					// pageState1.error()    // 切换为error状态
 			},
 			fail() {
-				 pageState1.error()    // 切换为error状态
+				
+				 
+				 wx.showToast({
+				 	 icon:'none',
+				 	 title:'操作失败'
+				 })
 			}
 		})
 	},
 	onRetry(){
-		this.onLoad()
+		this.getaddlist(1)
 	}
 })

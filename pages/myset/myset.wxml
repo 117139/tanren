@@ -26,7 +26,7 @@
 			<text class="flex_1">意见反馈</text>
 			<text class="iconfont iconnext myicon c9 myicon1"></text>
 		</view>
-		<view bindtap="jump" data-url="/pages/mysc/mysc" class="dis_flex mylist">
+		<view bindtap="jump" data-url="/pages/about/about" class="dis_flex mylist">
 			<!-- <text class="iconfont iconshezhi myicon mr20" style="color: #5d85dc;"></text> -->
 			<text class="iconfont iconguanyu myicon cf15a29 mr20"></text>
 			<text class="flex_1">关于我们</text>

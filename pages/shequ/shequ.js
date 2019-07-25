@@ -202,7 +202,8 @@ Page({
 			url:  app.IPurl+'/api/community/collect',
 			data:{
 				"authorization":wx.getStorageSync('usermsg').user_token,
-				'community_id':e.currentTarget.dataset.id
+				'module_id':e.currentTarget.dataset.id,
+				'module_type':4,
 			},
 			// header: {
 			// 	'content-type': 'application/x-www-form-urlencoded'

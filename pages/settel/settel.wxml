@@ -4,7 +4,7 @@
 		<view class="dis_flex aic pb100">
 			<view class="mr20">手机号</view>
 			<view class="intbox  flex_1">
-				<input class="ssint" type="text" placeholder="请输入手机号" name="sr"/>
+				<input class="ssint" type="text" placeholder="请输入手机号" name="tel"/>
 				
 				
 			</view>

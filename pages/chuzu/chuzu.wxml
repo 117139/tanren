@@ -46,10 +46,21 @@
 				</view>
 				<view class="dis_flex ju_b w100">
 					<text class="fz28 c9">发布时间{{item1.create_time}}</text>
-					<view class="share1">
-						<text class="iconfont iconfenxiang fz36 c9"></text>
-						<button class="shareBtn" open-type='share' data-supid="1" data-type="{{idx1}}"></button>
+					<view class="dis_flex">
+						<view class="dis_flex aic mr20"
+							data-idx="{{idx}}"
+							data-idx1="{{idx1}}"
+							data-id="{{item1.id}}"
+							catchtap="shoucangff">
+							<text  class="iconfont iconstar myicon mr10 fz30 {{item1.user_collect==1?'c9':'ce22829'}}"></text>
+							<text class='fz24'>{{item1.collect}}</text>
+						</view>
+						<view class="share1">
+							<text class="iconfont iconfenxiang fz36 c9"></text>
+							<button class="shareBtn" open-type='share' data-supid="1" data-type="{{idx1}}"></button>
+						</view>
 					</view>
+					
 				</view>
 
 				<view class="w100 dis_flex flex_ww">

@@ -426,6 +426,10 @@ Page({
 	},
 	
 	onRetry(){
-		this.onload()
+		this.getdizhi()
+		this.gettime()
+		this.getbanner()
+		this.gettuijian()
+		this.getshoplist(0)
 	}
 })

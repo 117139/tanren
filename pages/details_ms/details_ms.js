@@ -150,40 +150,102 @@ Page({
 	scpic(){
 		var that=this
 		wx.chooseImage({
-			count: 1,
+			count: 9,
 			sizeType: ['original', 'compressed'],
 			sourceType: ['album', 'camera'],
 			success (res) {
 				// tempFilePath可以作为img标签的src属性显示图片
 				console.log(res)
 				const tempFilePaths = res.tempFilePaths
-				
-				///api/upload_image/upload
-				wx.uploadFile({
-					url: app.IPurl+'/api/upload_image/upload', //仅为示例，非真实的接口地址
-					filePath: tempFilePaths[0],
-					name: 'images',
-					formData: {
-						'module_name': 'used'
-					},
-					success (res){
-						console.log(res.data)
-						var ndata=JSON.parse(res.data)
-						console.log(ndata)
-						console.log(ndata.errcode==0)
-						if(ndata.errcode==0){
-							that.data.tmpdata.imgb.push(ndata.retData[0])
-							that.setData({
-								tmpdata:that.data.tmpdata
-							})
-						}else{
-							wx.showToast({
-								icon:"none",
-								title:"上传失败"
-							})
-						}
+				for(var i=0;i<tempFilePaths.length;i++){
+					if(that.data.tmpdata.imgb.length==9){
+						wx.showToast({
+							icon:'none',
+							title:'最多可上传九张'
+						})
+						break;
 					}
+					wx.uploadFile({
+							url: app.IPurl+'/api/upload_image/upload', //仅为示例，非真实的接口地址
+							filePath: tempFilePaths[i],
+							name: 'images',
+							formData: {
+								'module_name': 'used'
+							},
+							success (res){
+								console.log(res.data)
+								var ndata=JSON.parse(res.data)
+								console.log(ndata)
+								console.log(ndata.errcode==0)
+								if(ndata.errcode==0){
+									that.data.tmpdata.imgb.push(ndata.retData[0])
+									that.setData({
+										tmpdata:that.data.tmpdata
+									})
+								}else{
+									wx.showToast({
+										icon:"none",
+										title:"上传失败"
+									})
+								}
+							}
+						})
+					
+				}
+			}
+		})
+	},
+	shoucangff(e){
+		var that =this
+		console.log(e.currentTarget.dataset.id)
+		wx.request({
+			url:  app.IPurl+'/api/community/collect',
+			data:{
+				"authorization":wx.getStorageSync('usermsg').user_token,
+				'module_id':that.data.sqid,
+				"module_type":5
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+			
+				
+				if(res.data.errcode==0){
+					that.setData({
+						shoucang:!that.data.shoucang
+					})
+					if(that.data.shoucang==1){
+						that.data.dataxq.collect--
+					}else{
+						that.data.dataxq.collect++
+					}
+					that.setData({
+						dataxq:that.data.dataxq
+					})
+				}else{
+					
+					wx.showToast({
+						 icon:'none',
+						 title:res.data.ertips
+					})
+				}
+				 
+			},
+			fail() {
+				that.setData({
+					kg:1
 				})
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			},
+			complete() {
+				wx.hideLoading()
 			}
 		})
 	},

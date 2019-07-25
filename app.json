@@ -1,8 +1,12 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/about/about",
+    "pages/my/my",
+    "pages/addressEdit/addressEdit",
+    "pages/myaddress/myaddress",
     "pages/myjfsc/myjfsc",
     "pages/Order/Order",
-    "pages/index/index",
     "pages/myjf/myjf",
     "pages/xitong/xitong",
     "pages/sharewe/sharewe",
@@ -14,8 +18,6 @@
     "pages/myset/myset",
     "pages/settel/settel",
     "pages/centertk/centertk",
-    "pages/myaddress/myaddress",
-    "pages/my/my",
     "pages/addAdd/addAdd",
     "pages/fabufw/fabufw",
     "pages/fabues/fabues",

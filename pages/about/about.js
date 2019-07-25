@@ -1,4 +1,4 @@
-// pages/setyj/setyj.js
+// pages/about/about.js
 const app=getApp()
 Page({
 
@@ -13,7 +13,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+		this.getabout()
   },
 
   /**
@@ -57,57 +57,54 @@ Page({
   onReachBottom: function () {
 
   },
-	formSubmit: function(e) {
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  },
+	getabout(){
+		
+		
 		let that =this
-		console.log('form发生了submit事件，携带数据为：', e.detail.value)
-		var fdata=e.detail.value
-		// that.setData({
-		// 	keyword:e.detail.value.sr
-		// })
-		// that.getshoplist(1)
-		///index/personal/idea
+		//http://water5100.800123456.top/WebService.asmx/useraddress
 		wx.request({
-			url:  app.IPurl+'/index/personal/idea',
+			url:  app.IPurl+'/index/personal/about',
 			data:  {
 					id:wx.getStorageSync('usermsg').id,
-					content:fdata.fankui
 				},
 			// header: {
 			// 	'content-type': 'application/x-www-form-urlencoded' 
 			// },
 			dataType:'json',
-			method:'POST',
+			method:'get',
 			success(res) {
 				console.log(res.data)
 				
 				if(res.data.errCode==0){
-					wx.showToast({
-						title:'提交成功'
+					that.setData({
+						addresslist:res.data.retData
 					})
-					setTimeout(function() {
-						wx.navigateBack()
-					}, 1000);
 				}else{
 					wx.showToast({
 						 icon:'none',
 						 title:'操作失败'
 					})
 				}
+				
+			
+					// pageState1.error()    // 切换为error状态
 			},
 			fail() {
-				 pageState1.error()    // 切换为error状态
+				
+				 
 				 wx.showToast({
-					 icon:'none',
-					 title:'操作失败'
+				 	 icon:'none',
+				 	 title:'操作失败'
 				 })
 			}
 		})
-		
 	},
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+	
 })

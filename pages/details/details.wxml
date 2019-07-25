@@ -68,8 +68,8 @@
 		<view class="dis_flex aic ju_c lxbtn" data-tel="{{dataxq.phone}}" bindtap="call">
 			<text class="iconfont icondianhua mr10 fz30 cfff"></text> <text class="fz30 cfff">联系卖主</text>
 		</view>
-		<view class="dis_flex aic mr20" data-id="{{dataxq.id}}" bindtap="dianzan">
-			<text  class="iconfont icondianzan2 myicon mr10 fz50 {{zan==0?'c9':'ce22829'}}"></text>
+		<view class="dis_flex aic mr20" data-id="{{dataxq.id}}" bindtap="shoucangff">
+			<text  class="iconfont iconstar myicon mr10 fz50 {{shoucang==0?'c9':'ce22829'}}"></text>
 			<text class='trbox'>{{dataxq.praise}}</text>
 		</view>
 		<view class="dis_flex aic mr20" data-id="{{dataxq.id}}" bindtap="showpp">

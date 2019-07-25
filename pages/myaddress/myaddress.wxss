@@ -6,6 +6,7 @@ page{
 	width: 100%;
 	background: #eeeeee;
 	padding-top: 17rpx;
+	padding-bottom: 150rpx;
 }
 .addressOne{
 	width: 100%;
