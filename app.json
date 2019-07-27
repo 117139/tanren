@@ -1,8 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/about/about",
+    "pages/mysc/mysc",
     "pages/my/my",
+    "pages/about/about",
     "pages/addressEdit/addressEdit",
     "pages/myaddress/myaddress",
     "pages/myjfsc/myjfsc",
@@ -11,7 +12,6 @@
     "pages/xitong/xitong",
     "pages/sharewe/sharewe",
     "pages/meishi/meishi",
-    "pages/mysc/mysc",
     "pages/fabuzp/fabuzp",
     "pages/faxian/faxian",
     "pages/setyj/setyj", 
@@ -81,5 +81,8 @@
 				"selectedIconPath": "/static/images/my1.png"
 			}
 		]
-	}
+	},
+	"usingComponents":{
+		"van-popup": "vendor/vant/lib/popup/index"
+	 }
 }

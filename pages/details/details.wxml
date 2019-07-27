@@ -69,8 +69,8 @@
 			<text class="iconfont icondianhua mr10 fz30 cfff"></text> <text class="fz30 cfff">联系卖主</text>
 		</view>
 		<view class="dis_flex aic mr20" data-id="{{dataxq.id}}" bindtap="shoucangff">
-			<text  class="iconfont iconstar myicon mr10 fz50 {{shoucang==0?'c9':'ce22829'}}"></text>
-			<text class='trbox'>{{dataxq.praise}}</text>
+			<text  class="iconfont iconstar myicon mr10 fz50 {{shoucang==1?'c9':'ce22829'}}"></text>
+			<text class='trbox'>{{dataxq.collect}}</text>
 		</view>
 		<view class="dis_flex aic mr20" data-id="{{dataxq.id}}" bindtap="showpp">
 			<text class="iconfont iconpinglun myicon mr10 fz50 c9" ></text>

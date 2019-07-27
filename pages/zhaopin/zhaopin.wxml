@@ -48,7 +48,7 @@
 				</view>
 
 				<view class="dis_flex ju_b w100">
-					<text class="fz28 c9">发布时间{{item1.update_time}}</text>
+					<text class="fz28 c9">发布时间{{item1.create_time}}</text>
 					<view class="dis_flex">
 						<view class="dis_flex aic mr20"
 							data-idx="{{idx}}"

@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+			phone:'',
 			userwxmsg:wx.getStorageSync('userWxmsg'),
 			userxcxmsg:wx.getStorageSync('usermsg'),
 			day:0
@@ -24,6 +25,7 @@ Page({
 		this.setData({
 			day:daytime
 		})
+		this.getkf()
   },
 
   /**
@@ -78,6 +80,51 @@ Page({
 		console.log(e.currentTarget.dataset.url)
 		wx.navigateTo({
 			url:e.currentTarget.dataset.url
+		})
+	},
+	call(e){
+		console.log(e.currentTarget.dataset.tel)
+		wx.makePhoneCall({
+			phoneNumber: e.currentTarget.dataset.tel //仅为示例，并非真实的电话号码
+		})
+	},
+	getkf(){
+		var that= this
+		wx.request({
+			url:  app.IPurl+'/api/customer_service/index',
+			data:{
+				id:wx.getStorageSync('usermsg').id
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'post',
+			success(res) {
+				console.log(res.data)
+				
+				
+				if(res.data.errcode==0){
+					
+					that.setData({
+						phone:res.data.retData.phone
+					})
+					
+				}else{
+					wx.showToast({
+						 icon:'none',
+						 title:'操作失败'
+					})
+				}
+				
+				 
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			}
 		})
 	},
 	qiandao(){

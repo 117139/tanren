@@ -11,6 +11,7 @@ Page({
 		sqid:'',
 		num:0,
 		zan:0,
+		shoucang:0,
 		show: false,
 		fbtext:'',
 		
@@ -377,6 +378,7 @@ Page({
 						}
 						that.setData({
               dataxq: rlist.taxi[0],
+							shoucang:rlist.taxi[0].collect,
 							dataxqpl:rlist.user_comment.data,
 							page:that.data.page
 						})

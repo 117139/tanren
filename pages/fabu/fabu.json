@@ -1,6 +1,4 @@
 {
-  "navigationBarTitleText": "发布社区动态",
-	"usingComponents":{
-		"van-popup": "../../miniprogram_npm/vant-weapp/popup/index"
-	 }
+  "navigationBarTitleText": "发布社区动态"
+	
 }

@@ -86,7 +86,7 @@ Page({
 				
 				if(res.data.errcode==0){
 					let rlist=res.data.retData.data
-					if(rlist.length>0){
+					if(res.data.retData.data&&rlist.length>0){
 						that.data.lists=that.data.lists.concat(rlist)
 						console.log(rlist)
 						that.data.page++
@@ -96,16 +96,12 @@ Page({
 						})
 						console.log(that.data.yhlist)
 					}else{
-						// if(that.data.search){
+					
 							wx.showToast({
 								 icon:'none',
 								 title:'没有更多数据了'
 							})
-						// }
-						// wx.showToast({
-						// 	 icon:'none',
-						// 	 title:'已经到底了'
-						// })
+				
 					}
 				}
 			
@@ -186,7 +182,9 @@ Page({
       url: app.IPurl + '/api/community/collect',
       data: {
         "authorization": wx.getStorageSync('usermsg').user_token,
-        'community_id': e.currentTarget.dataset.id
+        'module_id': e.currentTarget.dataset.id,
+        'module_type': e.currentTarget.dataset.type,
+				
       },
       // header: {
       // 	'content-type': 'application/x-www-form-urlencoded'
@@ -239,5 +237,11 @@ Page({
   },
 	jump(e){
     app.jump(e)
-  }
+  },
+	call(e){
+		console.log(e.currentTarget.dataset.tel)
+		wx.makePhoneCall({
+			phoneNumber: e.currentTarget.dataset.tel //仅为示例，并非真实的电话号码
+		})
+	},
 })

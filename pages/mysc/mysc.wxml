@@ -2,60 +2,428 @@
 <wxs src="../../utils/filter.wxs" module="filter" />
 <view class="container">
 	<view wx:if="{{lists.length==0}}" class="tac fz36 c9 pt100">暂无数据</view>
-	<view class='tjone w100' bindtap="jump" data-url="/pages/detailssq/detailssq?id={{item1.id}}"
-				wx:for="{{lists}}"
-				wx:for-index="idx1"
-				wx:for-item="item1"
-				wx:key="idx1">
-		<view class="w100 dis_flex ju_b aic mb20">
-			<view class="dis_flex aic">
-				<image class="headimg" src="{{item1.user.head_img}}"></image>
-				<text class="ml5 fz30">{{item1.user.nickname}}</text>
+	<block wx:for="{{lists}}"
+		wx:for-index="idx1"
+		wx:for-item="item1"
+		wx:key="idx1">
+		<view wx:if="{{item1.cate=='4'}}" class='tjone w100' bindtap="jump" data-url="/pages/detailssq/detailssq?id={{item1.id}}">
+			<view class="w100 dis_flex ju_b aic mb20">
+				<view class="dis_flex aic">
+					<image class="headimg" src="{{item1.user.head_img}}"></image>
+					<text class="ml5 fz30">{{item1.user.nickname}}</text>
+				</view>
+				<view class="c6 fz30">{{item1.create_time}}</view>
 			</view>
-			<view class="c6 fz30">{{item1.create_time}}</view>
+			<view class="oh2 fz28 mb20"><!-- <text wx:if="{{item1.sticky_status==0}}" class="zpzdicon">置顶</text> -->{{item1.body}}</view>
+			<view wx:if="{{item1.image.length>1}}" class="scrollbox mb30">
+				<scroll-view class="tjrimgbox" scroll-x style="width: 100%">
+					<image wx:for="{{item1.image}}"
+						wx:for-index="idx2"
+						wx:for-item="item2"
+						wx:key="idx2" 
+						lazy-load="true" 
+						class="tjrimg" 
+						mode="aspectFill" 
+						catchtap="previewImage" 
+						data-src="{{filter.imgIP(item2.path)}}" 
+						src="{{filter.imgIP(item2.path)}}"></image>
+				</scroll-view>
+			</view>
+			<image  wx:if="{{item1.image.length==1}}" 
+				class='tjrvideo mb20' 
+				mode="aspectFill" 
+				catchtap="previewImage" 
+				data-src="{{filter.imgIP(item1.image[0].path)}}" 
+				src="{{filter.imgIP(item1.image[0].path)}}" />	
+				
+			<view class="dis_flex ju_b w100 aic mt30">
+				<view class="dis_flex aic">
+					<!-- <image class="msgicon1" src="../../static/images/pl.png"></image> -->
+					<text class='fz24'>社区动态></text>
+					<text class='fz24'>{{item1.topic.name}}</text>
+				</view>
+				<view class="dis_flex aic">
+					<!-- <view class="dis_flex aic mr20" 
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						catchtap="dianzan">
+						<text  class="iconfont icondianzan2 myicon mr10 fz30 {{item1.user_praise==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.praise}}</text>
+					</view> -->
+					<view class="dis_flex aic"
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						data-type="4"
+						catchtap="shoucangff">
+						<text  class="iconfont iconstar myicon mr10 fz30 {{item1.user_collect==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.collect}}</text>
+					</view>
+				</view>
+			</view>
 		</view>
-		<view class="oh2 fz28 mb20"><!-- <text wx:if="{{item1.sticky_status==0}}" class="zpzdicon">置顶</text> -->{{item1.body}}</view>
-		<view wx:if="{{item1.community_file.length>1}}" class="scrollbox mb30">
-			<scroll-view class="tjrimgbox" scroll-x style="width: 100%">
-				<image wx:for="{{item1.community_file}}"
+		<!-- /* 1 二手*/ -->
+		<view wx:if="{{item1.cate==1}}" class='tjone w100' bindtap="jump" data-url="/pages/detailssq/detailssq?id={{item1.id}}">
+			
+			<view class="w100 dis_flex ju_b aic mb20">
+				<view class="dis_flex aic">
+					<image class="headimg" src="{{item1.user.head_img}}"></image>
+					<text class="ml5 fz30 oh1" wx:if="{{item1.user.nickname!==null}}">{{item1.user.nickname}}</text>
+				</view>
+				<text class="fz28 c9"><!-- 发布时间 -->{{item1.create_time}}</text>
+			</view>
+			<view class="oh2 fz28 mb20 lh40">{{item1.body}}</view>
+			<view class="dis_flex w100 aic mb20 ju_b">
+				<view class="dis_flex aic" data-tel="{{item1.phone}}" bindtap="call">
+					<text class="iconfont icondianhua mr10 fz30 c169fff"></text> <text class="fz30 c525155">{{item1.phone}}</text>
+				</view>
+				<view class="ce22829 fz30 fwb">{{item1.price}}</view>
+			</view>
+			
+			
+			<view class="w100 dis_flex flex_ww">
+				
+				<image wx:for="{{item1.image}}"
 					wx:for-index="idx2"
 					wx:for-item="item2"
-					wx:key="idx2" 
-					lazy-load="true" 
-					class="tjrimg" 
-					mode="aspectFill" 
-					catchtap="previewImage" 
-					data-src="{{filter.imgIP(item2.path)}}" 
-					src="{{filter.imgIP(item2.path)}}"></image>
-			</scroll-view>
-		</view>
-		<image  wx:if="{{item1.community_file.length==1}}" 
-			class='tjrvideo mb20' 
-			mode="aspectFill" 
-			catchtap="previewImage" 
-			data-src="{{filter.imgIP(item1.community_file[0].path)}}" 
-			src="{{filter.imgIP(item1.community_file[0].path)}}" />	
-		<view class="dis_flex ju_b w100 aic">
-			<view class="dis_flex aic">
-				<image class="msgicon1" src="../../static/images/pl.png"></image>
-				<text class='fz24'>{{item1.topic.name}}</text>
+					wx:key="idx2"
+					class="{{item1.image.length>1 ? 'img9':'tjrvideo'}}" mode="aspectFill"
+					data-src="{{filter.imgIP(item2.path)}}"
+					src="{{filter.imgIP(item2.path)}}"
+					catchtap="previewImage"alt="" lazy-load='true'/>
+				<!-- <image class="flex_1"  src="../../static/images/index_29.jpg" alt=""/> -->
 			</view>
-			<view class="dis_flex aic">
-				<view class="dis_flex aic mr20" 
-					data-idx1="{{idx1}}"
-					data-id="{{item1.id}}"
-					catchtap="dianzan">
-					<text  class="iconfont icondianzan2 myicon mr10 fz30 {{item1.user_praise==1?'c9':'ce22829'}}"></text>
-					<text class='fz24'>{{item1.praise}}</text>
+			
+			
+			<view class="dis_flex ju_b w100 aic  mt30">
+				<view class="dis_flex aic">
+					<!-- <image class="msgicon1" src="../../static/images/pl.png"></image> -->
+					<text class='fz24'>二手商品 > </text>
+					<text class='fz24'>{{item1.region.name}}</text>
 				</view>
-				<view class="dis_flex aic"
-					data-idx1="{{idx1}}"
-					data-id="{{item1.id}}"
-					catchtap="shoucangff">
-					<text  class="iconfont iconstar myicon mr10 fz30 {{item1.user_collect==1?'c9':'ce22829'}}"></text>
-					<text class='fz24'>{{item1.collect}}</text>
+				<view class="dis_flex aic">
+					<!-- <view class="dis_flex aic mr20" 
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						catchtap="dianzan">
+						<text  class="iconfont icondianzan2 myicon mr10 fz30 {{item1.user_praise==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.praise}}</text>
+					</view> -->
+					<view class="dis_flex aic"
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						data-type="1"
+						catchtap="shoucangff">
+						<text  class="iconfont iconstar myicon mr10 fz30 {{item1.user_collect==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.collect}}</text>
+					</view>
 				</view>
 			</view>
 		</view>
-	</view>
+		<!-- /* 2 房屋*/ -->
+		<view wx:if="{{item1.cate==2}}" class='tjone w100'>
+			<view class="w100 dis_flex ju_b aic mb20">
+				<view class="dis_flex aic">
+					<image class="headimg" src="{{item1.user.head_img}}"></image>
+					<text class="ml5 fz30 oh1">{{item1.user.nickname}}</text>
+				</view>
+				<text class="fz28 c9"><!-- 发布时间 -->{{item1.create_time}}</text>
+				
+			</view>
+			<view class=" fz28 mb20 lh40">{{item1.body}}</view>
+			<view class="dis_flex ju_b"> 
+				<view class="dis_flex w100 aic mb20" data-tel="{{item1.phone}}" bindtap="call">
+					<text class="iconfont icondianhua mr10 fz30 c169fff"></text> <text class="fz30 c525155">{{item1.phone}}</text>
+				</view>
+				<view class="ce22829 fz30 fwb">{{item1.price}}</view>
+			</view>
+			<!-- <view class="dis_flex ju_b w100">
+				<text class="fz28 c9">{{item1.create_time}}</text>
+				<view class="dis_flex">
+					<view class="dis_flex aic mr20"
+						data-idx="{{idx}}"
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						catchtap="shoucangff">
+						<text  class="iconfont iconstar myicon mr10 fz30 {{item1.user_collect==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.collect}}</text>
+					</view>
+					
+				</view>
+				
+			</view> -->
+			
+			<view class="w100 dis_flex flex_ww">
+				<image wx:for="{{item1.image}}"
+					wx:for-index="idx2"
+					wx:for-item="item2"
+					wx:key="idx2"
+					class="{{item1.image.length>1? 'img9':'tjrvideo'}}" mode="aspectFill"
+					data-src="{{filter.imgIP(item2.path)}}"
+					src="{{filter.imgIP(item2.path)}}"
+					catchtap="previewImage" alt="" lazy-load='true'/>
+				<!-- <image class="flex_1"  src="../../static/images/index_29.jpg" alt=""/> -->
+			</view>
+			
+			<view class="dis_flex ju_b w100 aic  mt30">
+				<view class="dis_flex aic">
+					<!-- <image class="msgicon1" src="../../static/images/pl.png"></image> -->
+					<text class='fz24'>房屋出租 > </text>
+					<text class='fz24'>{{item1.region.name}}</text>
+				</view>
+				<view class="dis_flex aic">
+					<!-- <view class="dis_flex aic mr20" 
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						catchtap="dianzan">
+						<text  class="iconfont icondianzan2 myicon mr10 fz30 {{item1.user_praise==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.praise}}</text>
+					</view> -->
+					<view class="dis_flex aic"
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						data-type="2"
+						catchtap="shoucangff">
+						<text  class="iconfont iconstar myicon mr10 fz30 {{item1.user_collect==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.collect}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- /*3 求职*/ -->
+		<view wx:if="{{item1.cate==3}}" class='tjone w100'>
+			
+			<view class="w100 dis_flex ju_b aic mb20">
+				<view class="dis_flex aic">
+					<image class="headimg" src="{{item1.user.head_img}}"></image>
+					<text class="ml5 fz30 oh1">{{item1.user.nickname}}</text>
+				</view>
+				<view class="ce22829 fz30 fwb">{{item1.create_time}}</view>
+			</view>
+			<view class=" fz28 mb20 lh40">{{item1.body}}</view>
+			<view class="dis_flex ju_b">
+				<view class="dis_flex w100 aic mb20" data-tel="{{item.phone}}" bindtap="call">
+					<text class="fz30 iconfont icondianhua mr10 c169fff"></text> <text class="fz30 c525155">{{item1.phone}}</text>
+				</view>
+				<view class="ce22829 fz30 fwb">{{item1.salary}}</view>
+			</view>
+			
+			
+			<view class="dis_flex ju_b w100 aic  mt30">
+				<view class="dis_flex aic">
+					<!-- <image class="msgicon1" src="../../static/images/pl.png"></image> -->
+					<text class='fz24'>招聘信息 > </text>
+					<text class='fz24'>{{item1.profession.name}}</text>
+				</view>
+				<view class="dis_flex aic">
+					<!-- <view class="dis_flex aic mr20" 
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						catchtap="dianzan">
+						<text  class="iconfont icondianzan2 myicon mr10 fz30 {{item1.user_praise==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.praise}}</text>
+					</view> -->
+					<view class="dis_flex aic"
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						data-type="3"
+						catchtap="shoucangff">
+						<text  class="iconfont iconstar myicon mr10 fz30 {{item1.user_collect==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.collect}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		
+		<!-- /*5 美食*/ -->
+		<view wx:if="{{item1.cate==5}}" class='tjone w100'>
+			
+			<view class=' dis_flex'
+				catchtap="jump"
+				data-url="/pages/details_ms/details_ms?id={{item1.id}}">
+				<image class='wh200 mr20' src="{{filter.imgIP(item1.logo)}}"></image>
+				<view class="flex_1">
+					<view class="oh1 fz32 mb20 lh40">{{item1.name}}</view>
+					<view class="oh1 fz28 mb20 lh40 c9" >{{item1.address}}</view>
+					<view class="dis_flex flex_ww mb10">
+						<view wx:for="{{item1.label}}"
+							wx:for-index="idx2"
+							wx:for-item="item2"
+							wx:key="idx2" class="biaoqian mr10">{{item2}}</view>
+					</view>
+					<view class="dis_flex w100 aic mb20 ju_b">
+						<view class="dis_flex aic" data-tel="{{item1.phone}}" catchtap="call">
+							<text class="iconfont icondianhua mr10 fz30 c169fff"></text> <text class="fz30 c525155">{{item1.phone}}</text>
+						</view>
+						<view class="dis_flex xingji">							
+							<text wx class="iconfont ce22829 fz24 {{item1.all>0?'iconstar':'iconwujiaoxing'}}"></text>
+							<text wx class="iconfont ce22829 fz24 {{item1.all>1?'iconstar':'iconwujiaoxing'}}"></text>
+							<text wx class="iconfont ce22829 fz24 {{item1.all>2?'iconstar':'iconwujiaoxing'}}"></text>
+							<text wx class="iconfont ce22829 fz24 {{item1.all>3?'iconstar':'iconwujiaoxing'}}"></text>
+							<text class="iconfont ce22829 fz24 {{item1.all>4?'iconstar':'iconwujiaoxing'}}"></text>
+							<text class="ml5">{{filter.pingjia(item1.all)}}</text>
+						</view>
+					</view>
+				</view>
+			
+			
+			
+			
+			</view>
+			
+			
+			<view class="dis_flex ju_b w100 aic  mt30">
+				<view class="dis_flex aic">
+					<!-- <image class="msgicon1" src="../../static/images/pl.png"></image> -->
+					<text class='fz24'>附近美食 > </text>
+					<text class='fz24'>{{item1.class}}</text>
+				</view>
+				<view class="dis_flex aic">
+					<!-- <view class="dis_flex aic mr20" 
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						catchtap="dianzan">
+						<text  class="iconfont icondianzan2 myicon mr10 fz30 {{item1.user_praise==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.praise}}</text>
+					</view> -->
+					<view class="dis_flex aic"
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						data-type="5"
+						catchtap="shoucangff">
+						<text  class="iconfont iconstar myicon mr10 fz30 {{item1.user_collect==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.collect}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		
+		<!-- /*6 酒店*/ -->
+		<view wx:if="{{item1.cate==6}}" class='tjone w100'>
+			
+			<view class=' dis_flex'
+				catchtap="jump"
+				data-url="/pages/details_ms/details_ms?id={{item1.id}}">
+				<image class='wh200 mr20' src="{{filter.imgIP(item1.logo)}}"></image>
+				<view class="flex_1">
+					<view class="oh1 fz32 mb20 lh40">{{item1.name}}</view>
+					<view class="oh1 fz28 mb20 lh40 c9" >{{item1.address}}</view>
+					<view class="dis_flex flex_ww mb10">
+						<view wx:for="{{item1.label}}"
+							wx:for-index="idx2"
+							wx:for-item="item2"
+							wx:key="idx2" class="biaoqian mr10">{{item2}}</view>
+					</view>
+					<view class="dis_flex w100 aic mb20 ju_b">
+						<view class="dis_flex aic" data-tel="{{item1.phone}}" catchtap="call">
+							<text class="iconfont icondianhua mr10 fz30 c169fff"></text> <text class="fz30 c525155">{{item1.phone}}</text>
+						</view>
+						<view class="dis_flex xingji">							
+							<text wx class="iconfont ce22829 fz24 {{item1.all>0?'iconstar':'iconwujiaoxing'}}"></text>
+							<text wx class="iconfont ce22829 fz24 {{item1.all>1?'iconstar':'iconwujiaoxing'}}"></text>
+							<text wx class="iconfont ce22829 fz24 {{item1.all>2?'iconstar':'iconwujiaoxing'}}"></text>
+							<text wx class="iconfont ce22829 fz24 {{item1.all>3?'iconstar':'iconwujiaoxing'}}"></text>
+							<text class="iconfont ce22829 fz24 {{item1.all>4?'iconstar':'iconwujiaoxing'}}"></text>
+							<text class="ml5">{{filter.pingjia(item1.all)}}</text>
+						</view>
+					</view>
+				</view>
+			
+			
+			
+			
+			</view>
+			
+			
+			<view class="dis_flex ju_b w100 aic  mt30">
+				<view class="dis_flex aic">
+					<!-- <image class="msgicon1" src="../../static/images/pl.png"></image> -->
+					<text class='fz24'>酒店服务 > </text>
+					<text class='fz24'>{{item1.class}}</text>
+				</view>
+				<view class="dis_flex aic">
+					<!-- <view class="dis_flex aic mr20" 
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						catchtap="dianzan">
+						<text  class="iconfont icondianzan2 myicon mr10 fz30 {{item1.user_praise==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.praise}}</text>
+					</view> -->
+					<view class="dis_flex aic"
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						data-type="6"
+						catchtap="shoucangff">
+						<text  class="iconfont iconstar myicon mr10 fz30 {{item1.user_collect==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.collect}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		
+		<!-- /*7：打车*/ -->
+		<view wx:if="{{item1.cate==7}}" class='tjone w100'>
+			
+			<view class=' dis_flex'
+				catchtap="jump"
+				data-url="/pages/details_ms/details_ms?id={{item1.id}}">
+				<image class='wh200 mr20' src="{{filter.imgIP(item1.logo)}}"></image>
+				<view class="flex_1">
+					<view class="oh1 fz32 mb20 lh40">{{item1.name}}</view>
+					<view class="oh1 fz28 mb20 lh40 c9" >{{item1.address}}</view>
+					<view class="dis_flex flex_ww mb10">
+						<view wx:for="{{item1.label}}"
+							wx:for-index="idx2"
+							wx:for-item="item2"
+							wx:key="idx2" class="biaoqian mr10">{{item2}}</view>
+					</view>
+					<view class="dis_flex w100 aic mb20 ju_b">
+						<view class="dis_flex aic" data-tel="{{item1.phone}}" catchtap="call">
+							<text class="iconfont icondianhua mr10 fz30 c169fff"></text> <text class="fz30 c525155">{{item1.phone}}</text>
+						</view>
+						<view class="dis_flex xingji">							
+							<text wx class="iconfont ce22829 fz24 {{item1.all>0?'iconstar':'iconwujiaoxing'}}"></text>
+							<text wx class="iconfont ce22829 fz24 {{item1.all>1?'iconstar':'iconwujiaoxing'}}"></text>
+							<text wx class="iconfont ce22829 fz24 {{item1.all>2?'iconstar':'iconwujiaoxing'}}"></text>
+							<text wx class="iconfont ce22829 fz24 {{item1.all>3?'iconstar':'iconwujiaoxing'}}"></text>
+							<text class="iconfont ce22829 fz24 {{item1.all>4?'iconstar':'iconwujiaoxing'}}"></text>
+							<text class="ml5">{{filter.pingjia(item1.all)}}</text>
+						</view>
+					</view>
+				</view>
+			
+			
+			
+			
+			</view>
+			
+			
+			<view class="dis_flex ju_b w100 aic  mt30">
+				<view class="dis_flex aic">
+					<!-- <image class="msgicon1" src="../../static/images/pl.png"></image> -->
+					<text class='fz24'>叫车服务 > </text>
+					<text class='fz24'>{{item1.class}}</text>
+				</view>
+				<view class="dis_flex aic">
+					<!-- <view class="dis_flex aic mr20" 
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						catchtap="dianzan">
+						<text  class="iconfont icondianzan2 myicon mr10 fz30 {{item1.user_praise==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.praise}}</text>
+					</view> -->
+					<view class="dis_flex aic"
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						data-type="7"
+						catchtap="shoucangff">
+						<text  class="iconfont iconstar myicon mr10 fz30 {{item1.user_collect==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.collect}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
+	</block>
+	
 </view>
+<!-- （taxi:打车，hotel:酒店 dining:美食 rent：房屋 used：二手 community:社区 job:求职） -->
+<!-- 被收藏内容模块（1：二手 2：房屋 3：求职 4：社区 5：美食 6：酒店 7：打车 ） -->

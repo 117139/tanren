@@ -32,11 +32,11 @@
 			<text class="flex_1">积分商城</text>
 			<text class="iconfont iconnext myicon c9 myicon1"></text>
 		</view>
-		<view class="dis_flex mylist">
+		<view class="dis_flex mylist" bindtap="call"  data-tel="{{phone}}">
 			<text class="iconfont iconkefu myicon mr20" style="color: #ffa217;"></text>
 			<text class="flex_1">在线客服  </text>
 			<!-- <text class="iconfont iconnext myicon c9 myicon1"></text> -->
-			<text class="fz36 c9">111111111</text>
+			<text class="fz36 c9">{{phone}}</text>
 		</view>
 		<view bindtap="jump" data-url="/pages/myset/myset" class="dis_flex mylist">
 			<text class="iconfont iconshezhi myicon mr20" style="color: #59b94e;"></text>
