@@ -135,7 +135,7 @@ Page({
 			success (res) {
 				if (res.confirm) {
 					console.log('用户点击确定')
-					that.data.tmpdata.imgb.splice(e.currentTarget.dataset.idx)
+					that.data.tmpdata.imgb.splice(e.currentTarget.dataset.idx,1)
 					that.setData({
 						tmpdata:that.data.tmpdata
 					})
@@ -319,6 +319,7 @@ Page({
 						dataType:'json',
 						method:'POST',
 						success(res) {
+							wx.hideLoading()
 							console.log(res.data)
 						
 							
@@ -326,7 +327,8 @@ Page({
 								
 								wx.showToast({
 									 icon:'none',
-									 title:'发表成功'
+									 title:'发表成功',
+									 duration:2000
 								})
 								setTimeout(function(){
 									wx.switchTab({
@@ -340,13 +342,15 @@ Page({
 								})
 								wx.showToast({
 									 icon:'none',
-									 title:res.data.ertips
+									 title:res.data.ertips,
+									 duration:2000
 								})
 							}
 							
 							 
 						},
 						fail() {
+							wx.hideLoading()
 							that.setData({
 								kg:1
 							})
@@ -356,7 +360,7 @@ Page({
 							})
 						},
 						complete() {
-							wx.hideLoading()
+							
 						}
 					})
 					

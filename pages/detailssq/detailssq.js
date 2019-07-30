@@ -117,6 +117,7 @@ Page({
 			method:'POST',
 			success(res) {
 				console.log(res.data)
+				wx.hideLoading()
 			
 				
 				if(res.data.errcode==0){
@@ -141,6 +142,7 @@ Page({
 				 
 			},
 			fail() {
+				wx.hideLoading()
 				that.setData({
 					kg:1
 				})
@@ -150,7 +152,6 @@ Page({
 				})
 			},
 			complete() {
-				wx.hideLoading()
 			}
 		})
 		

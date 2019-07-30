@@ -25,7 +25,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-	this.getbanner(5)
+	this.getbanner(6)
 		this.getquyu()
   },
 

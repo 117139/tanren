@@ -1,0 +1,77 @@
+<!-- lsitHeader.wxml -->
+
+
+	<view class="container">
+		
+		<wxs src="../../utils/filter.wxs" module="filter" />
+		<view class="dis_flex ju_b mt30 w100 mb60">
+			<view>
+				<view class="fwb fz40 c0 mb20">发表评论</view>
+				<view class="fz26 c9">请结合您的实际体验进行打分</view>
+			</view>
+			<view>
+				<view class="fwb fz42 ce22829">{{filter.pingjia(tmpdata.call)}}</view>
+				<view wx:if="{{tmpdata.call==5}}" class="fz24 ce22829 tac">超满意</view>
+				<view wx:if="{{tmpdata.call>=4&&tmpdata.call<5}}" class="fz24 ce22829 tac">满意</view>
+				<view wx:if="{{tmpdata.call>=3&&tmpdata.call<4}}" class="fz24 ce22829 tac">一般</view>
+				<view wx:if="{{tmpdata.call>=2&&tmpdata.call<3}}" class="fz24 ce22829 tac">不满意</view>
+				<view wx:if="{{tmpdata.call>=1&&tmpdata.call<2}}" class="fz24 ce22829 tac">很不满意</view>
+			</view>
+		</view>
+		<view class="dis_flex w100 aic mb30">
+			<view class="mr30 fz32 c0">到点速度</view>
+			<view class="w300r mr30 dis_flex ju_b">
+				<text class="iconfont ce22829 fz30 {{tmpdata.weidao>=1? 'iconstar':'iconwujiaoxing'}}" data-type="0" data-pf="1" bindtap="pingfen"></text>
+				<text class="iconfont ce22829 fz30 {{tmpdata.weidao>=2? 'iconstar':'iconwujiaoxing'}}" data-type="0" data-pf="2" bindtap="pingfen"></text>
+				<text class="iconfont ce22829 fz30 {{tmpdata.weidao>=3? 'iconstar':'iconwujiaoxing'}}" data-type="0" data-pf="3" bindtap="pingfen"></text>
+				<text class="iconfont ce22829 fz30 {{tmpdata.weidao>=4? 'iconstar':'iconwujiaoxing'}}" data-type="0" data-pf="4" bindtap="pingfen"></text>
+				<text class="iconfont ce22829 fz30 {{tmpdata.weidao>=5? 'iconstar':'iconwujiaoxing'}}" data-type="0" data-pf="5" bindtap="pingfen"></text>
+			</view>
+			<view class="flex_1 ce22829 fz26">{{tmpdata.weidao}}.0</view>
+		</view>
+		<view class="dis_flex w100 aic mb30">
+			<view class="mr30 fz32 c0">车辆质量</view>
+			<view class="w300r mr30 dis_flex ju_b">
+				<text class="iconfont ce22829 fz30 {{tmpdata.weishen>=1? 'iconstar':'iconwujiaoxing'}}" data-type="1" data-pf="1" bindtap="pingfen"></text>
+				<text class="iconfont ce22829 fz30 {{tmpdata.weishen>=2? 'iconstar':'iconwujiaoxing'}}" data-type="1" data-pf="2" bindtap="pingfen"></text>
+				<text class="iconfont ce22829 fz30 {{tmpdata.weishen>=3? 'iconstar':'iconwujiaoxing'}}" data-type="1" data-pf="3" bindtap="pingfen"></text>
+				<text class="iconfont ce22829 fz30 {{tmpdata.weishen>=4? 'iconstar':'iconwujiaoxing'}}" data-type="1" data-pf="4" bindtap="pingfen"></text>
+				<text class="iconfont ce22829 fz30 {{tmpdata.weishen>=5? 'iconstar':'iconwujiaoxing'}}" data-type="1" data-pf="5" bindtap="pingfen"></text>
+			</view>
+			<view class="flex_1 ce22829 fz26">{{tmpdata.weishen}}.0</view>
+		</view>
+		<view class="dis_flex w100 aic mb30">
+			<view class="mr30 fz32 c0">服务质量</view>
+			<view class="w300r mr30 dis_flex ju_b">
+				<text class="iconfont ce22829 fz30 {{tmpdata.fuwu>=1? 'iconstar':'iconwujiaoxing'}}" data-type="2" data-pf="1" bindtap="pingfen"></text>
+				<text class="iconfont ce22829 fz30 {{tmpdata.fuwu>=2? 'iconstar':'iconwujiaoxing'}}" data-type="2" data-pf="2" bindtap="pingfen"></text>
+				<text class="iconfont ce22829 fz30 {{tmpdata.fuwu>=3? 'iconstar':'iconwujiaoxing'}}" data-type="2" data-pf="3" bindtap="pingfen"></text>
+				<text class="iconfont ce22829 fz30 {{tmpdata.fuwu>=4? 'iconstar':'iconwujiaoxing'}}" data-type="2" data-pf="4" bindtap="pingfen"></text>
+				<text class="iconfont ce22829 fz30 {{tmpdata.fuwu>=5? 'iconstar':'iconwujiaoxing'}}" data-type="2" data-pf="5" bindtap="pingfen"></text>
+			</view>
+			<view class="flex_1 ce22829 fz26">{{tmpdata.fuwu}}.0</view>
+		</view>
+		<view class="textareabox">
+			<textarea bindinput="bint" class="ttaa" name="" maxlength="150" id="" placeholder="说说您的消费感受" cols="30" rows="10"></textarea>
+			<view class="ttnum">{{tmpdata.fblen}}/150</view>
+		</view>
+		<view class="imgbox mb40">
+			<view class="addimg1" wx:for="{{tmpdata.imgb}}" 
+					 wx:for-index="idx"
+					 wx:for-item="item"
+					 wx:key="idx"
+					 data-idx="{{idx}}"
+					 bindtap="imgdel">
+				<image  src="{{filter.imgIP(item)}}" data-src="{{filter.imgIP(item)}}"
+					 mode="aspectFill"></image>
+			</view>
+			
+			<view wx:if="{{tmpdata.imgb.length<9}}" class="addimg" bindtap="scpic">
+				
+				<text class="iconfont iconjiahao fz100 c9"></text>
+			</view>
+		</view>
+		<view class="fabubtn" bindtap="fabusub">
+			发表评论
+		</view>
+	</view>

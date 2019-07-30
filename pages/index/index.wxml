@@ -7,7 +7,7 @@
 	<view class='dis_flex ju_b header1 mb40'>
 		<view>
 			<view class='fz42 c0 fwb mb10'>{{NewDate[0].week}} {{NewDate[0].month}} {{NewDate[0].day}}</view>
-			<view class='fz24 c6'>{{address}} 多云29℃</view>
+			<view class='fz24 c6'>{{address}} <!-- 多云29℃ --></view>
 		</view>
 		<view class='fz42'></view>
 	</view>

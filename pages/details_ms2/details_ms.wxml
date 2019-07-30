@@ -40,8 +40,8 @@
 				wx:for-index="idx1"
 				wx:for-item="item1"
 				wx:key="idx1" mode="aspectFill" class="tjrimg" bindtap="previewImage" 
-	data-src="{{filter.imgIP(dataxq.hotel_logo)}}" 
-	src="{{filter.imgIP(dataxq.hotel_logo)}}"></image>
+	data-src="{{filter.imgIP(item1.hotel_images)}}" 
+	src="{{filter.imgIP(item1.hotel_images)}}"></image>
 			
 		</scroll-view>
 	</view>
@@ -96,9 +96,9 @@
 					</view>
 				</view>
 				<view class="c3 fz32 lh40 mb20">{{item.comment_content}}</view>
-				<view wx:if="{{item.comment_images!=''}}" class="w100 dis_flex flex_ww">
-					<image wx:if="{{filter.getgimgarr(item.comment_images).length==1}}"
-						wx:for="{{filter.getgimgarr(item.comment_images)}}"
+				<view wx:if="{{item.images!=0}}" class="w100 dis_flex flex_ww">
+					<image wx:if="{{filter.getgimgarr(item.images).length==1}}"
+						wx:for="{{filter.getgimgarr(item.images)}}"
 						wx:for-index="idx1"
 						wx:for-item="item1"
 						wx:key="idx1"
@@ -106,8 +106,8 @@
 						data-src="{{filter.imgIP(item1)}}"
 						src="{{filter.imgIP(item1)}}"
 						bindtap="previewImage"alt=""/>
-					<image wx:if="{{filter.getgimgarr(item.comment_images).length>1}}"
-						wx:for="{{filter.getgimgarr(item.comment_images)}}"
+					<image wx:if="{{filter.getgimgarr(item.images).length>1}}"
+						wx:for="{{filter.getgimgarr(item.images)}}"
 						wx:for-index="idx1"
 						wx:for-item="item1"
 						wx:key="idx1"

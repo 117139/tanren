@@ -1,6 +1,10 @@
 {
   "pages": [
     "pages/index/index",
+		"pages/ershoupl/ershoupl",
+		"pages/meishipl/meishipl",
+		"pages/jiaochepl/jiaochepl",
+		"pages/jiudianpl/jiudianpl",
     "pages/mysc/mysc",
     "pages/my/my",
     "pages/about/about",

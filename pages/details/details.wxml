@@ -20,7 +20,7 @@
 		<text class="iconfont icondianhua mr10 fz30 c169fff"></text> <text class="fz30 c525155">{{dataxq.phone}}</text>
 	</view>
 	<view class="w100 dis_flex flex_ww mb40">
-		<image wx:for="{{dataxq.community_file}}"
+		<image wx:for="{{dataxq.used_image}}"
 			wx:for-index="idx2"
 			wx:for-item="item2"
 			wx:key="idx2"
@@ -50,13 +50,13 @@
 				<view class="cadadad fz30 mb20">{{item2.create_time}}</view>
 				<view class="c3 fz32 lh40">{{item2.body}}</view>
 				<view class="w100 dis_flex flex_ww mb40">
-					<image wx:for="{{item2.community_file}}"
-						wx:for-index="idx2"
-						wx:for-item="item2"
-						wx:key="idx2"
-						class="{{dataxq.used_image.length>1 ? 'img9':'tjrvideo'}}" mode="aspectFill"
-						data-src="{{filter.imgIP(item2.path)}}"
-						src="{{filter.imgIP(item2.path)}}"
+					<image wx:for="{{item2.comment_image}}"
+						wx:for-index="idx3"
+						wx:for-item="item3"
+						wx:key="idx3"
+						class="{{item2.comment_image.length>1 ? 'img9':'tjrvideo'}}" mode="aspectFill"
+						data-src="{{filter.imgIP(item3.path)}}"
+						src="{{filter.imgIP(item3.path)}}"
 						catchtap="previewImage"alt="" lazy-load='true'/>
 					<!-- <image class="flex_1"  src="../../static/images/index_29.jpg" alt=""/> -->
 				</view>
@@ -81,8 +81,8 @@
 			<button class="shareBtn" open-type='share' data-supid="1" data-type="{{idx1}}"></button>
 		</view>
 	</view>
-	<van-popup show="{{ show }}" position="bottom" bind:close="onClose">
+	<!-- <van-popup show="{{ show }}" position="bottom" bind:close="onClose">
 		<template is="fabu1" data="{{tmpdata}}" />
-	</van-popup>
+	</van-popup> -->
 	
 </view> 
