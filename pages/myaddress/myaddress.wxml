@@ -13,7 +13,7 @@
 		<view class="addsetting">
 			<view class="setting1" data-id="{{item.address_id}}" bindtap="selecmr">
 				<view class="mricon {{item.default_address==0?'mricon1':''}}">
-					<icon  wx:if="{{item.default_address==0}}" size="12" type="success" color="#135eac" />
+					<icon  wx:if="{{item.default_address==0}}" size="12" type="success" color="#E22829" />
 
 				</view>
 				默认地址

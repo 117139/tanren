@@ -92,17 +92,17 @@ Page({
 				} else {
 					wx.showToast({
 						icon: 'none',
-						title: '操作失败'
+						title: '获取失败'
 					})
 
 				}
 
 			},
 			fail() {
-				wx.showToast({
-					icon: 'none',
-					title: '操作失败'
-				})
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败'
+        })
 				pageState1.error()
 			}
 		})

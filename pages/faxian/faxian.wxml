@@ -1,6 +1,6 @@
-<!--pages/faxian/faxian.wxml-->
-<import src="/utils/pageState/index.wxml" />
-<template is="pageState" data="{{...pageState}}" />
+<!-- pages/faxian/faxian.wxml -->
+<!-- <import src="/utils/pageState/index.wxml" />
+<template is="pageState" data="{{...pageState}}" /> -->
 <view class="container">
 	<form class="topform" bindsubmit="formSubmit">
 		<view class="ssbox mb30">
@@ -13,6 +13,7 @@
 		</view>
 	</form >
 	<view class="yhbox">
+		<view class="zanwu" wx:if="{{yhlist.length==0}}">暂无数据</view>
 		<view class="yhone" wx:for="{{yhlist}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
 			<image src="../../static/images/yhbg.png"></image>
 			<view class="yhmain">

@@ -18,7 +18,7 @@
 			wx:key="idx">
 			<text class="iconfont icondiamond myicon mr20" style="color: #F15A29;"></text>
 			<text class="flex_1">{{item.integral_number}}</text>
-			<text class="jfcz" data-mon="{{item.rmb_number}}" bindtap="showpp">{{filter.moneyFormat(item.rmb_number)}}</text>
+			<text class="jfcz" data-mon="{{item.rmb_number}}"  data-id="{{item.integral_id}}" bindtap="showpp">{{filter.moneyFormat(item.rmb_number)}}</text>
 		</view>
 
 		<view class="fwb c0 fz36 mt60">

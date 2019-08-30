@@ -22,6 +22,7 @@ Page({
     autoplay: true,
     interval: 3000,
     duration: 1000,
+		sharetype:''
   },
 
   /**
@@ -44,7 +45,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+		this.sharerw(this.data.sharetype)
+		this.setData({
+			sharetype:''
+		})
   },
 
   /**
@@ -81,8 +85,21 @@ Page({
   onShareAppMessage: function (res) {
 		if (res.from === 'button') {
 			console.log(res.target.dataset.type)
+			this.setData({
+				sharetype:'share'
+			})
+		}
+		return {
+		  title: '唐人街',
+		  path: '/pages/share/share?type=fwcz&id='+res.target.dataset.id,
+		  success: function (res) {
+		    console.log('成功', res)
+		  }
 		}
   },
+	sharerw(share){
+		app.sharerw(share)
+	},
   bindcur(e){
 		var that =this
     console.log(e.currentTarget.dataset.type)

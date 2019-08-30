@@ -7,10 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-			phone:'',
-			userwxmsg:wx.getStorageSync('userWxmsg'),
-			userxcxmsg:wx.getStorageSync('usermsg'),
-			day:0
+    btnkg:0,
+    phone:'',
+    userwxmsg:wx.getStorageSync('userWxmsg'),
+    userxcxmsg:wx.getStorageSync('usermsg'),
+    day:0
   },
 
   /**
@@ -22,6 +23,7 @@ Page({
 		// })
 		console.log(Date.now())
 		var daytime=util.getDay(Date.now(),wx.getStorageSync('usermsg').login_time)
+		console.log(daytime)
 		this.setData({
 			day:daytime
 		})
@@ -139,6 +141,13 @@ Page({
 			})
 			return
 		}
+    if (that.data.btnkg == 1) {
+      return
+    } else {
+      that.setData({
+        btnkg: 1
+      })
+    }
 		wx.request({
 			url:  app.IPurl+'/index/personal/sign',
 			data:{
@@ -152,21 +161,25 @@ Page({
 			success(res) {
 				console.log(res.data)
 				
-				
+        that.setData({
+          btnkg: 0
+        })
 				if(res.data.errCode==0){
 					
 					// if(rlist.length>0){
 						wx.showToast({
 							 icon:'none',
-							 title:'签到成功'
+              title:'签到成功，积分+3'
 						})
 						app.dologin()
 						setTimeout(function() {
+              that.data.userwxmsg= wx.getStorageSync('userWxmsg')
+              that.data.userxcxmsg= wx.getStorageSync('usermsg')
 							that.setData({
-								userwxmsg:wx.getStorageSync('userWxmsg'),
-								userxcxmsg:wx.getStorageSync('usermsg'),
+                userwxmsg: that.data.userwxmsg,
+                userxcxmsg: that.data.userxcxmsg
 							})
-						}, 500);
+						}, 1000);
 					// }
 					
 				}else{
@@ -179,6 +192,9 @@ Page({
 				 
 			},
 			fail() {
+        that.setData({
+          btnkg: 0
+        })
 				wx.showToast({
 					 icon:'none',
 					 title:'操作失败'

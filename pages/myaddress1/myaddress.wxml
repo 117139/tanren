@@ -1,0 +1,37 @@
+<!--logs.wxml-->
+<import src="/utils/pageState/index.wxml" />
+<!-- <template is="pageState" data="{{...pageState}}" /> -->
+<view class="container">
+  <view class="addressOne" wx:for="{{addresslist}}" wx:for-index="idx"          
+          wx:for-item="item" 
+          wx:key="idx"
+					data-idx="{{idx}}"
+					bindtap='selectadd'>
+		<view class="addp1">
+			<text>{{item.name}}</text>
+			<text>{{item.phone}}</text>
+		</view>
+		<view class="addp2">{{item.city}}</view>
+		<view class="addsetting">
+			<view class="setting1" data-id="{{item.address_id}}" catchtap="selecmr">
+				<view class="mricon {{item.default_address==0?'mricon1':''}}">
+					<icon  wx:if="{{item.default_address==0}}" size="12" type="success" color="#E22829" />
+
+				</view>
+				默认地址
+			</view>
+			<view class="setcz">
+				<view class="setting2" data-id="{{idx}}" catchtap="addressEdit">编辑</view>
+				<view class="setting3" data-id="{{item.address_id}}" catchtap="addressDel">删除</view>
+			</view>
+		</view>
+	</view>
+	<view class="fixbottom">
+		<navigator class="addbtn" url="/pages/addAdd/addAdd">
+			<view class="addicon">
+				<image src="/static/images/addicon.png"></image>
+			</view>
+			添加新地址
+		</navigator>
+	</view>
+</view>

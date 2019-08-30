@@ -67,9 +67,17 @@ function dateLater(dates, later) {
 
 function getDay(nowtime, firtime) {
   var firtime1=firtime+'000'
+	console.log(firtime1)
+	if(firtime==undefined){
+		return 1
+	}
+	console.log(nowtime)
 	var daytime=nowtime-firtime1
+	console.log(daytime)
 	daytime=(daytime-daytime%1000)/1000/3600/24
+	console.log(daytime)
 	daytime=Math.ceil(daytime)
+	console.log(daytime)
   return daytime;
 }
 

@@ -40,7 +40,7 @@
 				<view class="dis_flex aic">
 					<!-- <image class="msgicon1" src="../../static/images/pl.png"></image> -->
 					<text class='fz24'>社区动态></text>
-					<text class='fz24'>{{item1.topic.name}}</text>
+					<text class='fz24'>{{item1.title}}</text>
 				</view>
 				<view class="dis_flex aic">
 					<!-- <view class="dis_flex aic mr20" 
@@ -197,7 +197,7 @@
 					<image class="headimg" src="{{item1.user.head_img}}"></image>
 					<text class="ml5 fz30 oh1">{{item1.user.nickname}}</text>
 				</view>
-				<view class="ce22829 fz30 fwb">{{item1.create_time}}</view>
+				<view class=" fz30 fwb">{{item1.create_time}}</view><!-- ce22829 -->
 			</view>
 			<view class=" fz28 mb20 lh40">{{item1.body}}</view>
 			<view class="dis_flex ju_b">
@@ -422,8 +422,179 @@
 				</view>
 			</view>
 		</view>
+
+
+    <!-- 8曝光 -->
+    <view wx:if="{{item1.cate=='8'}}" class='tjone w100' bindtap="jump" data-url="/pages/detailssq_bg/detailssq?id={{item1.id}}">
+			<view class="w100 dis_flex ju_b aic mb20">
+				<view class="dis_flex aic">
+					<image class="headimg" src="{{filter.imgIP(item1.user.portrait)}}"></image>
+					<text class="ml5 fz30">{{item1.user.reception}}</text>
+				</view>
+				<view class="c6 fz30">{{item1.create_time}}</view>
+			</view>
+			<view class="oh2 fz28 mb20"><!-- <text wx:if="{{item1.sticky_status==0}}" class="zpzdicon">置顶</text> -->{{item1.body}}</view>
+			<view wx:if="{{item1.image.length>1}}" class="scrollbox mb30">
+				<scroll-view class="tjrimgbox" scroll-x style="width: 100%">
+					<image wx:for="{{item1.image}}"
+						wx:for-index="idx2"
+						wx:for-item="item2"
+						wx:key="idx2" 
+						lazy-load="true" 
+						class="tjrimg" 
+						mode="aspectFill" 
+						catchtap="previewImage" 
+						data-src="{{filter.imgIP(item2.path)}}" 
+						src="{{filter.imgIP(item2.path)}}"></image>
+				</scroll-view>
+			</view>
+			<image  wx:if="{{item1.image.length==1}}" 
+				class='tjrvideo mb20' 
+				mode="aspectFill" 
+				catchtap="previewImage" 
+				data-src="{{filter.imgIP(item1.image[0].path)}}" 
+				src="{{filter.imgIP(item1.image[0].path)}}" />	
+				
+			<view class="dis_flex ju_b w100 aic mt30">
+				<view class="dis_flex aic">
+					<!-- <image class="msgicon1" src="../../static/images/pl.png"></image> -->
+					<text class='fz24'>曝光平台></text>
+					<text class='fz24'>{{item1.title}}</text>
+				</view>
+				<view class="dis_flex aic">
+					<!-- <view class="dis_flex aic mr20" 
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						catchtap="dianzan">
+						<text  class="iconfont icondianzan2 myicon mr10 fz30 {{item1.user_praise==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.praise}}</text>
+					</view> -->
+					<view class="dis_flex aic"
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						data-type="4"
+						catchtap="shoucangff">
+						<text  class="iconfont iconstar myicon mr10 fz30 {{item1.user_collect==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.collect}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
+    <!-- 9热门 -->
+    <view wx:if="{{item1.cate=='9'}}" class='tjone w100' bindtap="jump" data-url="/pages/detailssq_hot/detailssq?id={{item1.id}}">
+			<view class="w100 dis_flex ju_b aic mb20">
+				<view class="dis_flex aic">
+					<image class="headimg" src="{{filter.imgIP(item1.user.portrait)}}"></image>
+					<text class="ml5 fz30">{{item1.user.reception}}</text>
+				</view>
+				<view class="c6 fz30">{{item1.create_time}}</view>
+			</view>
+			<view class="oh2 fz28 mb20"><!-- <text wx:if="{{item1.sticky_status==0}}" class="zpzdicon">置顶</text> -->{{item1.body}}</view>
+			<view wx:if="{{item1.image.length>1}}" class="scrollbox mb30">
+				<scroll-view class="tjrimgbox" scroll-x style="width: 100%">
+					<image wx:for="{{item1.image}}"
+						wx:for-index="idx2"
+						wx:for-item="item2"
+						wx:key="idx2" 
+						lazy-load="true" 
+						class="tjrimg" 
+						mode="aspectFill" 
+						catchtap="previewImage" 
+						data-src="{{filter.imgIP(item2.path)}}" 
+						src="{{filter.imgIP(item2.path)}}"></image>
+				</scroll-view>
+			</view>
+			<image  wx:if="{{item1.image.length==1}}" 
+				class='tjrvideo mb20' 
+				mode="aspectFill" 
+				catchtap="previewImage" 
+				data-src="{{filter.imgIP(item1.image[0].path)}}" 
+				src="{{filter.imgIP(item1.image[0].path)}}" />	
+				
+			<view class="dis_flex ju_b w100 aic mt30">
+				<view class="dis_flex aic">
+					<!-- <image class="msgicon1" src="../../static/images/pl.png"></image> -->
+					<text class='fz24'>热门专题></text>
+					<text class='fz24'>{{item1.title}}</text>
+				</view>
+				<view class="dis_flex aic">
+					<!-- <view class="dis_flex aic mr20" 
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						catchtap="dianzan">
+						<text  class="iconfont icondianzan2 myicon mr10 fz30 {{item1.user_praise==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.praise}}</text>
+					</view> -->
+					<view class="dis_flex aic"
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						data-type="4"
+						catchtap="shoucangff">
+						<text  class="iconfont iconstar myicon mr10 fz30 {{item1.user_collect==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.collect}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
+    
+    <!-- 10首页推荐 -->
+    <view wx:if="{{item1.cate=='10'}}" class='tjone w100' bindtap="jump" data-url="/pages/detailssq_tj/detailssq?id={{item1.id}}">
+			<view class="w100 dis_flex ju_b aic mb20">
+				<view class="dis_flex aic">
+					<image class="headimg" src="{{filter.imgIP(item1.user.portrait)}}"></image>
+					<text class="ml5 fz30">{{item1.user.reception}}</text>
+				</view>
+				<view class="c6 fz30">{{item1.create_time}}</view>
+			</view>
+			<view class="oh2 fz28 mb20"><!-- <text wx:if="{{item1.sticky_status==0}}" class="zpzdicon">置顶</text> -->{{item1.body}}</view>
+			<view wx:if="{{item1.image.length>1}}" class="scrollbox mb30">
+				<scroll-view class="tjrimgbox" scroll-x style="width: 100%">
+					<image wx:for="{{item1.image}}"
+						wx:for-index="idx2"
+						wx:for-item="item2"
+						wx:key="idx2" 
+						lazy-load="true" 
+						class="tjrimg" 
+						mode="aspectFill" 
+						catchtap="previewImage" 
+						data-src="{{filter.imgIP(item2.path)}}" 
+						src="{{filter.imgIP(item2.path)}}"></image>
+				</scroll-view>
+			</view>
+			<image  wx:if="{{item1.image.length==1}}" 
+				class='tjrvideo mb20' 
+				mode="aspectFill" 
+				catchtap="previewImage" 
+				data-src="{{filter.imgIP(item1.image[0].path)}}" 
+				src="{{filter.imgIP(item1.image[0].path)}}" />	
+				
+			<view class="dis_flex ju_b w100 aic mt30">
+				<view class="dis_flex aic">
+					<!-- <image class="msgicon1" src="../../static/images/pl.png"></image> -->
+					<text class='fz24'>首页推荐></text>
+					<text class='fz24'>{{item1.title}}</text>
+				</view>
+				<view class="dis_flex aic">
+					<!-- <view class="dis_flex aic mr20" 
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						catchtap="dianzan">
+						<text  class="iconfont icondianzan2 myicon mr10 fz30 {{item1.user_praise==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.praise}}</text>
+					</view> -->
+					<view class="dis_flex aic"
+						data-idx1="{{idx1}}"
+						data-id="{{item1.id}}"
+						data-type="4"
+						catchtap="shoucangff">
+						<text  class="iconfont iconstar myicon mr10 fz30 {{item1.user_collect==1?'c9':'ce22829'}}"></text>
+						<text class='fz24'>{{item1.collect}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
 	</block>
 	
 </view>
 <!-- （taxi:打车，hotel:酒店 dining:美食 rent：房屋 used：二手 community:社区 job:求职） -->
-<!-- 被收藏内容模块（1：二手 2：房屋 3：求职 4：社区 5：美食 6：酒店 7：打车 ） -->
+<!-- 被收藏内容模块（1：二手 2：房屋 3：求职 4：社区 5：美食 6：酒店 7：打车 8曝光 9热门 10首页推荐） -->

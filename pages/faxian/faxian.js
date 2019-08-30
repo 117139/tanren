@@ -1,6 +1,6 @@
 // pages/faxian/faxian.js
 const app=getApp()
-var pageState = require('../../utils/pageState/index.js')
+// var pageState = require('../../utils/pageState/index.js')
 Page({
 
   /**
@@ -8,6 +8,8 @@ Page({
    */
   data: {
 		yhlist:[],
+		keyword:'',
+		page:1
   },
 
   /**
@@ -57,7 +59,7 @@ Page({
    */
   onReachBottom: function () {
 		console.log('触底')
-		// this.getyhlist()
+		this.getyhlist()
   },
 
   /**
@@ -67,17 +69,25 @@ Page({
 
   },
 	//获取首页list（搜索）
-	getyhlist(){
+	getyhlist(type){
 		// console.log(pageState)
 		let that = this
-		const pageState1 = pageState.default(that)
-	  pageState1.loading()    // 切换为loading状态
+		// if(type){
+		// 	
+		// }else{
+		// 	const pageState = pageState.default(that)
+		// 	pageState.loading()    // 切换为loading状态
+		// }
 		
-
+		
+		wx.showLoading({
+			title: '加载中',
+		})
 		wx.request({
 			url:  app.IPurl+'/api/coupon/discovery',
 			data:{
-				
+				page:that.data.page,
+				search:that.data.keyword
 			},
 			header: {
 				'content-type': 'application/x-www-form-urlencoded' 
@@ -85,39 +95,69 @@ Page({
 			dataType:'json',
 			method:'get',
 			success(res) {
+				
 				console.log(res.data)
-				let rlist=res.data.retData
+				
 				
 				if(res.data.errcode==0){
-					
+          let rlist = res.data.retData.data
+					if(type=="ss"){
+						console.log('ss')
+						that.data.yhlist=[]
+					}
 					if(rlist.length>0){
+						that.data.page++
 						that.data.yhlist=that.data.yhlist.concat(rlist)
 						console.log(rlist)
 						that.setData({
+							page:that.data.page,
 							yhlist:that.data.yhlist
 						})
 						console.log(that.data.yhlist)
+					}else{
+						wx.showToast({
+							icon:'none',
+							title:'暂无更多数据'
+						})
+						that.setData({
+							yhlist:that.data.yhlist
+						})
 					}
-					if(rlist.length<10){
-						console.log('没了')
-						
-					}
-					 pageState1.finish()    // 切换为finish状态
-				}
-				
-				  // pageState1.error()    // 切换为error状态
+					
+        } else {
+          if (res.data.ertips) {
+            wx.showToast({
+              icon: 'none',
+              title: res.data.ertips
+            })
+          } else {
+            wx.showToast({
+              icon: 'none',
+              title: '获取数据失败'
+            })
+          }
+          // pageState1.error()    // 切换为error状态
+        }
+				wx.hideLoading()
+				  
 			},
 			fail() {
-				 pageState1.error()    // 切换为error状态
+				wx.hideLoading()
+				wx.showToast({
+					icon:'none',
+					title:'获取失败'
+				})
+				 // pageState.error()    // 切换为error状态
 			}
 		})
 	},
 	formSubmit: function(e) {
 		let that =this
 		console.log('form发生了submit事件，携带数据为：', e.detail.value)
-		// that.setData({
-		// 	keyword:e.detail.value.sr
-		// })
-		// that.getshoplist(1)
+		that.setData({
+			keyword:e.detail.value.sr,
+			page:1
+		})
+		that.getyhlist('ss')
 	},
 })

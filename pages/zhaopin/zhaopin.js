@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    btnkg:0,
 		pages:[],
 		search:'',
     type:0,
@@ -17,7 +18,7 @@ Page({
     autoplay: true,
     interval: 3000,
     duration: 1000,
-		
+		sharetype:''
   },
 
   /**
@@ -41,7 +42,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.sharerw(this.data.sharetype)
+		this.setData({
+			sharetype:''
+		})
+		
   },
 
   /**
@@ -80,15 +85,21 @@ Page({
 		 
     if (res.from === 'button') {
 			console.log(res.target.dataset.type)
+			this.setData({
+				sharetype:'share'
+			})
     }
-    // return {
-    //   title: '转发',
-    //   path: '/pages/index/community/topic/topic?jsonStr=' + this.data.list,
-    //   success: function (res) {
-    //     console.log('成功', res)
-    //   }
-    // }
+    return {
+      title: '唐人街',
+      path: '/pages/share/share?type=zpqz&id='+res.target.dataset.id,
+      success: function (res) {
+        console.log('成功', res)
+      }
+    }
   },
+	sharerw(share){
+		app.sharerw(share)
+	},
   bindcur(e){
 		var that =this
     console.log(e.currentTarget.dataset.type)
@@ -112,6 +123,13 @@ Page({
 		console.log(e.currentTarget.dataset.id)
 		var idx=e.currentTarget.dataset.idx
 		var idx1=e.currentTarget.dataset.idx1
+    if (that.data.btnkg == 1) {
+      return
+    } else {
+      that.setData({
+        btnkg: 1
+      })
+    }
 		wx.request({
 			url:  app.IPurl+'/api/community/collect',
 			data:{
@@ -127,7 +145,9 @@ Page({
 			success(res) {
 				console.log(res.data)
 			
-				
+        that.setData({
+          btnkg: 0
+        })
 				if(res.data.errcode==0){
 					that.data.lists[idx][idx1].user_collect = !that.data.lists[idx][idx1].user_collect
 					that.setData({
@@ -144,16 +164,26 @@ Page({
 						lists:that.data.lists
 					})
 				}else{
-					
-					wx.showToast({
-						 icon:'none',
-						 title:res.data.ertips
-					})
+          that.setData({
+            btnkg: 0
+          })
+          if (res.data.ertips){
+            wx.showToast({
+              icon: 'none',
+              title: res.data.ertips
+            })
+          }else{
+            wx.showToast({
+              icon: 'none',
+              title: '操作失败'
+            })
+          }
 				}
 				 
 			},
 			fail() {
-				that.setData({
+        that.setData({
+          btnkg: 0,
 					kg:1
 				})
 				wx.showToast({
@@ -181,6 +211,13 @@ Page({
 			pages:that.data.pages,
 			lists:that.data.lists
 		})
+    if (that.data.btnkg == 1) {
+      return
+    } else {
+      that.setData({
+        btnkg: 1
+      })
+    }
 		wx.request({
 			url:  app.IPurl+'/api/job_seek/index',
 			data:{
@@ -196,7 +233,9 @@ Page({
 			method:'get',
 			success(res) {
 				console.log(res.data)
-				
+        that.setData({
+          btnkg: 0
+        })
 				if(res.data.errcode==0){
 					let rlist=res.data.retData.data
 					
@@ -220,9 +259,27 @@ Page({
 						 title:'暂无数据'
 						})
 					}
-				}
+				}else{
+          that.setData({
+            btnkg: 0
+          })
+          if (res.data.ertips) {
+            wx.showToast({
+              icon: 'none',
+              title: res.data.ertips
+            })
+          } else {
+            wx.showToast({
+              icon: 'none',
+              title: '操作失败'
+            })
+          }
+        }
 			},
 			fail() {
+        that.setData({
+          btnkg: 0
+        })
 				 wx.showToast({
 					 icon:'none',
 					 title:'操作失败'
@@ -296,12 +353,29 @@ Page({
 					}
 					
 					 pageState1.finish()    // 切换为finish状态
-				}
+				}else{
+          pageState1.error()    // 切换为error状态
+          if (res.data.ertips) {
+            wx.showToast({
+              icon: 'none',
+              title: res.data.ertips
+            })
+          } else {
+            wx.showToast({
+              icon: 'none',
+              title: '获取失败'
+            })
+          }
+        }
 				
 				  // pageState1.error()    // 切换为error状态
 			},
 			fail() {
-				 pageState1.error()    // 切换为error状态
+				pageState1.error()    // 切换为error状态
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败'
+        })
 			}
 		})
 	},

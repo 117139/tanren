@@ -7,6 +7,13 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 120rpx;
+  height: 60rpx;
+  border-radius: 10rpx;
+}
+.ibone image{
+   width: 120rpx;
+  height: 60rpx;
 }
 .indebtnicon{
   width: 65rpx;
@@ -17,11 +24,53 @@
   font-size: 26rpx;
 }
 .ib2one{
-	width: 320rpx;
+	width: 200rpx;
 	height: 120rpx;
 }
 
 .ib2one image{
 	width: 100%;
 	height: 120rpx;
+}
+.t-scroll-header{
+  height: 400rpx;
+  display: flex;
+  white-space: nowrap;
+  margin-bottom:20rpx;
+}
+.t-rel-list{
+  width: 700rpx;
+  height:400rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  
+  display: inline-block;
+  position: relative;
+  
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+.t-rel-list image{
+  width: 100%;
+  height: 100%;
+  border-radius: 20rpx;
+}
+.t-text{
+  position: absolute;
+  bottom: 20rpx;
+  left: 20rpx;
+  right: 20rpx;
+  height: 120rpx;
+  /* line-height: 100rpx; */
+  color: #fff;
+  padding:0 30rpx;
+  box-sizing: border-box;
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
+  border-bottom-right-radius: 20rpx;
+  border-bottom-left-radius: 20rpx;
+  font-size: 34rpx;
+  line-height: 50rpx;
+}
+.cbody{
+  font-size: 28rpx;
 }

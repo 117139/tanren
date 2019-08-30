@@ -1,4 +1,5 @@
 // pages/share/share.js
+const app=getApp()
 Page({
 
   /**
@@ -13,7 +14,10 @@ Page({
    */
   onLoad: function (options) {
 		if(options.type=="fwcz"){
-			
+			this.getfwzc(options.id)
+		}
+		if(options.type=="zpqz"){
+			this.getzpqz(options.id)
 		}
   },
 
@@ -85,17 +89,46 @@ Page({
 	getfwzc(id){
 		let that = this
 		wx.request({
-			url:  app.IPurl2+'/index/dining/index',
-			data:{
-				"page":that.data.pages[that.data.type],
-				"region_name":that.data.datalist[that.data.type].region_name,
-				"search":that.data.search
-			},
+			url:  app.IPurl+'/api/rent_house/show?rent_id='+id,
+			data:{},
 			// header: {
 			// 	'content-type': 'application/x-www-form-urlencoded'
 			// },
 			dataType:'json',
-			method:'get',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+				let rlist=res.data.retData
+				
+				if(res.data.errcode==0){
+					
+					
+						
+						that.setData({
+							fxdata:rlist
+						})
+
+				}
+			
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			}
+		})
+	},
+	getzpqz(id){
+		let that = this
+		wx.request({
+			url:  app.IPurl+'/api/job_seek/show?job_id='+id,
+			data:{},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
 			success(res) {
 				console.log(res.data)
 				let rlist=res.data.retData

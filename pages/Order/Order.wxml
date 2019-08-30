@@ -1,12 +1,18 @@
 <!--logs.wxml-->
 <import src="/utils/pageState/index.wxml" />
-<template is="pageState" data="{{...pageState}}" />
+<!-- <template is="pageState" data="{{...pageState}}" /> -->
+<wxs src="../../utils/filter.wxs" module="filter" />
 <view class="container">
   <view class="address" bindtap="goaddress">
-		<view class="add_l">
-			<view class="al_1">{{address.nickname}} <text class="l_tel">{{address.account}}</text></view>
+		<view wx:if="{{address.id}}" class="add_l">
+			<view class="al_1">{{address.name}} <text class="l_tel">{{address.phone}}</text></view>
+			<!-- <view class="al_1">{{address.nickname}} <text class="l_tel">{{address.account}}</text></view> -->
 			
-			<view class="al_2">{{address.city}}</view>
+			<!-- <view class="al_2">{{address.city}}</view> -->
+			<view class="al_2">{{address.city}}{{address.address}}</view>
+		</view>
+		<view  wx:if="{{!address.id}}" class="flex_1">
+			请选择地址
 		</view>
 		<view class="add_r">
 			<text class="iconfont iconnext myicon c9 myicon1"></text>
@@ -19,20 +25,20 @@
 		<view class="goodsOne">
 			<view class="goodsdft">
 				<view class="goodsImg">
-					<image src="{{spimg[idx]}}"></image>
+					<image src="{{filter.imgIP(orderxq.goods_img)}}"></image>
 				</view>
 				<view class="goodsInr">
-					{{item.data.goods_sku_name}} {{goodsguige===''?'':goodsguige}} {{goodsnum===''?'':goodsnum}}件
+					<text>{{orderxq.goods_name}}</text>
 				</view>
 			</view>
 			
 			<view class="xiaoji">
-				共{{goodsnum===''?'':goodsnum}}件商品 <text class="ml10">小计：</text><text class="xjjine">￥{{goods_sele[idx].Totalpri? goods_sele[idx].Totalpri:goods_sele[idx].laddermsgs.Totalpri}}</text>
+				共{{1}}件商品 <text class="ml10">小计：</text><text class="xjjine">{{orderxq.goods_fraction}}积分</text>
 			</view>
 		</view>
 	</view>
 	<view class="fixbottom">
-		<view class="fb_l">￥{{sum}}</view>
+		<view class="fb_l">{{orderxq.goods_fraction}}积分</view>
 		<view wx:if="{{paykg}}" class="subbtn"  bindtap="subbtn">提交订单</view>
 		<view wx:if="{{!paykg}}" class="subbtn subbtn1" >提交订单</view>
 	</view>

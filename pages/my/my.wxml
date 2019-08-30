@@ -13,35 +13,57 @@
 	<view class="w100">
 		<view bindtap="jump" data-url="/pages/xitong/xitong" class="dis_flex mylist">
 			<text class="iconfont icontongzhi myicon mr20" style="color: #2e62e5;"></text>
-			<text class="flex_1">系统通知</text>
+			<text class="flex_1 fz32">系统通知</text>
 			<text class="iconfont iconnext myicon c9 myicon1"></text>
 		</view>
 		<view bindtap="jump" data-url="/pages/mysc/mysc" class="dis_flex mylist">
 			<text class="iconfont iconwujiaoxing myicon mr20" style="color: #eabb26;"></text>
-			<text class="flex_1">我的收藏</text>
+			<text class="flex_1 fz32">我的收藏</text>
 			<text class="iconfont iconnext myicon c9 myicon1"></text>
 		</view>
 		<view bindtap="jump" data-url="/pages/myjf/myjf" class="dis_flex mylist">
 			<!-- <text class="iconfont iconshezhi myicon mr20" style="color: #f15a29;"></text> -->
 			<text class="iconfont icondiamond myicon cf15a29 mr20"></text>
-			<text class="flex_1">我的积分</text>
+			<text class="flex_1 fz32">我的积分</text>
 			<text class="iconfont iconnext myicon c9 myicon1"></text>
 		</view>
 		<view bindtap="jump" data-url="/pages/myjfsc/myjfsc" class="dis_flex mylist">
 			<text class="iconfont icongwc myicon mr20" style="color: #e22829;"></text>
-			<text class="flex_1">积分商城</text>
+			<text class="flex_1 fz32">积分商城</text>
 			<text class="iconfont iconnext myicon c9 myicon1"></text>
 		</view>
 		<view class="dis_flex mylist" bindtap="call"  data-tel="{{phone}}">
 			<text class="iconfont iconkefu myicon mr20" style="color: #ffa217;"></text>
-			<text class="flex_1">在线客服  </text>
+			<text class="flex_1 fz32">在线客服</text>
 			<!-- <text class="iconfont iconnext myicon c9 myicon1"></text> -->
-			<text class="fz36 c9">{{phone}}</text>
+			<text class="fz32 c9">{{phone}}</text>
 		</view>
-		<view bindtap="jump" data-url="/pages/myset/myset" class="dis_flex mylist">
-			<text class="iconfont iconshezhi myicon mr20" style="color: #59b94e;"></text>
-			<text class="flex_1">设置</text>
+    <view bindtap="jump" data-url="/pages/myaddress/myaddress" class="dis_flex mylist">
+			<text class="iconfont iconGPS-xuanzhongdizhiguanli myicon mr20" style="color: #f15a29;"></text>
+			<text class="flex_1  fz32">地址管理</text>
 			<text class="iconfont iconnext myicon c9 myicon1"></text>
 		</view>
+		<view bindtap="jump" data-url="/pages/settel/settel" class="dis_flex mylist">
+			<text class="iconfont iconshouji myicon mr20" style="color: #E22829;"></text>
+			<text class="flex_1 fz32">换绑手机</text>
+			<text class="iconfont iconnext myicon c9 myicon1"></text>
+		</view>
+    <view bindtap="jump" data-url="/pages/setyj/setyj" class="dis_flex mylist">
+			<text class="iconfont icontubiao05 myicon mr20" style="color: #59b94e;"></text>
+			<text class="flex_1 fz32">意见反馈</text>
+			<text class="iconfont iconnext myicon c9 myicon1"></text>
+		</view>
+		<view bindtap="jump" data-url="/pages/about/about" class="dis_flex mylist">
+			<!-- <text class="iconfont iconshezhi myicon mr20" style="color: #5d85dc;"></text> -->
+			<text class="iconfont iconguanyu myicon cf15a29 mr20"></text>
+			<text class="flex_1 fz32">关于我们</text>
+			<text class="iconfont iconnext myicon c9 myicon1"></text>
+		</view>
+    <view class="heng1"></view>
+		<!-- <view bindtap="jump" data-url="/pages/myset/myset" class="dis_flex mylist">
+			<text class="iconfont iconshezhi myicon mr20" style="color: #59b94e;"></text>
+			<text class="flex_1 fz32">设置</text>
+			<text class="iconfont iconnext myicon c9 myicon1"></text>
+		</view> -->
 	</view>
 </view>

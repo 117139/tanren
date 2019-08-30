@@ -296,7 +296,7 @@ Page({
 								
 								wx.showToast({
 									 icon:'none',
-									 title:'发表成功',
+                  title: res.data.ertips,
 									 duration:2000
 								})
 								setTimeout(function(){
@@ -307,25 +307,29 @@ Page({
 								that.setData({
 									kg:1
 								})
-								wx.showToast({
-									 icon:'none',
-									 title:res.data.ertips,
-									 duration:2000
-								})
+                if(res.data.ertips) {
+                  wx.showToast({
+                    icon: 'none',
+                    title: res.data.ertips
+                  })
+                } else {
+                  wx.showToast({
+                    icon: 'none',
+                    title: '操作失败'
+                  })
+                }
 							}
 							
 							 
 						},
-						fail() {
-							wx.hideLoading()
-							that.setData({
-								kg:1
-							})
-							wx.showToast({
-								icon:'none',
-								title:'操作失败',
-								duration:2000
-							})
+						fail(err) {
+              wx.hideLoading()
+              
+              console.log(err)
+              wx.showToast({
+                icon: 'none',
+                title: '操作失败'
+              })
 						},
 						complete() {
 							

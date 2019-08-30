@@ -1,0 +1,57 @@
+/* pages/huodong/huodong.wxss */
+.yhbox{
+	width: 100%;
+	/* background-color: #ddd; */
+	/* margin: 0 -36rpx; */
+	
+}
+.yhone{
+	width: 100%;
+	height: 450rpx;
+	position: relative;
+}
+.yhone>image{
+	width: auto;
+	height: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: -10rpx;
+	bottom: 0;
+	z-index: 3;
+}
+.yhmain{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 4;
+}
+.yhmain>view{
+	height: 215rpx;
+}
+.yhpri{
+	width: 240rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #e22829;
+	font-size: 34rpx;
+}
+.yhpri text{
+	font-size: 50rpx;
+	margin-left: 5px;
+	font-weight: bold;
+}
+.yhicon{
+	width: 28rpx;
+	height: 28rpx;
+	margin-left: 65rpx;
+	margin-right: 10px;
+}
+.iconyiguoqi{
+	position: absolute;
+	top: 0;
+	right: 0;
+}

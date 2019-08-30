@@ -112,6 +112,43 @@ App({
 			url:e.currentTarget.dataset.url
 		})
 	},
+	sharerw(type){
+		var that =this
+		if(type!='share'){
+			return
+		}
+		wx.request({
+			url:  that.IPurl+'/index/personal/share',
+			data:{
+				"id":wx.getStorageSync('usermsg').id
+			},
+			// header: {
+			// 	'content-type': 'application/x-www-form-urlencoded'
+			// },
+			dataType:'json',
+			method:'POST',
+			success(res) {
+				console.log(res.data)
+				let rlist=res.data.retData
+				
+				if(res.data.errCode==0){
+					wx.showToast({
+						icon:'none',
+						// title:'分享成功'
+						title:res.data.ertips
+					})
+		
+				}
+			
+			},
+			fail() {
+				wx.showToast({
+					 icon:'none',
+					 title:'操作失败'
+				})
+			}
+		})
+	},
 	//获取支付信息
 	Pay(order_info_id,type){
 		let that=this
@@ -158,6 +195,7 @@ App({
 		});
 	},
 	doWxPay(param) {
+    console.log(param)
 		// wx.showToast({
 		// 	title:'doWxPay'
 		// })

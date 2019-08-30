@@ -83,7 +83,7 @@
 			<view class="dis_flex ju_b w100 aic">
 				<view class="dis_flex aic">
 					<image class="msgicon1" src="../../static/images/pl.png"></image>
-					<text class='fz24'>{{item1.region.name}}</text>
+					<text class='fz24'>{{item1.title}}</text>
 				</view>
 				<view class="dis_flex aic">
 					<view class="dis_flex aic mr20" 

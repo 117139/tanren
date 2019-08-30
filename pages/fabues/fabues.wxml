@@ -15,16 +15,14 @@
 		</view> -->
 		<view class="dis_flex w100 aic ju_b mb40">
 			<view style="color:#525252">
-				<text class="iconfont icondianhua1 c9 mr10"></text>
-				您的电话
+				<text class="iconfont icondianhua1 c9 mr10"></text>您的电话
 			</view>
 			<input type="text" placeholder="请输入您的电话" bindinput="usertel"/>
 		</view>
 		<view class="c9 fz30 w100 pl40 boxsiz">价格示例: $100 或 $100-$200</view>
 		<view class="dis_flex w100 aic ju_b mb40">
 			<view style="color:#525252">
-				<text class="iconfont iconbiaoqian c9 mr10"></text>
-				商品价格
+				<text class="iconfont iconbiaoqian c9 mr10"></text>商品价格
 			</view>
 			<view class="dis_flex">
 				<!-- <text class="ce22829 mr10">$</text> -->
@@ -35,8 +33,7 @@
 		<picker class="w100" bindchange="bindPickerChange" value="{{index}}" range="{{datalist}}" range-key="{{'region_name'}}">
 			<view class="dis_flex w100 aic ju_b mb40">
 				<view style="color:#525252">
-					<text class="iconfont icondiqu c9 mr10"></text>
-					交易地区
+					<text class="iconfont icondiqu c9 mr10"></text>交易地区
 				</view>
 					<view style="color:#a0a0a0">{{datalist[index].region_name? datalist[index].region_name:'未选择'}}<text class="iconfont iconnext c9 mr10"></text></view>
 			</view>

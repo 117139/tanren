@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    btnkg:0,
 		page:1,
 		sqid:'',
 		num:0,
@@ -25,7 +26,8 @@ Page({
 			weishen:0,
 			weidao:0,
 			fuwu:0
-		}
+		},
+		sharetype:''
   },
 
   /**
@@ -50,12 +52,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+		this.sharerw(this.data.sharetype)
+		this.setData({
+			sharetype:''
+		})
 		this.setData({
 			page:1
 		})
-		this.getpl()
+		this.getpl(1)
   },
 
+	sharerw(share){
+		app.sharerw(share)
+	},
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -88,17 +97,20 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
+		this.setData({
+			sharetype:'share'
+		})
 		console.log(res)
 		if (res.from === 'button') {
-			console.log(res.target.dataset.supid)
+			// console.log(res.target.dataset.supid)
     }
-    return {
-      title: '转发',
-      path: '/pages/share/share/?supid=' + res.target.dataset.type,
-      success: function (res) {
-        console.log('成功', res)
-      }
-    }
+    // return {
+    //   title: '转发',
+    //   path: '/pages/share/share/?supid=' + res.target.dataset.type,
+    //   success: function (res) {
+    //     console.log('成功', res)
+    //   }
+    // }
   },
 	call(e){
 		console.log(e.currentTarget.dataset.tel)
@@ -124,6 +136,13 @@ Page({
 	shoucangff(e){
 		var that =this
 		console.log(e.currentTarget.dataset.id)
+    if (that.data.btnkg == 1) {
+      return
+    } else {
+      that.setData({
+        btnkg: 1
+      })
+    }
 		wx.request({
 			url:  app.IPurl+'/api/community/collect',
 			data:{
@@ -138,7 +157,9 @@ Page({
 			method:'POST',
 			success(res) {
 				console.log(res.data)
-			
+        that.setData({
+          btnkg: 0
+        })
 				
 				if(res.data.errcode==0){
 					that.setData({
@@ -162,7 +183,8 @@ Page({
 				 
 			},
 			fail() {
-				that.setData({
+        that.setData({
+          btnkg: 0,
 					kg:1
 				})
 				wx.showToast({
@@ -214,7 +236,7 @@ Page({
 				}else{
 					 wx.showToast({
 						 icon:'none',
-						 title:'操作失败'
+						 title:'获取失败'
 					})
 					pageState1.error()
 				}
@@ -223,7 +245,7 @@ Page({
 			fail() {
 				 wx.showToast({
 					 icon:'none',
-					 title:'操作失败'
+           title:'获取失败'
 				 })
 				 pageState1.error()    // 切换为error状态
 			}
@@ -281,14 +303,14 @@ Page({
 				}else{
 					 wx.showToast({
 						 icon:'none',
-						 title:'操作失败'
+             title:'获取失败'
 					})
 				}
 			},
 			fail() {
 				 wx.showToast({
 					 icon:'none',
-					 title:'操作失败'
+           title:'获取失败'
 				 })
 			}
 		})

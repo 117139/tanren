@@ -27,30 +27,36 @@
 	<view class='dis_flex ju_a mb45 w100'>
 		<view class='ibone' data-url="/pages/zhaopin/zhaopin" bindtap="jump">
 			<image class='indebtnicon' src='/static/images/index_07.jpg'></image>
-			<text>招聘求职</text>
+			<!-- <text>招聘求职</text> -->
 		</view>
 		<view class='ibone' bindtap="jump" data-url="/pages/chuzu/chuzu">
 			<image class='indebtnicon' src='/static/images/index_09.jpg'></image>
-			<text>房屋出租</text>
+			<!-- <text>房屋出租</text> -->
 		</view>
 		<view class='ibone' bindtap="jump" data-url="/pages/ershou/ershou">
 			<image class='indebtnicon' src='/static/images/index_11.jpg'></image>
-			<text>二手买卖</text>
+			<!-- <text>二手买卖</text> -->
 		</view>
 		<view class='ibone' bindtap="jump" data-url="/pages/meishi/meishi">
 			<image class='indebtnicon' src='/static/images/index_13.jpg'></image>
-			<text>附近美食</text>
+			<!-- <text>附近美食</text> -->
 		</view>
 	</view>
 	<view class="w100 dis_flex ju_b mb45">
 		<view class="ib2one"  bindtap="jump" data-url="/pages/jiaoche/jiaoche">
 			<image src='/static/images/index_20.jpg'></image>
 		</view>
-		<view class="ib2one"  bindtap="jump" data-url="/pages/jiudian/jiudian">
+		<view class="ib2one"  bindtap="jump" data-url="/pages/bgpingtai/bgpingtai">
 			<image src='/static/images/index_22.jpg'></image>
 		</view>
+		<view class="ib2one"  bindtap="jump" data-url="/pages/huodong/huodong">
+			<image src='/static/images/index_22.jpg'></image>
+		</view>
+		<!-- <view class="ib2one"  bindtap="jump" data-url="/pages/jiudian/jiudian">
+			<image src='/static/images/index_22.jpg'></image>
+		</view> -->
 	</view>
-	<view class="w100 mb45">
+	<!-- <view class="w100 mb45">
 		<view class="tac mb40">// 美食推荐 //</view>
 		<view class="w100 dis_flex ju_b">
 			<view  bindtap="jump" data-url="/pages/details_ms/details_ms?id={{item.dining_id}}" class="msone"
@@ -71,20 +77,38 @@
 			</view>
 			
 		</view>
-	</view>
+	</view> -->
+  <!-- hot -->
+  <view class='t-title'>
+    <text>// 热门专题 //</text>
+  </view>
+  <scroll-view scroll-x class="t-scroll-header" lower-threshold="100" bindscrolltolower="zt_jiazai">
+    <view class='t-rel-list' 	wx:for="{{tuijian}}"
+				wx:for-index="idx"
+				wx:for-item="item"
+				wx:key="idx" bindtap="jump" data-url="/pages/detailssq_hot/detailssq?id={{item.id}}">
+      <image src="{{filter.imgIP(item.pic)}}"></image>
+      <view class='t-text conceal oh1'>
+        <view>{{item.title}}</view>
+        <view class='oh1 cbody'>{{item.body}}</view>
+      </view>
+      <!-- <view class='t-text conceal oh1'>{{item.body}}</view> -->
+    </view>
+  </scroll-view>
+  <!-- hot -->
 	<view class="w100 mb45">
 		<view class="fwb mb40 fz32">
 			推荐内容
 		</view>
-		<view  bindtap="jump" data-url="/pages/detailssq/detailssq?id={{item1.id}}" class='tjone w100'
+		<view  bindtap="jump" data-url="/pages/detailssq_tj/detailssq?id={{item1.id}}" class='tjone w100'
 				wx:for="{{lists}}"
 				wx:for-index="idx1"
 				wx:for-item="item1"
 				wx:key="idx1">
 			<view class="w100 dis_flex ju_b aic mb20">
 				<view class="dis_flex aic">
-					<image class="headimg" src="{{item1.user.head_img}}"></image>
-					<text class="ml5 fz30">{{item1.user.nickname}}</text>
+					<image class="headimg" src="{{filter.imgIP(item1.user.portrait)}}"></image>
+					<text class="ml5 fz30">{{item1.user.reception}}</text>
 				</view>
 				<view class="c6 fz30">{{item1.create_time}}</view>
 			</view>
@@ -113,7 +137,7 @@
 			<view class="dis_flex ju_b w100 aic">
 				<view class="dis_flex aic">
 					<image class="msgicon1" src="../../static/images/pl.png"></image>
-					<text class='fz24'>{{item1.region.name}}</text>
+					<text class='fz24'>{{item1.title}}</text>
 				</view>
 				<view class="dis_flex aic">
 					<view class="dis_flex aic mr20" 

@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    btnkg:0,
 		pages:[],
 		hangye:0,
 		search:'',
@@ -109,6 +110,13 @@ Page({
   		pages:that.data.pages,
   		lists:that.data.lists
   	})
+    if (that.data.btnkg == 1) {
+      return
+    } else {
+      that.setData({
+        btnkg: 1
+      })
+    }
   	wx.request({
   		url:  app.IPurl+'/api/used_product/index',
   		data:{
@@ -123,6 +131,9 @@ Page({
   		dataType:'json',
   		method:'get',
   		success(res) {
+        that.setData({
+          btnkg: 0
+        })
   			console.log(res.data)
   			let rlist=res.data.retData.data
   			
@@ -151,6 +162,9 @@ Page({
   			}
   		},
   		fail() {
+        that.setData({
+          btnkg: 0
+        })
   			 wx.showToast({
   				 icon:'none',
   				 title:'操作失败'
@@ -200,12 +214,22 @@ Page({
   				}
   				
   				 pageState1.finish()    // 切换为finish状态
-  			}
+  			}else{
+          pageState1.error()    // 切换为error状态
+          wx.showToast({
+            icon: 'none',
+            title: '获取失败'
+          })
+        }
   			
   			  // pageState1.error()    // 切换为error状态
   		},
   		fail() {
-  			 pageState1.error()    // 切换为error状态
+  			pageState1.error()    // 切换为error状态
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败'
+        })
   		}
   	})
   },

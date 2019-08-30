@@ -47,7 +47,7 @@
 					<text class="fz30 iconfont icondianhua mr10 c169fff"></text> <text class="fz30 c525155">{{item1.phone}}</text>
 				</view>
 
-				<view class="dis_flex ju_b w100">
+				<view class="dis_flex ju_b w100 aic">
 					<text class="fz28 c9">发布时间{{item1.create_time}}</text>
 					<view class="dis_flex">
 						<view class="dis_flex aic mr20"
@@ -56,11 +56,11 @@
 							data-id="{{item1.id}}"
 							catchtap="shoucangff">
 							<text  class="iconfont iconstar myicon mr10 fz30 {{item1.user_collect==1?'c9':'ce22829'}}"></text>
-							<text class='fz24'>{{item1.collect}}</text>
+							<text class='fz32'>{{item1.collect}}</text>
 						</view>
 						<view class="share1">
 							<text class="iconfont iconfenxiang fz36 c9"></text>
-							<button class="shareBtn" open-type='share' data-id="{{id}}" data-type="{{idx1}}"></button>
+							<button class="shareBtn" open-type='share' data-id="{{item1.id}}" data-type="{{idx1}}"></button>
 						</view>
 					</view>
 					

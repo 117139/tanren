@@ -3,11 +3,14 @@ const app = getApp()
 
 Page({
   data: {
+    btnkg:0,
     region: [],
 		moren:true
   },
   onLoad: function () {
-    
+    that.setData({
+      btnkg: 0
+    })
   },
 	//选择地区
 	bindRegionChange(e) {
@@ -61,6 +64,13 @@ Page({
 			});
 			return false;
 		}
+    if (that.data.btnkg==1){
+      return
+    }else{
+      that.setData({
+        btnkg:1
+      })
+    }
 	//http://water5100.800123456.top/WebService.asmx/useraddress
 		wx.request({
 			url:  app.IPurl+'/index/personal/address',
@@ -83,9 +93,15 @@ Page({
 						title:'保存成功'
 					})
 					setTimeout(function() {
+            that.setData({
+              btnkg: 0
+            })
 						wx.navigateBack()
 					}, 1000);
 				}else{
+          that.setData({
+            btnkg: 0
+          })
 					wx.showToast({
 						 icon:'none',
 						 title:'操作失败'
@@ -93,7 +109,9 @@ Page({
 				}
 			},
 			fail() {
-				 pageState1.error()    // 切换为error状态
+        that.setData({
+          btnkg: 0
+        })
 				 wx.showToast({
 				 	 icon:'none',
 				 	 title:'操作失败'

@@ -34,7 +34,7 @@
 	align-items: center;
 	color: #fff;
 	font-size: 28rpx;
-	background-color: #135eac;
+	background-color: #E22829;
 }
 .wx-switch-input{width:86rpx !important;height:50rpx !important;}
 .wx-switch-input::before{width:82rpx !important;height: 46rpx !important;}

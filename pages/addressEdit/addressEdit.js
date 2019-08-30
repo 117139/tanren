@@ -3,6 +3,7 @@ const app = getApp()
 
 Page({
   data: {
+    btnkg:0,
     region: [],
 		moren:false,
 		editaddress:{
@@ -79,7 +80,13 @@ Page({
 			});
 			return false;
 		}
-
+    if (that.data.btnkg == 1) {
+      return
+    } else {
+      that.setData({
+        btnkg: 1
+      })
+    }
 		wx.request({
 			url:  app.IPurl+'/index/personal/address_edit',
 			data:  {
@@ -101,9 +108,15 @@ Page({
 						title:'保存成功'
 					})
 					setTimeout(function() {
+            that.setData({
+              btnkg: 0
+            })
 						wx.navigateBack()
 					}, 1000);
 				}else{
+          that.setData({
+            btnkg: 0
+          })
 					wx.showToast({
 						 icon:'none',
 						 title:'操作失败'
@@ -111,7 +124,9 @@ Page({
 				}
 			},
 			fail() {
-				 pageState1.error()    // 切换为error状态
+        that.setData({
+          btnkg: 0
+        })
 				 wx.showToast({
 				 	 icon:'none',
 				 	 title:'操作失败'

@@ -169,12 +169,21 @@ Page({
 					}
 					
 					 pageState1.finish()    // 切换为finish状态
-				}
+				}else{
+          wx.showToast({
+            icon: 'none',
+            title: '获取失败'
+          })
+        }
 				
 				  // pageState1.error()    // 切换为error状态
 			},
 			fail() {
 				 pageState1.error()    // 切换为error状态
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败'
+        })
 			}
 		})
 	},
@@ -227,14 +236,19 @@ Page({
 						// 	 title:'已经到底了'
 						// })
 					}
-				}
+				}else{
+          wx.showToast({
+            icon: 'none',
+            title: '获取失败'
+          })
+        }
 			
 			},
 			fail() {
-				wx.showToast({
-					 icon:'none',
-					 title:'操作失败'
-				})
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败'
+        })
 			}
 		})
 	},

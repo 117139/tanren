@@ -27,4 +27,5 @@
 			<text class="jfcz" data-url="/pages/Order/Order?id={{item.goods_id}}" bindtap="jump">马上兑</text>
 		</view>
 	</view>
+	<view class="tips">兑换商品后我们将尽快为您寄送您所兑换的商品，请您耐心等待!</view>
 </view>

@@ -44,7 +44,7 @@ Page({
    */
   onLoad: function (options) {
 		this.getbanner(7)
-		this.getyhlist()
+		
 		this.getxiaoxi()
   },
 
@@ -59,24 +59,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-		console.log('show')
-    var that = this;
-    var length = '';//文字长度
-		var obj=wx.createSelectorQuery();
-		obj.selectAll('.marquee_text').boundingClientRect();
-		obj.exec(function (rect) {
-			console.log(rect)
-				console.log(rect[0][0].height)
-				console.log(rect[0][0].width)
-				length=rect[0][0].width
-				console.log(length)
-				var windowWidth = wx.getSystemInfoSync().windowWidth;// 屏幕宽度
-				that.setData({
-				  length: length,
-				  windowWidth: windowWidth,
-				});
-				that.runMarquee();// 水平一行字滚动完了再按照原来的方向滚动
-		}) 
+		this.setData({
+			pages:[1,1,1],
+			lists:[
+				[],
+				[],
+				[]
+			],
+		})
+		this.getyhlist(1)
     
   },
 
@@ -462,7 +453,26 @@ Page({
 					that.setData({
 						zdxx:rlist
 					})
-				
+					// setTimeout(function() {
+					// 	console.log('show')
+					// 	// var that = this;
+					// 	var length = '';//文字长度
+					// 	var obj=wx.createSelectorQuery();
+					// 	obj.selectAll('.marquee_text').boundingClientRect();
+					// 	obj.exec(function (rect) {
+					// 		console.log(rect)
+					// 			console.log(rect[0][0].height)
+					// 			console.log(rect[0][0].width)
+					// 			length=rect[0][0].width
+					// 			console.log(length)
+					// 			var windowWidth = wx.getSystemInfoSync().windowWidth;// 屏幕宽度
+					// 			that.setData({
+					// 			  length: length,
+					// 			  windowWidth: windowWidth,
+					// 			});
+					// 			that.runMarquee();// 水平一行字滚动完了再按照原来的方向滚动
+					// 	}) 
+					// }, 10);
 				}else{
 					wx.showToast({
 						 icon:'none',

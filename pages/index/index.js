@@ -8,6 +8,7 @@ const util = require('../../utils/util.js')
 Page({
   data: {
 		page:1,
+    page_zt:1,
 		search:'',
 		ak:"HHnGRVsuG6aDpQQQveZnpOE14sk1ZyLd", //填写申请到的ak  
     markers: [],  
@@ -43,14 +44,22 @@ Page({
     console.log(1)
 		this.getshoplist()
   },
-	//获取首页list（搜索）
+  zt_jiazai(){
+    console.log(1)
+    var that =this
+    // that.data.tuijian.push(that.data.tuijian[0])
+    // that.setData({
+    //   tuijian: that.data.tuijian
+    // })
+    that.gettuijian()
+  },
+	//获取首页list（推荐内容）
 	getshoplist(type){
 		let that = this	
 		wx.request({
-			url:  app.IPurl+'/api/community/index',
+      url: app.IPurl +'/api/recommend/index',
 			data:{
 				"authorization":wx.getStorageSync('usermsg').user_token,
-				'recommend':1,
 				'search':that.data.search,
 				'page':that.data.page
 			},
@@ -273,30 +282,35 @@ Page({
 	gettuijian(){
 		let that = this
 		wx.request({
-			url:  app.IPurl+'index/dining/homeelect',
+      url: app.IPurl +'/api/hot_subject/index',
 			data:{
-				"turns_class":0,
+        "authorization": wx.getStorageSync('usermsg').user_token,
+				"page":that.data.page_zt,
 			},
-			// header: {
-			// 	'content-type': 'application/x-www-form-urlencoded'
-			// },
+			header: {
+				'content-type': 'application/x-www-form-urlencoded'
+			},
 			dataType:'json',
 			method:'POST',
 			success(res) {
 				console.log(res.data)
 				
 				
-				if(res.data.errCode==0){
-					let rlist=res.data.retData
-					
-						that.setData({
-							tuijian:rlist
-						})
+				if(res.data.errcode==0){
+          let rlist = res.data.retData.data
+          if (rlist.length>0){
+            that.data.page_zt++
+          }
+          that.data.tuijian = that.data.tuijian.concat(rlist)
+          that.setData({
+            tuijian: that.data.tuijian,
+            page_zt: that.data.page_zt
+          })
 				
 				}else{
 					wx.showToast({
 						 icon:'none',
-						 title:'操作失败'
+						 title:'获取失败'
 					})
 				}
 			
@@ -304,7 +318,7 @@ Page({
 			fail() {
 				wx.showToast({
 					 icon:'none',
-					 title:'操作失败'
+          title:'获取失败'
 				})
 			}
 		})
@@ -314,7 +328,7 @@ Page({
 		console.log(e.currentTarget.dataset.id)
 		var idx1=e.currentTarget.dataset.idx1
 		wx.request({
-			url:  app.IPurl+'/api/community/praise',
+      url: app.IPurl +'/api/recommend/praise',
 			data:{
 				"authorization":wx.getStorageSync('usermsg').user_token,
 				'community_id':e.currentTarget.dataset.id
@@ -370,10 +384,11 @@ Page({
 		console.log(e.currentTarget.dataset.id)
 		var idx1=e.currentTarget.dataset.idx1
 		wx.request({
-			url:  app.IPurl+'/api/community/collect',
+      url: app.IPurl +'/api/recommend/collect',
 			data:{
 				"authorization":wx.getStorageSync('usermsg').user_token,
-				'community_id':e.currentTarget.dataset.id
+				'module_id':e.currentTarget.dataset.id,
+				'module_type':10
 			},
 			// header: {
 			// 	'content-type': 'application/x-www-form-urlencoded'

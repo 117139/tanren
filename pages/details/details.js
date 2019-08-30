@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    btnkg:0,
 		sqid:"",
 		shoucang:'',
 		page:1,
@@ -20,7 +21,8 @@ Page({
 		tmpdata:{
 			fblen:0,
 			imgb:[]
-		}
+		},
+		sharetype:''
   },
 
   /**
@@ -45,6 +47,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+		this.sharerw(this.data.sharetype)
+		this.setData({
+			sharetype:''
+		})
 		this.setData({
 			page:1
 		})
@@ -83,10 +89,15 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-		// console.log(res)
-		// if (res.from === 'button') {
-		// 	console.log(res.target.dataset.supid)
-  //   }
+		this.setData({
+			sharetype:'share'
+		})
+		if (res.from === 'button') {
+			// console.log(res.target.dataset.type)
+			this.setData({
+				sharetype:'share'
+			})
+		}
   //   return {
   //     title: '转发',
   //     path: '/pages/share/share/?spid=' + this.data.sqid,
@@ -95,6 +106,10 @@ Page({
   //     }
   //   }
   },
+	
+	sharerw(share){
+		app.sharerw(share)
+	},
 	call(e){
 		console.log(e.currentTarget.dataset.tel)
 		wx.makePhoneCall({
@@ -104,6 +119,13 @@ Page({
 	shoucangff(e){
 		var that =this
 		console.log(e.currentTarget.dataset.id)
+    if (that.data.btnkg == 1) {
+      return
+    } else {
+      that.setData({
+        btnkg: 1
+      })
+    }
 		wx.request({
 			url:  app.IPurl+'/api/community/collect',
 			data:{
@@ -119,7 +141,9 @@ Page({
 			success(res) {
 				console.log(res.data)
 			
-				
+        that.setData({
+          btnkg: 0
+        })
 				if(res.data.errcode==0){
 					that.setData({
 						shoucang:!that.data.shoucang
@@ -142,7 +166,8 @@ Page({
 				 
 			},
 			fail() {
-				that.setData({
+        that.setData({
+          btnkg: 0,
 					kg:1
 				})
 				wx.showToast({
@@ -200,7 +225,7 @@ Page({
 				}else{
 					 wx.showToast({
 						 icon:'none',
-						 title:'操作失败'
+						 title:'获取失败'
 					})
 					pageState1.error()
 				}
@@ -209,7 +234,7 @@ Page({
 			fail() {
 				 wx.showToast({
 					 icon:'none',
-					 title:'操作失败'
+           title:'获取失败'
 				 })
 				 pageState1.error()    // 切换为error状态
 			}
@@ -266,14 +291,14 @@ Page({
 				}else{
 					 wx.showToast({
 						 icon:'none',
-						 title:'操作失败'
+             title:'获取失败'
 					})
 				}
 			},
 			fail() {
 				 wx.showToast({
 					 icon:'none',
-					 title:'操作失败'
+           title:'获取失败'
 				 })
 			}
 		})

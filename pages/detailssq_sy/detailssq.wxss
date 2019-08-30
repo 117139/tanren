@@ -1,0 +1,36 @@
+/* pages/detailssq/detailssq.wxss */
+.bbbtnz{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100rpx;
+	padding: 0 36rpx;
+	background-color: #fff;
+	border-top: 1px solid #ddd;
+}
+.lxbtn{
+	width: 300rpx;
+	height: 60rpx;
+	padding-left: 20rpx;
+	background-color: #f2f2f2;
+	border: 1px solid #ddd;
+	color: #999;
+	border-radius: 8rpx;
+	margin-right: 50rpx;
+}
+.msgicon1{
+	margin-top: 10rpx;
+}
+.trbox{
+	padding: 0 5px;
+	height: 30rpx;
+	border-radius: 30rpx;
+	font-size: 26rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #eee;
+	color:#a4a4a4;
+	margin-top: -15rpx;
+}

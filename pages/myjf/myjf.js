@@ -8,7 +8,9 @@ Page({
   data: {
 		jifen:0,
 		show: false,
-		tmpdata:{}
+		tmpdata:{},
+    money:0,
+    in_id:''
   },
 
   /**
@@ -153,12 +155,55 @@ Page({
 	},
 	onClose1() {
 	  this.setData({ show: false });
-	},
+	// },
+  // //获取支付信息
+  // Pay() {
+    let that = this
+    
+    // console.log(JSON.stringify(datas))
+    wx.request({
+      url: app.IPurl + '/api/integral_pay/index',
+      data: {
+        "authorization": wx.getStorageSync('usermsg').user_token,
+        integral_id: that.data.in_id,
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' // 默认值
+      },
+      method: "POST",
+      success: function (res) {
+        console.log('194' + res.data);
+        if (res.data.code == 0) {
+          app.doWxPay(res.data);
+        } else {
+          if(res.data.ertips){
+            wx.showToast({
+              icon:'none',
+              title: res.data.ertips,
+            })
+          }else{
+            wx.showToast({
+              icon: 'none',
+              title: '操作失败',
+            })
+          }
+        }
+
+      },
+      fail: function (err) {
+        wx.showToast({
+          icon: "none",
+          title: '服务器异常，请稍候再试'
+        })
+      },
+    });
+  },
 	showpp(e){
 		console.log(e.currentTarget.dataset.mon)
 		this.setData({
 			show: true ,
-			money:e.currentTarget.dataset.mon
+      money: e.currentTarget.dataset.mon,
+			in_id:e.currentTarget.dataset.id
 		});
 	},
 })

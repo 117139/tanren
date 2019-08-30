@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-		kg:1,
+		btnkg:0,
 		num:0,
 		zan:0,
 		show: false,
@@ -157,8 +157,12 @@ Page({
 				// tempFilePath可以作为img标签的src属性显示图片
 				console.log(res)
 				const tempFilePaths = res.tempFilePaths
+				const imglen=that.data.tmpdata.imgb.length
 				for(var i=0;i<tempFilePaths.length;i++){
-					if(that.data.tmpdata.imgb.length==9){
+					// console.log(imglen)
+					var newlen=Number(imglen)+Number(i)
+					// console.log(newlen)
+					if(newlen==9){
 						wx.showToast({
 							icon:'none',
 							title:'最多可上传九张'
@@ -268,9 +272,13 @@ Page({
 			success (res) {
 				if (res.confirm) {
 					console.log('用户点击确定')
-					that.setData({
-						kg:0
-					})
+          // if (that.data.btnkg == 1) {
+          //   return
+          // } else {
+          //   that.setData({
+          //     btnkg: 1
+          //   })
+          // }
 					wx.showLoading({
 						title:'请稍后。。'
 					})
@@ -283,6 +291,7 @@ Page({
 					var imbox=that.data.tmpdata.imgb
 					imbox=imbox.join(',')
 					// 'Authorization':wx.getStorageSync('usermsg').user_token
+          
 					wx.request({
 						url:  app.IPurl+'/api/used_product/save',
 						data:{
@@ -308,39 +317,46 @@ Page({
 								
 								wx.showToast({
 									 icon:'none',
-									 title:'发表成功',
+                  title: res.data.ertips,
 									 duration:2000
 								})
 								setTimeout(function(){
+                  that.setData({
+                    btnkg: 0
+                  })
 									wx.navigateBack()
 								},1000)
 								
 							}else{
-								that.setData({
-									kg:1
-								})
-								wx.showToast({
-									 icon:'none',
-									 title:res.data.ertips,
-									 duration:2000
-								})
+                that.setData({
+                  btnkg: 0
+                })
+                if (res.data.ertips) {
+                  wx.showToast({
+                    icon: 'none',
+                    title: res.data.ertips
+                  })
+                } else {
+                  wx.showToast({
+                    icon: 'none',
+                    title: '操作失败'
+                  })
+                }
 							}
 							
 							 
 						},
-						fail() {
+						fail(err) {
 							wx.hideLoading()
-							that.setData({
-								kg:1
-							})
+              that.setData({
+                btnkg: 0
+              })
+              console.log(err)
 							wx.showToast({
 								 icon:'none',
 								 title:'操作失败',
 								duration:2000
 							})
-						},
-						complete() {
-							
 						}
 					})
 					

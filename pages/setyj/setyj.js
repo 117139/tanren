@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    btnkg:0,
   },
 
   /**
@@ -66,6 +66,20 @@ Page({
 		// })
 		// that.getshoplist(1)
 		///index/personal/idea
+    if (fdata.fankui.length==0){
+      wx.showToast({
+        icon:'none',
+        title: '请输入内容',
+      })
+      return
+    }
+    if(that.data.btnkg==1){
+      return
+    }else{
+      that.setData({
+        btnkg:1
+      })
+    }
 		wx.request({
 			url:  app.IPurl+'/index/personal/idea',
 			data:  {
@@ -79,15 +93,21 @@ Page({
 			method:'POST',
 			success(res) {
 				console.log(res.data)
-				
+        
 				if(res.data.errCode==0){
 					wx.showToast({
 						title:'提交成功'
 					})
 					setTimeout(function() {
+            that.setData({
+              btnkg: 0
+            })
 						wx.navigateBack()
 					}, 1000);
 				}else{
+          that.setData({
+            btnkg: 0
+          })
 					wx.showToast({
 						 icon:'none',
 						 title:'操作失败'
@@ -95,7 +115,9 @@ Page({
 				}
 			},
 			fail() {
-				 pageState1.error()    // 切换为error状态
+          that.setData({
+            btnkg:0
+          })
 				 wx.showToast({
 					 icon:'none',
 					 title:'操作失败'

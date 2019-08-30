@@ -6,12 +6,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-		kg:1,
+		btnkg:0, //0 可以  1不可以
 		num:0,
 		zan:0,
 		show: false,
 		fbtext:'',
 		datalist:[],
+    uzhuti:'',
 		array: ['主题1', '主题2', '主题3', '主题4'],
 		dataxq:{
 			img:[1,1,1]
@@ -156,8 +157,12 @@ Page({
 				// tempFilePath可以作为img标签的src属性显示图片
 				console.log(res)
 				const tempFilePaths = res.tempFilePaths
+				const imglen=that.data.tmpdata.imgb.length
 				for(var i=0;i<tempFilePaths.length;i++){
-					if(that.data.tmpdata.imgb.length==9){
+					// console.log(imglen)
+					var newlen=Number(imglen)+Number(i)
+					// console.log(newlen)
+					if(newlen==9){
 						wx.showToast({
 							icon:'none',
 							title:'最多可上传九张'
@@ -230,6 +235,13 @@ Page({
 			}
 		})
 	},
+  //zhuti
+  userzhuti(e){
+    console.log(e.detail.value)
+    this.setData({
+      uzhuti: e.detail.value
+    })
+  },
 	getzhiding(){
 		// console.log(pageState)
 		let that = this
@@ -275,22 +287,34 @@ Page({
 			})
 			return
 		}
-		if(that.data.hangyelb==""){
+    if (that.data.uzhuti==""){
 			wx.showToast({
 				icon:"none",
-				title:"请选择主题"
+				title:"请输入主题"
 			})
 			return
 		}
+
+    if (that.data.uzhuti.length>=10) {
+      wx.showToast({
+        icon: "none",
+        title: "主题最多允许10个字"
+      })
+      return
+    }
 		wx.showModal({
 			title: '提示',
 			content: '是否要发布该动态',
 			success (res) {
 				if (res.confirm) {
 					console.log('用户点击确定')
-					that.setData({
-						kg:0
-					})
+          // if (that.data.btnkg == 1) {
+          //   return
+          // } else {
+          //   that.setData({
+          //     btnkg: 1
+          //   })
+          // }
 					wx.showLoading({
 						title:'请稍后。。'
 					})
@@ -303,11 +327,12 @@ Page({
 					}
 					var imbox=that.data.tmpdata.imgb
 					imbox=imbox.join(',')
+         
 					wx.request({
 						url:  app.IPurl+'/api/community/save',
 						data:{
 							"authorization":wx.getStorageSync('usermsg').user_token,
-							'topic_id':that.data.hangyelb.id,
+							'title':that.data.uzhuti,
 							'body':that.data.fbtext,
 							'sticky_id':dztime,
 							'path':imbox,
@@ -327,7 +352,7 @@ Page({
 								
 								wx.showToast({
 									 icon:'none',
-									 title:'发表成功',
+									 title:res.data.ertips,
 									 duration:2000
 								})
 								setTimeout(function(){
@@ -337,30 +362,27 @@ Page({
 								},1000)
 								
 							}else{
-								that.setData({
-									kg:1
-								})
-								wx.showToast({
-									 icon:'none',
-									 title:res.data.ertips,
-									 duration:2000
-								})
+                if (res.data.ertips){
+                  wx.showToast({
+                    icon: 'none',
+                    title: res.data.ertips
+                  })
+                }else{
+                  wx.showToast({
+                    icon: 'none',
+                    title: '操作失败'
+                  })
+                }
 							}
 							
 							 
 						},
 						fail() {
 							wx.hideLoading()
-							that.setData({
-								kg:1
-							})
 							wx.showToast({
 								 icon:'none',
 								 title:'操作失败'
 							})
-						},
-						complete() {
-							
 						}
 					})
 					

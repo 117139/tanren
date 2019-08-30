@@ -4,20 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-		addresslist:[
-			{
-				"name":"啊实打实大",
-				"mobile":"1830000000",
-				"address":"地址地址地址地址地址地址地址",
-			},{
-				"name":"啊实打实大",
-				"mobile":"1830000000",
-				"address":"地址地址地址地址地址地址地址",
-			},{
-				"name":"啊实打实大",
-				"mobile":"1830000000",
-				"address":"地址地址地址地址地址地址地址",
-			},],
+		addresslist:[],
     mridx:0
   },
   onLoad: function (option) {

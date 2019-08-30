@@ -3,6 +3,7 @@
 const app=getApp()
 Page({
   data: {
+    btnkg:0,
 		sqid:'',
 		fbtext:'',
     tmpdata:{
@@ -58,8 +59,12 @@ Page({
 				// tempFilePath可以作为img标签的src属性显示图片
 				console.log(res)
 				const tempFilePaths = res.tempFilePaths
+				const imglen=that.data.tmpdata.imgb.length
 				for(var i=0;i<tempFilePaths.length;i++){
-					if(that.data.tmpdata.imgb.length==9){
+					// console.log(imglen)
+					var newlen=Number(imglen)+Number(i)
+					// console.log(newlen)
+					if(newlen==9){
 						wx.showToast({
 							icon:'none',
 							title:'最多可上传九张'
