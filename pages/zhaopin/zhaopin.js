@@ -202,7 +202,7 @@ Page({
 	formSubmit: function(e) {
 		let that =this
 		console.log('form发生了submit事件，携带数据为：', e.detail.value)
-		for(var i=0;i<that.data.datalist.length-1;i++){
+		for(var i=0;i<that.data.datalist.length;i++){
 			that.data.pages[i]=1
 			that.data.lists[i]=[]
 		}

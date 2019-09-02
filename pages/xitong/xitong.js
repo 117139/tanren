@@ -71,11 +71,11 @@ Page({
 		wx.request({
 			url: app.IPurl + '/api/marquee/index',
 			data: {
-
+        cate:2
 			},
-			// header: {
-			// 	'content-type': 'application/x-www-form-urlencoded'
-			// },
+			header: {
+				'content-type': 'application/x-www-form-urlencoded'
+			},
 			dataType: 'json',
 			method: 'get',
 			success(res) {

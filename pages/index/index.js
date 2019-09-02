@@ -27,10 +27,11 @@ Page({
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
-    duration: 1000
+    duration: 1000,
+    currentIndex:0
   },
   onLoad: function () {
-		this.getdizhi()
+		// this.getdizhi()
 		this.gettime()
 		this.getbanner()
 		this.gettuijian()
@@ -43,6 +44,18 @@ Page({
   onReachBottom: function () {
     console.log(1)
 		this.getshoplist()
+  },
+
+  handleChange: function (e) {
+    var that =this
+    console.log(e.detail.current)
+    that.setData({
+      currentIndex: e.detail.current
+    })
+    if (e.detail.current == that.data.tuijian.length-1){
+      console.log('ajax')
+      that.gettuijian()
+    }
   },
   zt_jiazai(){
     console.log(1)

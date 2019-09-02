@@ -26,31 +26,31 @@
 	</swiper>
 	<view class='dis_flex ju_a mb45 w100'>
 		<view class='ibone' data-url="/pages/zhaopin/zhaopin" bindtap="jump">
-			<image class='indebtnicon' src='/static/images/index_07.jpg'></image>
+			<image class='indebtnicon' src='/static/images/tanren_zp.jpg'></image>
 			<!-- <text>招聘求职</text> -->
 		</view>
 		<view class='ibone' bindtap="jump" data-url="/pages/chuzu/chuzu">
-			<image class='indebtnicon' src='/static/images/index_09.jpg'></image>
+			<image class='indebtnicon' src='/static/images/tanren_cz.jpg'></image>
 			<!-- <text>房屋出租</text> -->
 		</view>
 		<view class='ibone' bindtap="jump" data-url="/pages/ershou/ershou">
-			<image class='indebtnicon' src='/static/images/index_11.jpg'></image>
+			<image class='indebtnicon' src='/static/images/tanren_es.jpg'></image>
 			<!-- <text>二手买卖</text> -->
 		</view>
 		<view class='ibone' bindtap="jump" data-url="/pages/meishi/meishi">
-			<image class='indebtnicon' src='/static/images/index_13.jpg'></image>
+			<image class='indebtnicon' src='/static/images/tanren_ms.jpg'></image>
 			<!-- <text>附近美食</text> -->
 		</view>
 	</view>
 	<view class="w100 dis_flex ju_b mb45">
 		<view class="ib2one"  bindtap="jump" data-url="/pages/jiaoche/jiaoche">
-			<image src='/static/images/index_20.jpg'></image>
+			<image src='/static/images/tanren_fw.jpg'></image>
 		</view>
 		<view class="ib2one"  bindtap="jump" data-url="/pages/bgpingtai/bgpingtai">
-			<image src='/static/images/index_22.jpg'></image>
+			<image src='/static/images/tanren_bg.jpg'></image>
 		</view>
 		<view class="ib2one"  bindtap="jump" data-url="/pages/huodong/huodong">
-			<image src='/static/images/index_22.jpg'></image>
+			<image src='/static/images/tanren_xz.jpg'></image>
 		</view>
 		<!-- <view class="ib2one"  bindtap="jump" data-url="/pages/jiudian/jiudian">
 			<image src='/static/images/index_22.jpg'></image>
@@ -82,7 +82,23 @@
   <view class='t-title'>
     <text>// 热门专题 //</text>
   </view>
-  <scroll-view scroll-x class="t-scroll-header" lower-threshold="100" bindscrolltolower="zt_jiazai">
+  <swiper class="swiper swiper_hot" 
+		interval="{{interval}}"
+    previous-margin="80rpx"
+    next-margin="80rpx" bindchange="handleChange">
+		<block wx:for="{{tuijian}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
+			<swiper-item >
+        <view class="t-rel-list {{currentIndex == idx ? 'active': ''}}">
+          <image src="{{filter.imgIP(item.pic)}}"></image>
+          <view class='t-text conceal oh1'>
+            <view>{{item.title}}</view>
+            <view class='oh1 cbody'>{{item.body}}</view>
+          </view>
+        </view>
+			</swiper-item>
+		</block>
+	</swiper>
+  <!-- <scroll-view scroll-x class="t-scroll-header" lower-threshold="100" bindscrolltolower="zt_jiazai">
     <view class='t-rel-list' 	wx:for="{{tuijian}}"
 				wx:for-index="idx"
 				wx:for-item="item"
@@ -92,9 +108,8 @@
         <view>{{item.title}}</view>
         <view class='oh1 cbody'>{{item.body}}</view>
       </view>
-      <!-- <view class='t-text conceal oh1'>{{item.body}}</view> -->
     </view>
-  </scroll-view>
+  </scroll-view> -->
   <!-- hot -->
 	<view class="w100 mb45">
 		<view class="fwb mb40 fz32">

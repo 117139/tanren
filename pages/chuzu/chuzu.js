@@ -182,7 +182,7 @@ Page({
 	formSubmit: function(e) {
 		let that =this
 		console.log('form发生了submit事件，携带数据为：', e.detail.value)
-		for(var i=0;i<that.data.datalist.length-1;i++){
+		for(var i=0;i<that.data.datalist.length;i++){
 			that.data.pages[i]=1
 			that.data.lists[i]=[]
 		}
@@ -191,6 +191,13 @@ Page({
 			pages:that.data.pages,
 			lists:that.data.lists
 		})
+    var data1 = {
+      "authorization": wx.getStorageSync('usermsg').user_token,
+      "page": that.data.pages[that.data.type],
+      "region_id": that.data.datalist[that.data.type].region_id,
+      "search": e.detail.value.sr
+    }
+    console.log(JSON.stringify(data1))
 		wx.request({
 			url:  app.IPurl+'/api/rent_house/index',
 			data:{

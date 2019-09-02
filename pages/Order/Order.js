@@ -40,7 +40,7 @@ Page({
 		console.log(app.IPurl1)
 		let that = this
 		let data
-		if(that.data.address.address_id==undefined||that.data.address.address_id==''){
+		if(that.data.address==null||that.data.address.address_id==undefined||that.data.address.address_id==''){
 			wx.showToast({
 				icon:'none',
 				title:'请选择地址'
