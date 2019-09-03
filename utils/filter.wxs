@@ -8,7 +8,8 @@ var imgIP=function(img){
 	if(img==undefined){
 		return
 	}
-	var newimg ='http://ceshi.800123456.top/'+img
+	// var newimg ='http://ceshi.800123456.top/'+img
+  var newimg = 'https://tangrenjie.800123456.top'+img
 	// console.log(newimg)
 	return newimg
 }
