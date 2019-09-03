@@ -511,4 +511,21 @@ Page({
 	    }
 	  }, that.data.interval1);
 	},
+  onRetry() {
+    var that =this
+    that.getbanner(7)
+
+    that.getxiaoxi()
+    setTimeout(function(){
+      that.setData({
+        pages: [1, 1, 1],
+        lists: [
+          [],
+          [],
+          []
+        ],
+      })
+      that.getyhlist(1)
+    },0)
+  }
 })

@@ -88,7 +88,8 @@
     next-margin="80rpx" bindchange="handleChange">
 		<block wx:for="{{tuijian}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
 			<swiper-item >
-        <view class="t-rel-list {{currentIndex == idx ? 'active': ''}}">
+        <view class="t-rel-list {{currentIndex == idx ? 'active': ''}}" 
+        data-url="/pages/detailssq_hot/detailssq?id={{item.id}}" bindtap="jump">
           <image src="{{filter.imgIP(item.pic)}}"></image>
           <view class='t-text conceal oh1'>
             <view>{{item.title}}</view>

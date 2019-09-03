@@ -472,5 +472,9 @@ Page({
 				})
 			}
 		})
-	}
+	},
+  onRetry() {
+    this.getbanner()
+    this.gethanye()
+  }
 })

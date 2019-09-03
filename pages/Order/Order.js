@@ -91,6 +91,21 @@ Page({
 					that.setData({
 						paykg:true
 					})
+          if(res.data.ertips){
+            wx.showToast({
+              icon: 'none',
+              // title:'我们将尽快为您寄送您所兑换的商品，请您耐心等待!',
+              title: res.data.ertips,
+              duration: 1000
+            })
+          }else{
+            wx.showToast({
+              icon: 'none',
+              // title:'我们将尽快为您寄送您所兑换的商品，请您耐心等待!',
+              title: '操作失败',
+              duration: 1000
+            })
+          }
 				}
 			},
 			fail(res) {

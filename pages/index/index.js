@@ -36,7 +36,7 @@ Page({
 		this.getbanner()
 		this.gettuijian()
 		this.getshoplist(0)
-		this.getSetting()
+		// this.getSetting()
   },
   /**
   * 页面上拉触底事件的处理函数
@@ -454,10 +454,10 @@ Page({
 	},
 	
 	onRetry(){
-		this.getdizhi()
+		// this.getdizhi()
 		this.gettime()
 		this.getbanner()
 		this.gettuijian()
-		this.getshoplist(0)
+		// this.getshoplist(0)
 	}
 })
