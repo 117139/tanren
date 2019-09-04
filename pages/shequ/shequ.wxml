@@ -74,7 +74,7 @@
 						src="{{filter.imgIP(item2.path)}}"></image>
 				</scroll-view>
 			</view>
-			<image  wx:if="{{item.community_file.length==1}}" 
+			<image  wx:if="{{item1.community_file.length==1}}" 
 				class='tjrvideo mb20' 
 				mode="aspectFill" 
 				catchtap="previewImage" 
