@@ -10,7 +10,7 @@ App({
 		// logs.unshift(Date.now())
 		// wx.setStorageSync('logs', logs)
 
-
+    var that =this
 		// 获取用户信息
 		wx.getSetting({
 			success: res => {
@@ -19,13 +19,24 @@ App({
 					wx.getUserInfo({
 						success: res => {
 							// 可以将 res 发送给后台解码出 unionId
-							this.globalData.userInfo = res.userInfo
-							wx.setStorageSync('userWxmsg', res.userInfo)
+							that.globalData.userInfo = res.userInfo
+							
 							console.log(res.userInfo)
 							// 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
 							// 所以此处加入 callback 以防止这种情况
 							// 登录
-							this.dologin()
+              if (!that.globalData.userInfo) {
+                wx.reLaunch({
+                  url: '/pages/login/login',
+                  fail: (err) => {
+                    console.log("失败: " + JSON.stringify(err));
+                  }
+                })
+              } else {
+                wx.setStorageSync('userWxmsg', that.globalData.userInfo)
+                that.dologin()
+              }
+							
 
 						}
 					})
@@ -37,7 +48,7 @@ App({
 			}
 		})
 	},
-	dologin() {
+	dologin(type) {
 		let that = this
 		wx.login({
 			success: function(res) {
@@ -73,9 +84,18 @@ App({
 							//     console.log("失败: " + JSON.stringify(err));
 							//   }
 							// })
+              wx.setStorageSync('login', 'login')
+              wx.setStorageSync('usermsg', res.data.retData)
+              if (type =='shouquan'){
+                wx.reLaunch({
+							  url: '/pages/index/index',
+							  fail: (err) => {
+							    console.log("失败: " + JSON.stringify(err));
+							  }
+							})
+              }
 							console.log('登录成功')
-		          wx.setStorageSync('login', 'login')
-							wx.setStorageSync('usermsg', res.data.retData)
+		          
 						}else{
 							wx.showToast({
 								icon:'none',

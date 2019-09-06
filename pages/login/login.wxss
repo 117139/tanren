@@ -7,6 +7,12 @@
 .header{
   width: 150rpx;
   height: 150rpx;
+	margin-bottom: 18rpx;
+}
+
+.header image{
+  width: 150rpx;
+  height: 150rpx;
 }
 .content{
   margin-top: 80rpx;

@@ -1,9 +1,9 @@
 <!--pages/my/my.wxml-->
 <view class="container">
 	<view class="usermsg dis_flex w100 aic">
-		<image class="userimg mr20" src="{{userwxmsg.avatarUrl==''? userxcxmsg.avatarUrl:userwxmsg.avatarUrl}}"></image>
+		<image class="userimg mr20" src="{{userxcxmsg.head_img!==''? userxcxmsg.head_img:userwxmsg.avatarUrl}}"></image>
 		<view class="flex_1">
-			<view class="fwb fz50 oh1" style="color: #0a0a0a;">{{userwxmsg.nickName=='' ? userxcxmsg.nickName:userwxmsg.nickName}}</view>
+			<view class="fwb fz50 oh1" style="color: #0a0a0a;">{{userxcxmsg.nickname!=='' ? userxcxmsg.nickname:userwxmsg.nickName}}</view>
 			<view class="fz30 oh1" style="color: #525155;">今天是你在唐人街的{{day}}天</view>
 		</view>
 		<view wx:if="{{userxcxmsg.sign_type==2}}" class="qdbtn" bindtap="qiandao">签到</view>
