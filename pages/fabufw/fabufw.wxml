@@ -59,7 +59,7 @@
 			</view>
 		</view>
 		<view class="fabubtn" bindtap="fabusub">
-			发表评论
+			发布
 		</view>
 		<van-popup show="{{ show }}" position="bottom" bind:close="onClose">
 			<template is="zhiding" data="{{tmpdata}}" />

@@ -82,10 +82,13 @@ Page({
 
   },
 	jump(e){
-		console.log(e.currentTarget.dataset.url)
-		wx.navigateTo({
-			url:e.currentTarget.dataset.url
-		})
+    if (!wx.getStorageSync('userWxmsg')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    } else {
+      app.jump(e)
+    }
 	},
 	call(e){
 		console.log(e.currentTarget.dataset.tel)

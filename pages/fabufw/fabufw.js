@@ -137,7 +137,7 @@ Page({
 		})
 		
 	},
-	scpic(){
+	/*scpic(){
 		var that=this
 		wx.chooseImage({
 			count: 9,
@@ -188,7 +188,67 @@ Page({
 				}
 			}
 		})
-	},
+  },*/
+  scpic() {
+    var that = this
+    wx.chooseImage({
+      count: 9,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success(res) {
+        // tempFilePath可以作为img标签的src属性显示图片
+        console.log(res)
+        const tempFilePaths = res.tempFilePaths
+        that.upimg(tempFilePaths, 0)
+
+      }
+    })
+  },
+  upimg(imgs, i) {
+    var that = this
+    const imglen = that.data.tmpdata.imgb.length
+    var newlen = Number(imglen) + Number(i)
+    if (imglen == 9) {
+      wx.showToast({
+        icon: 'none',
+        title: '最多可上传九张'
+      })
+      return
+    }
+    // console.log(img1)
+    wx.uploadFile({
+      url: app.IPurl + '/api/upload_image/upload', 
+      filePath: imgs[i],
+      name: 'images',
+      formData: {
+        'module_name': 'used'
+      },
+      success(res) {
+        // console.log(res.data)
+        var ndata = JSON.parse(res.data)
+        console.log(ndata)
+        // console.log(ndata.error == 0)
+        if (ndata.errcode == 0) {
+          that.data.tmpdata.imgb.push(ndata.retData[0])
+          that.setData({
+            tmpdata: that.data.tmpdata
+          })
+
+          var news1 = that.data.tmpdata.imgb.length
+          if (news1 < 9) {
+            i++
+            that.upimg(imgs, i)
+          }
+
+        } else {
+          wx.showToast({
+            icon: "none",
+            title: "上传失败"
+          })
+        }
+      }
+    })
+  },
 	getzhiding(){
 		// console.log(pageState)
 		let that = this
@@ -228,10 +288,16 @@ Page({
 	
 	fabusub(){
 		var that =this
+    if (!wx.getStorageSync('userWxmsg')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+      return
+    }
 		if(that.data.fbtext==""){
 			wx.showToast({
 				icon:"none",
-				title:"请输入您的评论"
+				title:"请输入您的发布内容"
 			})
 			return
 		}
@@ -258,7 +324,7 @@ Page({
 		}
 		wx.showModal({
 			title: '提示',
-			content: '是否要发布该评论',
+			content: '是否要发布该内容',
 			success (res) {
 				if (res.confirm) {
 					console.log('用户点击确定')

@@ -1,10 +1,12 @@
 <!--pages/my/my.wxml-->
 <view class="container">
 	<view class="usermsg dis_flex w100 aic">
-		<image class="userimg mr20" src="{{userxcxmsg.head_img!==''? userxcxmsg.head_img:userwxmsg.avatarUrl}}"></image>
+		<image wx:if="{{userxcxmsg.nickname}}" class="userimg mr20" src="{{userxcxmsg.head_img}}"></image>
+		<image wx:else class="userimg mr20" src="/static/images/tx.jpg"></image>
 		<view class="flex_1">
-			<view class="fwb fz50 oh1" style="color: #0a0a0a;">{{userxcxmsg.nickname!=='' ? userxcxmsg.nickname:userwxmsg.nickName}}</view>
-			<view class="fz30 oh1" style="color: #525155;">今天是你在唐人街的{{day}}天</view>
+			<view wx:if="{{userxcxmsg.nickname}}" class="fwb fz50 oh1" style="color: #0a0a0a;">{{userxcxmsg.nickname}}</view>
+			<view wx:if="{{userxcxmsg.nickname}}" class="fz30 oh1" style="color: #525155;">今天是你在唐人街的{{day}}天</view>
+			<view wx:else class="fz30 oh1" style="color: #525155;" bindtap="jump" data-url="/pages/login/login">点击登录</view>
 		</view>
 		<view wx:if="{{userxcxmsg.sign_type==2}}" class="qdbtn" bindtap="qiandao">签到</view>
 		<view wx:if="{{userxcxmsg.sign_type==0}}" class="qdbtn">已签到</view>

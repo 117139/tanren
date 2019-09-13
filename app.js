@@ -26,12 +26,12 @@ App({
 							// 所以此处加入 callback 以防止这种情况
 							// 登录
               if (!that.globalData.userInfo) {
-                wx.reLaunch({
-                  url: '/pages/login/login',
-                  fail: (err) => {
-                    console.log("失败: " + JSON.stringify(err));
-                  }
-                })
+                // wx.reLaunch({
+                //   url: '/pages/login/login',
+                //   fail: (err) => {
+                //     console.log("失败: " + JSON.stringify(err));
+                //   }
+                // })
               } else {
                 wx.setStorageSync('userWxmsg', that.globalData.userInfo)
                 that.dologin()
@@ -41,9 +41,9 @@ App({
 						}
 					})
 				} else {
-					wx.reLaunch({
-						url: '/pages/login/login',
-					})
+					// wx.reLaunch({
+					// 	url: '/pages/login/login',
+					// })
 				}
 			}
 		})
@@ -87,12 +87,13 @@ App({
               wx.setStorageSync('login', 'login')
               wx.setStorageSync('usermsg', res.data.retData)
               if (type =='shouquan'){
-                wx.reLaunch({
-							  url: '/pages/index/index',
-							  fail: (err) => {
-							    console.log("失败: " + JSON.stringify(err));
-							  }
-							})
+                wx.showToast({
+                  icon:'none',
+                  title: '登录成功',
+                })
+                setTimeout(function(){
+                  wx.navigateBack()
+                },1000)
               }
 							console.log('登录成功')
 		          
