@@ -34,7 +34,48 @@ App({
                 // })
               } else {
                 wx.setStorageSync('userWxmsg', that.globalData.userInfo)
-                that.dologin()
+                wx.login({
+                  success: function (res) {
+                    // 发送 res.code 到后台换取 openId, sessionKey, unionId
+
+                    // console.log(that.IPurl1)
+                    // const url =   
+                    let data = {
+                      code: res.code
+                    }
+                    let rcode = res.code
+                    console.log(res.code)
+                    // return
+                    wx.request({
+                      url: that.IPurl + '/index/userlogin/login',
+                      data: {
+                        'code': rcode,
+                        'avatarUrl': that.globalData.userInfo.avatarUrl,
+                        'nickName': that.globalData.userInfo.nickName,
+                      },
+                      // header: {
+                      // 	'content-type': 'application/x-www-form-urlencoded' 
+                      // },
+                      dataType: 'json',
+                      method: 'POST',
+                      success(res) {
+                        console.log(res)
+                        console.log(res.data)
+                        if (res.data.errCode == 0) {
+                          wx.setStorageSync('login', 'login')
+                          wx.setStorageSync('usermsg', res.data.retData)
+                          console.log('登录成功')
+
+                        } else {
+                          wx.showToast({
+                            icon: 'none',
+                            title: res.data.ertips
+                          })
+                        }
+                      }
+                    })
+                  }
+                })
               }
 							
 

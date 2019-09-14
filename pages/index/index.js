@@ -34,15 +34,16 @@ Page({
 		// this.getdizhi()
 		this.gettime()
 		this.getbanner()
-		this.gettuijian()
-		this.getshoplist(0)
+		/*this.gettuijian()
+		this.getshoplist(0)*/
 		// this.getSetting()
   },
   onShow: function() {
-    // this.getdizhi()
-    this.gettuijian()
-    this.getshoplist(0)
-    // this.getSetting()
+    var that =this
+    setTimeout(function(){
+      that.gettuijian()
+      that.getshoplist(0)
+    },800)
   },
   /**
   * 页面上拉触底事件的处理函数
