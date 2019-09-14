@@ -125,7 +125,13 @@ Page({
 		})
 	},
 	dianzan(e){
-		var that =this
+    var that = this
+    if (!wx.getStorageSync('userWxmsg')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+      return
+    }
 		console.log(e.currentTarget.dataset.id)
 		var idx=e.currentTarget.dataset.idx
 		var idx1=e.currentTarget.dataset.idx1
@@ -185,7 +191,13 @@ Page({
 		
 	},
 	shoucangff(e){
-		var that =this
+    var that = this
+    if (!wx.getStorageSync('userWxmsg')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+      return
+    }
 		console.log(e.currentTarget.dataset.id)
 		var idx=e.currentTarget.dataset.idx
 		var idx1=e.currentTarget.dataset.idx1

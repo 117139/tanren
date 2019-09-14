@@ -87,13 +87,13 @@ App({
               wx.setStorageSync('login', 'login')
               wx.setStorageSync('usermsg', res.data.retData)
               if (type =='shouquan'){
-                wx.showToast({
-                  icon:'none',
-                  title: '登录成功',
-                })
+                // wx.showToast({
+                //   icon:'none',
+                //   title: '登录成功',
+                // })
                 setTimeout(function(){
                   wx.navigateBack()
-                },1000)
+                },300)
               }
 							console.log('登录成功')
 		          

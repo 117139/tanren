@@ -8,6 +8,7 @@ Page({
    */
   data: {
     btnkg:0,
+    hangye:-1,
 		pages:[],
 		search:'',
     type:0,
@@ -42,6 +43,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.gethanye()
     this.sharerw(this.data.sharetype)
 		this.setData({
 			sharetype:''
@@ -120,6 +122,13 @@ Page({
 	},
 	shoucangff(e){
 		var that =this
+
+    if (!wx.getStorageSync('userWxmsg')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+      return
+    }
 		console.log(e.currentTarget.dataset.id)
 		var idx=e.currentTarget.dataset.idx
 		var idx1=e.currentTarget.dataset.idx1
@@ -315,7 +324,9 @@ Page({
 		// console.log(pageState)
 		let that = this
 		const pageState1 = pageState.default(that)
-	  pageState1.loading()    // 切换为loading状态
+    if (that.data.hangye == -1) {
+      pageState1.loading()    // 切换为loading状态
+    }
 		
 	
 		wx.request({

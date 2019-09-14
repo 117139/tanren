@@ -13,6 +13,9 @@ Page({
       //用户按了允许授权按钮后需要处理的逻辑方法体
       console.log(e.detail.userInfo)
       app.globalData.userInfo = e.detail.userInfo
+      wx.showLoading({
+        title: '正在登录',
+      })
       app.dologin('shouquan')
 			// wx.reLaunch({
 			// 	url: '/pages/index/index',

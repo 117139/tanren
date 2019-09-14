@@ -111,6 +111,12 @@ Page({
 	
 	fabusub(){
 		var that =this
+    if (!wx.getStorageSync('userWxmsg')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+      return
+    }
 		if(that.data.fbtext==""){
 			wx.showToast({
 				icon:"none",

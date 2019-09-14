@@ -22,12 +22,7 @@ Page({
 		// 	userwxmsg:app.globalData.userInfo
 		// })
 		console.log(Date.now())
-		var daytime=util.getDay(Date.now(),wx.getStorageSync('usermsg').login_time)
-		console.log(daytime)
-		this.setData({
-			day:daytime
-		})
-		this.getkf()
+	
   },
 
   /**
@@ -41,6 +36,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var daytime = util.getDay(Date.now(), wx.getStorageSync('usermsg').login_time)
+    console.log(daytime)
+    this.setData({
+      day: daytime
+    })
+    this.getkf()
     this.setData({
       userwxmsg: wx.getStorageSync('userWxmsg'),
       userxcxmsg: wx.getStorageSync('usermsg')

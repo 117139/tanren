@@ -45,13 +45,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.getdetails(this.data.sqid)
 		this.sharerw(this.data.sharetype)
 		this.setData({
 			sharetype:''
@@ -135,6 +136,12 @@ Page({
   },
 	shoucangff(e){
 		var that =this
+    if (!wx.getStorageSync('userWxmsg')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+      return
+    }
 		console.log(e.currentTarget.dataset.id)
     if (that.data.btnkg == 1) {
       return

@@ -50,6 +50,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.getdetails(this.data.sqid)
 		this.sharerw(this.data.sharetype)
 		this.setData({
 			sharetype:''
@@ -119,6 +120,12 @@ Page({
 	},
 	dianzan(e){
 		var that =this
+    if (!wx.getStorageSync('userWxmsg')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+      return
+    }
 		console.log(e.currentTarget.dataset.id)
     if (that.data.btnkg == 1) {
       return
@@ -185,6 +192,12 @@ Page({
 	},
 	shoucangff(e){
 		var that =this
+    if (!wx.getStorageSync('userWxmsg')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+      return
+    }
 		console.log(e.currentTarget.dataset.id)
 		wx.request({
       url: app.IPurl +'/api/hot_subject/collect',
@@ -444,6 +457,6 @@ Page({
 		app.previewImage(e)
 	},
 	onRetry(){
-		this.getdetails(this.data.id)
+		this.getdetails(this.data.sqid)
 	}
 })

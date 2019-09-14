@@ -142,9 +142,16 @@ Page({
   },
   dianzan(e) {
     var that = this
+    if (!wx.getStorageSync('userWxmsg')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+      return
+    }
     console.log(e.currentTarget.dataset.id)
     var idx = e.currentTarget.dataset.idx
     var idx1 = e.currentTarget.dataset.idx1
+    
     wx.request({
       url: app.IPurl + '/api/exposure/praise',
       data: {
@@ -202,6 +209,12 @@ Page({
   },
   shoucangff(e) {
     var that = this
+    if (!wx.getStorageSync('userWxmsg')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+      return
+    }
     console.log(e.currentTarget.dataset.id)
     var idx = e.currentTarget.dataset.idx
     var idx1 = e.currentTarget.dataset.idx1

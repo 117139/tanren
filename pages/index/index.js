@@ -38,6 +38,12 @@ Page({
 		this.getshoplist(0)
 		// this.getSetting()
   },
+  onShow: function() {
+    // this.getdizhi()
+    this.gettuijian()
+    this.getshoplist(0)
+    // this.getSetting()
+  },
   /**
   * 页面上拉触底事件的处理函数
   */
@@ -337,7 +343,13 @@ Page({
 		})
 	},
 	dianzan(e){
-		var that =this
+    var that = this
+    if (!wx.getStorageSync('userWxmsg')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+      return
+    }
 		console.log(e.currentTarget.dataset.id)
 		var idx1=e.currentTarget.dataset.idx1
 		wx.request({
@@ -393,7 +405,13 @@ Page({
 		
 	},
 	shoucangff(e){
-		var that =this
+    var that = this
+    if (!wx.getStorageSync('userWxmsg')) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+      return
+    }
 		console.log(e.currentTarget.dataset.id)
 		var idx1=e.currentTarget.dataset.idx1
 		wx.request({
@@ -455,9 +473,13 @@ Page({
 	
 	onRetry(){
 		// this.getdizhi()
-		this.gettime()
-		this.getbanner()
-		this.gettuijian()
+		// this.gettime()
+		// this.getbanner()
+		// this.gettuijian()
+    this.gettime()
+    this.getbanner()
+    this.gettuijian()
+    this.getshoplist(0)
 		// this.getshoplist(0)
 	}
 })
