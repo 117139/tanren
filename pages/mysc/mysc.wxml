@@ -73,7 +73,7 @@
 			</view>
 			<view class="oh2 fz28 mb20 lh40">{{item1.body}}</view>
 			<view class="dis_flex w100 aic mb20 ju_b">
-				<view class="dis_flex aic" data-tel="{{item1.phone}}" bindtap="call">
+				<view class="dis_flex aic" data-tel="{{item1.phone}}" catchtap="call">
 					<text class="iconfont icondianhua mr10 fz30 c169fff"></text> <text class="fz30 c525155">{{item1.phone}}</text>
 				</view>
 				<view class="ce22829 fz30 fwb">{{item1.price}}</view>
@@ -131,7 +131,7 @@
 			</view>
 			<view class=" fz28 mb20 lh40">{{item1.body}}</view>
 			<view class="dis_flex ju_b"> 
-				<view class="dis_flex w100 aic mb20" data-tel="{{item1.phone}}" bindtap="call">
+				<view class="dis_flex w100 aic mb20" data-tel="{{item1.phone}}" catchtap="call">
 					<text class="iconfont icondianhua mr10 fz30 c169fff"></text> <text class="fz30 c525155">{{item1.phone}}</text>
 				</view>
 				<view class="ce22829 fz30 fwb">{{item1.price}}</view>
@@ -201,7 +201,7 @@
 			</view>
 			<view class=" fz28 mb20 lh40">{{item1.body}}</view>
 			<view class="dis_flex ju_b">
-				<view class="dis_flex w100 aic mb20" data-tel="{{item.phone}}" bindtap="call">
+				<view class="dis_flex w100 aic mb20" data-tel="{{item.phone}}" catchtap="call">
 					<text class="fz30 iconfont icondianhua mr10 c169fff"></text> <text class="fz30 c525155">{{item1.phone}}</text>
 				</view>
 				<view class="ce22829 fz30 fwb">{{item1.salary}}</view>

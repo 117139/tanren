@@ -34,7 +34,7 @@
 			<text class="flex_1 fz32">积分商城</text>
 			<text class="iconfont iconnext myicon c9 myicon1"></text>
 		</view>
-		<view class="dis_flex mylist" bindtap="call"  data-tel="{{phone}}">
+		<view class="dis_flex mylist" catchtap="call"  data-tel="{{phone}}">
 			<text class="iconfont iconkefu myicon mr20" style="color: #ffa217;"></text>
 			<text class="flex_1 fz32">在线客服</text>
 			<!-- <text class="iconfont iconnext myicon c9 myicon1"></text> -->

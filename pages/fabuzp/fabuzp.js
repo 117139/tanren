@@ -98,7 +98,7 @@ Page({
 	call(e){
 		console.log(e.currentTarget.dataset.tel)
 		wx.makePhoneCall({
-			phoneNumber: e.currentTarget.dataset.tel //仅为示例，并非真实的电话号码
+			phoneNumber: e.currentTarget.dataset.tel+'' //仅为示例，并非真实的电话号码
 		})
 	},
 	dianzan(e){

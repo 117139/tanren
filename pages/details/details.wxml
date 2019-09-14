@@ -16,7 +16,7 @@
 		<view class="fz36 fwb ce22829">{{dataxq.price}}</view>
 	</view>
 	<view class="fz36 lh50 mb20 w100">{{dataxq.body}}</view>
-	<view class="dis_flex w100 aic mb40">
+	<view class="dis_flex w100 aic mb40" data-tel="{{dataxq.phone}}" bindtap='call'>
 		<text class="iconfont icondianhua mr10 fz30 c169fff"></text> <text class="fz30 c525155">{{dataxq.phone}}</text>
 	</view>
 	<view class="w100 dis_flex flex_ww mb40">
@@ -65,7 +65,7 @@
 		<view wx:if="{{idx2!=dataxqpl.length-1}}" class="heng2 mb40"></view>
 	</block>
 	<view class="bbbtnz dis_flex aic ju_b">
-		<view class="dis_flex aic ju_c lxbtn" data-tel="{{dataxq.phone}}" bindtap="call">
+		<view class="dis_flex aic ju_c lxbtn" data-tel="{{dataxq.phone}}" catchtap="call">
 			<text class="iconfont icondianhua mr10 fz30 cfff"></text> <text class="fz30 cfff">联系卖主</text>
 		</view>
 		<view class="dis_flex aic mr20" data-id="{{dataxq.id}}" bindtap="shoucangff">

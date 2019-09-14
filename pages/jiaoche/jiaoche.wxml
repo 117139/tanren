@@ -71,7 +71,7 @@
 							wx:key="idx2" class="biaoqian mr10">{{item2}}</view>
 					</view>
 					<view class="dis_flex w100 aic mb20 ju_b">
-						<view class="dis_flex aic" data-tel="{{item1.taxi_phone}}" bindtap="call">
+						<view class="dis_flex aic" data-tel="{{item1.taxi_phone}}" catchtap="call">
 							<text class="iconfont icondianhua mr10 fz30 c169fff"></text> <text class="fz30 c525155">{{item1.taxi_phone}}</text>
 						</view>
 						<view class="dis_flex xingji">

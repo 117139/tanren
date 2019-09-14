@@ -44,7 +44,7 @@
 				</view>
 				<view class="oh2 fz28 mb20 lh40"><text wx:if="{{item1.sticky_status==0}}" class="zpzdicon">置顶</text>{{item1.body}}</view>
 				<view class="dis_flex w100 aic mb20 ju_b">
-					<view class="dis_flex aic" data-tel="{{item1.phone}}" bindtap="call">
+					<view class="dis_flex aic" data-tel="{{item1.phone}}" catchtap="call">
 						<text class="iconfont icondianhua mr10 fz30 c169fff"></text> <text class="fz30 c525155">{{item1.phone}}</text>
 					</view>
 					<text class="fz28 c9">发布时间{{item1.create_time}}</text>
