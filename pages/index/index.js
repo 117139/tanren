@@ -17,11 +17,7 @@ Page({
     address:'',     //地址  
     cityInfo:{},    //城市信息 
 		NewDate:[],    //时间
-    bannerimg: [
-      '/static/images/banner_03.jpg',
-      '/static/images/banner_03.jpg',
-      '/static/images/banner_03.jpg',
-    ],
+    bannerimg: [],
 		tuijian:[],
 		lists:[],
     indicatorDots: true,
@@ -40,6 +36,12 @@ Page({
   },
   onShow: function() {
     var that =this
+    this.setData({
+      page: 1,
+      page_zt: 1,
+      tuijian: [],
+      lists: [],
+    })
     setTimeout(function(){
       that.gettuijian()
       that.getshoplist(0)

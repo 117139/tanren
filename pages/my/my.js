@@ -179,14 +179,14 @@ Page({
               title:'签到成功，积分+3'
 						})
 						app.dologin()
-						setTimeout(function() {
-              that.data.userwxmsg= wx.getStorageSync('userWxmsg')
-              that.data.userxcxmsg= wx.getStorageSync('usermsg')
-							that.setData({
-                userwxmsg: that.data.userwxmsg,
-                userxcxmsg: that.data.userxcxmsg
-							})
-						}, 1000);
+						// setTimeout(function() {
+            //   that.data.userwxmsg= wx.getStorageSync('userWxmsg')
+            //   that.data.userxcxmsg= wx.getStorageSync('usermsg')
+						// 	that.setData({
+            //     userwxmsg: that.data.userwxmsg,
+            //     userxcxmsg: that.data.userxcxmsg
+						// 	})
+						// }, 1000);
 					// }
 					
 				}else{

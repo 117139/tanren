@@ -127,6 +127,12 @@ App({
 							// })
               wx.setStorageSync('login', 'login')
               wx.setStorageSync('usermsg', res.data.retData)
+              setTimeout(function () {
+                if (getCurrentPages().length != 0) {
+                  getCurrentPages()[getCurrentPages().length - 1].onLoad()
+                  getCurrentPages()[getCurrentPages().length - 1].onShow()
+                }
+              }, 0)
               if (type =='shouquan'){
                 // wx.showToast({
                 //   icon:'none',
