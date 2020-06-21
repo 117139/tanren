@@ -22,7 +22,7 @@
 		circular='true'>
 		<block wx:for="{{bannerimg}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
 			<swiper-item>
-				<image lazy-load="true" src="{{filter.imgIP(item.turns_img)}}" class="slide-image" />
+				<image lazy-load="true" src="{{filter.imgIP(item.turns_img)}}" class="slide-image"  mode="aspectFill"/>
 			</swiper-item>
 		</block>
 	</swiper>
@@ -54,7 +54,7 @@
 				wx:key="idx1">
 			<view class="w100 dis_flex ju_b aic mb20">
 				<view class="dis_flex aic">
-					<image class="headimg" src="{{item1.user.head_img}}"></image>
+					<image class="headimg" src="{{item1.user.head_img}}"  mode="aspectFill"></image>
 					<text class="ml5 fz30">{{item1.user.nickname}}</text>
 				</view>
 				<view class="c6 fz30">{{item1.create_time}}</view>

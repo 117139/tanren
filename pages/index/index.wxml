@@ -20,7 +20,7 @@
 		circular='true'>
 		<block wx:for="{{bannerimg}}" wx:for-index="idx" wx:for-item="item" wx:key="idx">
 			<swiper-item>
-				<image lazy-load='true' src="{{filter.imgIP(item.turns_img)}}" class="slide-image" />
+				<image lazy-load='true' src="{{filter.imgIP(item.turns_img)}}" class="slide-image" mode="aspectFill"/>
 			</swiper-item>
 		</block>
 	</swiper>

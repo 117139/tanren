@@ -3,7 +3,7 @@
 <wxs src="../../utils/filter.wxs" module="filter" />
 <view class="container">
 	<view class="tac pt100 pb100">
-		<view class="ce22829 fz60 fwb mb20">{{jifen.integral[0].integral}}</view>
+		<view class="ce22829 fz60 fwb mb20">{{jifen.integral[0].integral?jifen.integral[0].integral:'0'}}</view>
 		<view class="c9 fz30">当前可用积分</view>
 	</view>
 	<view class="heng1"></view>

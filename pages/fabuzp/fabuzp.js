@@ -20,7 +20,8 @@ Page({
 			fblen:0,
 			imgb:[],
 			zhidingcur:-1,
-			zhiding:[1,2,3,4]
+      zhiding: [1, 2, 3, 4],
+      sticky: 1
 		},
 		usertel:'',
 		userpri:'',
@@ -230,6 +231,7 @@ Page({
 				
 				if(res.data.errcode==0){
 						that.data.tmpdata.zhiding=rlist
+            that.data.tmpdata.sticky = res.data.sticky
 					// if(rlist.length>0){
 						that.setData({
 							tmpdata:that.data.tmpdata,
