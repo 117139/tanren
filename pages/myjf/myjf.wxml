@@ -8,10 +8,10 @@
 	</view>
 	<view class="heng1"></view>
 	<view class="w100">
-		<view class="fwb c0 fz36 mt40">
+		<view class="fwb c0 fz36 mt40"  wx:if="{{sticky !=1}}">
 			积分充值
 		</view>
-		<view class="dis_flex mylist bb1d0"
+		<view  wx:if="{{sticky !=1}}" class="dis_flex mylist bb1d0"
 			wx:for="{{jifen.date}}"
 			wx:for-index="idx"
 			wx:for-item="item"

@@ -264,7 +264,7 @@ Page({
 			method:'get',
 			success(res) {
 				console.log(res.data)
-				let rlist=res.data.retData
+        let rlist = res.data.retDate
 				
 				if(res.data.errcode==0){
 						that.data.tmpdata.zhiding=rlist
@@ -311,7 +311,7 @@ Page({
 			return
 		}
 
-    if (that.data.uzhuti.length>=10) {
+    if (that.data.uzhuti.length>10) {
       wx.showToast({
         icon: "none",
         title: "主题最多允许10个字"

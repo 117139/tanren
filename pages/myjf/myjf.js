@@ -10,7 +10,8 @@ Page({
 		show: false,
 		tmpdata:{},
     money:0,
-    in_id:''
+    in_id:'',
+    sticky:1
   },
 
   /**
@@ -82,7 +83,8 @@ Page({
 				if(res.data.errCode==0){
 					// let rlist=res.data.retData.data
 					that.setData({
-						jifen:res.data.retData
+						jifen:res.data.retData,
+            
 					})
 							
 						
@@ -123,7 +125,8 @@ Page({
 				if(res.data.errCode==0){
 					// let rlist=res.data.retData.data
 					that.setData({
-						tmpdata:res.data.retData
+						tmpdata:res.data.retData,
+            sticky: res.data.sticky
 					})
 							
 						

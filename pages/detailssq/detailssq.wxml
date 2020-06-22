@@ -55,7 +55,7 @@
 				<view class="c0 fz32 fwb mb10">{{item2.user.nickname}}</view>
 				<view class="cadadad fz30 mb20">{{item2.create_time}}</view>
 				<view class="c3 fz32 lh40">{{item2.body}}</view>
-				<view class="w100 dis_flex flex_ww">
+				<view class="w100 dis_flex flex_ww mt10">
 					<image wx:for="{{item2.image}}"
 						wx:for-index="idx3"
 						wx:for-item="item3"

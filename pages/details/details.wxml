@@ -43,13 +43,13 @@
 			wx:for-index="idx2"
 			wx:for-item="item2"
 			wx:key="idx2">
-		<view class="dis_flex mb40 w100">
+		<view class="dis_flex mb40 w100 ">
 			<image class="headimg mr20" src="{{item2.user.head_img}}"></image>
 			<view class="flex_1">
 				<view class="c0 fz32 fwb mb10">{{item2.user.nickname}}</view>
 				<view class="cadadad fz30 mb20">{{item2.create_time}}</view>
 				<view class="c3 fz32 lh40">{{item2.body}}</view>
-				<view class="w100 dis_flex flex_ww mb40">
+				<view class="w100 dis_flex flex_ww mb40 mt10">
 					<image wx:for="{{item2.comment_image}}"
 						wx:for-index="idx3"
 						wx:for-item="item3"

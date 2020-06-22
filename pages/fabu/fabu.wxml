@@ -8,8 +8,11 @@
 		</view>
 		<!-- <picker class="w100" bindchange="bindPickerChange" value="{{index}}" range="{{datalist}}" range-key="{{'name'}}"> -->
 			<view class="dis_flex w100 aic ju_b mb40">
-				<view class="dis_flex aic" style="color:#525252;"><text class="iconfont icontubiao05 c9 mr10" ></text><text>选择主题</text>
-      </view>
+				<view class="dis_flex aic" style="color:#525252;">
+          <text class="iconfont icontubiao05 c9 mr10" ></text>
+          <!-- <text>选择主题</text> -->
+          <text>主题</text>
+        </view>
 				
 				<input type="text" placeholder="请输入主题(10字以内)" maxlength='10' bindinput="userzhuti"/>
 					<!-- <view style="color:#a0a0a0">{{datalist[index].name? datalist[index].name:'未选择'}}<text class="iconfont iconnext c9 mr10"></text></view> -->

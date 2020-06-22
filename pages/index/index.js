@@ -54,7 +54,14 @@ Page({
     console.log(1)
 		this.getshoplist()
   },
-
+  /**
+     * 用户点击右上角分享
+     */
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      console.log(res.target.dataset.type)
+    }
+  },
   handleChange: function (e) {
     var that =this
     console.log(e.detail.current)

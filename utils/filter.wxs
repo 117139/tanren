@@ -9,7 +9,7 @@ var imgIP=function(img){
 		return
 	}
 	// var newimg ='http://ceshi.800123456.top/'+img
-  var newimg = 'https://tangrenjie.800123456.top/'+img
+  var newimg = 'https://mg173.usaxk.com/'+img
 	// console.log(newimg)
 	return newimg
 }

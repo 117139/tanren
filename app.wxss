@@ -234,6 +234,9 @@
 	color: #f15a29;
 }
 /*margin*/
+.mt10{
+  margin-top: 10rpx;
+}
 .mt30{
 	margin-top: 30rpx;
 }

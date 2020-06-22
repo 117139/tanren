@@ -3,7 +3,7 @@ App({
 	IPurl1: 'http://192.168.129.120/',
 	IPurl2: "http://192.168.129.120/",
 	// IPurl:"http://ceshi.800123456.top/",
-  IPurl:"https://tangrenjie.800123456.top",
+  IPurl:"https://mg173.usaxk.com",
 	onLaunch: function() {
 		// // 展示本地存储能力
 		// var logs = wx.getStorageSync('logs') || []
